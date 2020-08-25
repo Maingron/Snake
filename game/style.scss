@@ -5,3 +5,9 @@ body {
         color:#fff;
     }
 }
+
+canvas {
+    background:url("background.png");
+    background-size: 32px;
+    image-rendering: crisp-edges;
+}
