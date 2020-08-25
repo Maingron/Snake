@@ -56,14 +56,13 @@ function init() {
         }
     });
 
-    window.setInterval(function() {
-        renderFPS();
-    },(1000 / snake.config.fps));
+window.setInterval(function() {
+    renderFPS();
+},(1000 / snake.config.fps));
 
-    window.setInterval(function() {
-        renderTPS();
-    },(1000 / snake.config.tps));
-}
+window.setInterval(function() {
+    renderTPS();
+},(1000 / snake.config.tps));
 
 function renderFPS() {
     ctx.clearRect(0,0,snake.config.canvasWidth,snake.config.canvasHeight);
@@ -112,10 +111,24 @@ function renderTPS() {
             snake.data.player.length++;
         }
     }
+
+    for(var i = 0; i < snake.data.player.positions.length; i++) {
+        if(snake.data.player.x == snake.data.player.positions[i][0]) {
+            if(snake.data.player.y == snake.data.player.positions[i][1]) {
+                if(i != snake.data.player.positions.length - 1) {
+                    playerdie();
+                }
+            }
+        }
+    }
 }
 
 init();
 
 function randomize(max) {
     return Math.floor(Math.random() * Math.floor(max));
+}
+
+function playerdie() {
+    init();
 }
