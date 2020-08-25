@@ -19,8 +19,6 @@ snake.config = {
 snake.config.oneHeight = snake.config.canvasHeight / snake.config.fieldHeight;
 snake.config.oneWidth = snake.config.canvasWidth / snake.config.fieldWidth;
 
-
-
 snake.elements.canvas = document.getElementById("snakecanvas");
 var ctx = snake.data.ctx = snake.elements.canvas.getContext("2d");
 
@@ -33,6 +31,9 @@ function init() {
     snake.elements.canvas.style.border = "1px solid #ff0";
 
     snake.data.controls = {};
+
+    snake.data.spritesheet = new Image();
+    snake.data.spritesheet.src = "spritesheet.png";
 
     
     snake.data.player = {};
@@ -91,7 +92,7 @@ function renderFPS() {
 
 
     ctx.fillStyle = "#f00";
-    ctx.fillRect(snake.data.apple.x * snake.config.oneWidth, snake.data.apple.y * snake.config.oneHeight, snake.config.oneWidth, snake.config.oneHeight);
+    ctx.drawImage(snake.data.spritesheet, 0, 128, 128, 128, snake.data.apple.x * snake.config.oneWidth, snake.data.apple.y * snake.config.oneHeight, snake.config.oneWidth, snake.config.oneHeight);
 
 
 
