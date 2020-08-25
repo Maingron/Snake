@@ -14,7 +14,7 @@ snake.config = {
     "fieldHeight": 40, // fields
     "fieldWidth": 40, // fields
     "fps": 60, // Probably Dev value
-    "tps": 8 // Ticks per Second
+    "tps": 5 // Ticks per Second
 }
 snake.config.oneHeight = snake.config.canvasHeight / snake.config.fieldHeight;
 snake.config.oneWidth = snake.config.canvasWidth / snake.config.fieldWidth;
@@ -32,37 +32,21 @@ function init() {
     snake.elements.canvas.style.border = "1px solid #ff0";
 
     snake.data.controls = {};
-    snake.data.controls.up = 0;
-    snake.data.controls.down = 0;
-    snake.data.controls.left = 0;
-    snake.data.controls.right = 0;
 
     snake.data.player = {};
     snake.data.player.x = 0;
     snake.data.player.y = 0;
     snake.data.player.length = 1;
 
-    window.addEventListener("keydown",function(e) {
+    window.addEventListener("keypress",function(e) {
         if(e.key == "w") {
-            snake.data.controls.up = 1;
+            snake.data.player.direction = "up";
         } else if (e.key == "s") {
-            snake.data.controls.down = 1;
+            snake.data.player.direction = "down";
         } else if (e.key == "a") {
-            snake.data.controls.left = 1;
+            snake.data.player.direction = "left";
         } else if (e.key == "d") {
-            snake.data.controls.right = 1;
-        }
-    });
-
-    window.addEventListener("keyup",function(e) {
-        if(e.key == "w") {
-            snake.data.controls.up = 0;
-        } else if (e.key == "s") {
-            snake.data.controls.down = 0;
-        } else if (e.key == "a") {
-            snake.data.controls.left = 0;
-        } else if (e.key == "d") {
-            snake.data.controls.right = 0;
+            snake.data.player.direction = "right";
         }
     });
 
@@ -78,20 +62,6 @@ function init() {
 function renderFPS() {
     ctx.clearRect(0,0,snake.config.canvasWidth,snake.config.canvasHeight);
 
-    ctx.fillStyle = "#fff";
-    if(snake.data.controls.up == 1) {
-        ctx.fillRect(10,0,10,10);
-    }
-    if(snake.data.controls.down == 1) {
-        ctx.fillRect(10,20,10,10);
-    }
-    if(snake.data.controls.left == 1) {
-        ctx.fillRect(0,10,10,10);
-    }
-    if(snake.data.controls.right == 1) {
-        ctx.fillRect(20,10,10,10);
-    }
-
     ctx.fillStyle = "#ff0";
     ctx.fillRect(snake.data.player.x * snake.config.oneWidth,snake.data.player.y * snake.config.oneHeight,snake.config.oneWidth,snake.config.oneHeight);
 
@@ -100,16 +70,14 @@ function renderFPS() {
 }
 
 function renderTPS() {
-    if(snake.data.controls.up == 1) {
+
+    if(snake.data.player.direction == "up") {
         snake.data.player.y--;
-    }
-    if(snake.data.controls.down == 1) {
+    } else if(snake.data.player.direction == "down") {
         snake.data.player.y++;
-    }
-    if(snake.data.controls.left == 1) {
+    } else if(snake.data.player.direction == "left") {
         snake.data.player.x--;
-    }
-    if(snake.data.controls.right == 1) {
+    } else if(snake.data.player.direction == "right") {
         snake.data.player.x++;
     }
 }
