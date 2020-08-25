@@ -9,12 +9,12 @@ snake.config = {};
 snake.data = {};
 
 snake.config = {
-    "canvasHeight": 500, // px; Dev value, should be automated later
-    "canvasWidth": 700, // px; Dev value, should be automated later
-    "fieldHeight": 40, // fields
-    "fieldWidth": 40, // fields
+    "canvasHeight": 512, // px; Dev value, should be automated later
+    "canvasWidth": 512, // px; Dev value, should be automated later
+    "fieldHeight": 16, // fields
+    "fieldWidth": 16, // fields
     "fps": 60, // Probably Dev value
-    "tps": 5 // Ticks per Second
+    "tps": 8 // Ticks per Second
 }
 snake.config.oneHeight = snake.config.canvasHeight / snake.config.fieldHeight;
 snake.config.oneWidth = snake.config.canvasWidth / snake.config.fieldWidth;
