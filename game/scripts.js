@@ -26,6 +26,7 @@ var ctx = snake.data.ctx = snake.elements.canvas.getContext("2d");
 
 snake.elements.coords = document.getElementById("coords");
 
+
 function init() {
     snake.elements.canvas.height = snake.config.canvasHeight;
     snake.elements.canvas.width = snake.config.canvasWidth;
@@ -39,6 +40,7 @@ function init() {
     snake.data.player.y = 0;
     snake.data.player.length = 1;
     snake.data.player.direction = "right";
+    snake.data.player.pause = 0;
     
     snake.data.player.positions = [[0,0]]; // [[x,y],[x,y],[x,y],...]
 
@@ -61,6 +63,8 @@ function init() {
             if(snake.data.player.direction != "left") {
                 snake.data.player.direction = "right";
             }
+        } else if (e.key == "r") {
+            init();
         }
     });
 }
@@ -74,6 +78,10 @@ window.setInterval(function() {
 },(1000 / snake.config.tps));
 
 function renderFPS() {
+    if(snake.data.player.pause == 1) {
+    } else {
+
+
     ctx.clearRect(0,0,snake.config.canvasWidth,snake.config.canvasHeight);
 
     ctx.fillStyle = "#ff0";
@@ -88,6 +96,7 @@ function renderFPS() {
 
 
     snake.elements.coords.innerHTML = snake.data.player.x + ";" + snake.data.player.y;
+}
 
 }
 
@@ -133,11 +142,22 @@ function renderTPS() {
 }
 
 init();
+ctx.fillStyle = "#ff0";
+ctx.font = "30px Arial";
+ctx.fillText("Press 'R' to start", 100,100);
+snake.data.player.pause = 1;
+
 
 function randomize(max) {
     return Math.floor(Math.random() * Math.floor(max));
 }
 
 function playerdie() {
-    init();
+    ctx.fillStyle = "#55300066";
+    ctx.fillRect(0,0,snake.config.canvasWidth,snake.config.canvasHeight);
+    snake.data.player.pause = 1;
+    ctx.fillStyle = "#ff0";
+    ctx.font = "30px Arial";
+    ctx.fillText("You died",100,100);
+    ctx.fillText("Press 'R' to restart",100,140);
 }
