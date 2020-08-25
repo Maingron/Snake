@@ -27,8 +27,8 @@ var ctx = snake.data.ctx = snake.elements.canvas.getContext("2d");
 snake.elements.coords = document.getElementById("coords");
 
 function init() {
-    snake.elements.canvas.style.height = snake.config.canvasHeight + "px";
-    snake.elements.canvas.style.width = snake.config.canvasWidth + "px";
+    snake.elements.canvas.height = snake.config.canvasHeight;
+    snake.elements.canvas.width = snake.config.canvasWidth;
     snake.elements.canvas.style.border = "1px solid #ff0";
 
     snake.data.controls = {};
@@ -63,14 +63,13 @@ function renderFPS() {
     ctx.clearRect(0,0,snake.config.canvasWidth,snake.config.canvasHeight);
 
     ctx.fillStyle = "#ff0";
-    ctx.fillRect(snake.data.player.x * snake.config.oneWidth,snake.data.player.y * snake.config.oneHeight,snake.config.oneWidth,snake.config.oneHeight);
+    ctx.fillRect(snake.data.player.x * snake.config.oneWidth, snake.data.player.y * snake.config.oneHeight, snake.config.oneWidth, snake.config.oneHeight);
 
     snake.elements.coords.innerHTML = snake.data.player.x + ";" + snake.data.player.y;
 
 }
 
 function renderTPS() {
-
     if(snake.data.player.direction == "up") {
         snake.data.player.y--;
     } else if(snake.data.player.direction == "down") {
