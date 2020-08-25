@@ -38,6 +38,8 @@ function init() {
     snake.data.player.y = 0;
     snake.data.player.length = 1;
 
+    snake.data.apple = {};
+
     window.addEventListener("keypress",function(e) {
         if(e.key == "w") {
             snake.data.player.direction = "up";
@@ -65,6 +67,12 @@ function renderFPS() {
     ctx.fillStyle = "#ff0";
     ctx.fillRect(snake.data.player.x * snake.config.oneWidth, snake.data.player.y * snake.config.oneHeight, snake.config.oneWidth, snake.config.oneHeight);
 
+
+    ctx.fillStyle = "#f00";
+    ctx.fillRect(snake.data.apple.x * snake.config.oneWidth, snake.data.apple.y * snake.config.oneHeight, snake.config.oneWidth, snake.config.oneHeight);
+
+
+
     snake.elements.coords.innerHTML = snake.data.player.x + ";" + snake.data.player.y;
 
 }
@@ -79,9 +87,24 @@ function renderTPS() {
     } else if(snake.data.player.direction == "right") {
         snake.data.player.x++;
     }
+
+    if(snake.data.apple.spawned == 1) {
+    } else {
+        snake.data.apple.x = randomize(snake.config.fieldWidth);
+        snake.data.apple.y = randomize(snake.config.fieldHeight);
+        snake.data.apple.spawned = 1;
+    }
+
+    if(snake.data.player.x == snake.data.apple.x) {
+        if(snake.data.player.y == snake.data.apple.y) {
+            snake.data.apple.spawned = 0;
+        }
+
+    }
 }
 
 init();
+
 function randomize(max) {
     return Math.floor(Math.random() * Math.floor(max));
 }
