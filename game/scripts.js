@@ -46,15 +46,24 @@ function init() {
 
     window.addEventListener("keypress",function(e) {
         if(e.key == "w") {
-            snake.data.player.direction = "up";
+            if(snake.data.player.direction != "down") {
+                snake.data.player.direction = "up";
+            }
         } else if (e.key == "s") {
-            snake.data.player.direction = "down";
+            if(snake.data.player.direction != "up") {
+                snake.data.player.direction = "down";
+            }
         } else if (e.key == "a") {
-            snake.data.player.direction = "left";
+            if(snake.data.player.direction != "right") {
+                snake.data.player.direction = "left";
+            }
         } else if (e.key == "d") {
-            snake.data.player.direction = "right";
+            if(snake.data.player.direction != "left") {
+                snake.data.player.direction = "right";
+            }
         }
     });
+}
 
 window.setInterval(function() {
     renderFPS();
