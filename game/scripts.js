@@ -85,6 +85,17 @@ window.setInterval(function() {
     renderTPS();
 },(1000 / snake.config.tps));
 
+
+function numHex(s)
+{
+    s = Math.round(s);
+    var a = s.toString(16);
+    if ((a.length % 2) > 0) {
+        a = "0" + a;
+    }
+    return a;
+}
+
 function renderFPS() {
     if(snake.data.player.pause == 1) {
     } else {
@@ -94,6 +105,9 @@ function renderFPS() {
 
     ctx.fillStyle = "#ff0";
     for(var i = 0; i < snake.data.player.positions.length; i++) {
+        var currentGradient = numHex((256 / snake.data.player.positions.length * i));
+
+        ctx.fillStyle="#"+currentGradient+currentGradient+"00";
         ctx.fillRect(snake.data.player.positions[i][0] * snake.config.oneWidth, snake.data.player.positions[i][1] * snake.config.oneHeight, snake.config.oneWidth, snake.config.oneHeight);
     }
 
