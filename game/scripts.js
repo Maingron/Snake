@@ -7,6 +7,7 @@ var snake = data["snake"] = {};
 snake.elements = {};
 snake.config = {};
 snake.data = {};
+snake.meta = {};
 
 snake.config = {
     "fieldHeight": 24, // fields
@@ -15,6 +16,9 @@ snake.config = {
     "canvasWidth": Math.min(document.body.offsetHeight,document.body.offsetWidth) - 60, // px
     "fps": 60, // Probably Dev value
     "tps": 15, // Ticks per Second
+
+    "fontSize": "32", // px
+    "fontFamily":"sans-serif",
 
     "wrapField": true
 }
@@ -42,12 +46,17 @@ function init() {
     snake.data.player = {};
     snake.data.player.x = 0;
     snake.data.player.y = 0;
-    snake.data.player.length = 1;
     snake.data.player.direction = "right";
     snake.data.player.controlblock = false;
     snake.data.player.pause = 0;
+
+    snake.meta.author = "maingron";
+    snake.meta.website = "https://maingron.com/snake";
     
-    snake.data.player.positions = [[0,0]]; // [[x,y],[x,y],[x,y],...]
+    snake.data.player.positions = [[0,0],[0,0]]; // [[x,y],[x,y],[x,y],...]
+    snake.data.player.initialLength = snake.data.player.positions.length + 1; // Initial length, used for some calculations like scoreboard
+
+    snake.data.player.points = 0;
 
     snake.data.apple = {};
 
@@ -103,6 +112,17 @@ function renderFPS() {
 
     ctx.clearRect(0,0,snake.config.canvasWidth,snake.config.canvasHeight);
 
+
+    // // Scoreboard
+    // ctx.drawImage(snake.data.spritesheet, 0, 128, 128, 128, 5, 5, 24, 24); // Apple
+    ctx.font = snake.config.fontSize * 4 + "px " + snake.config.fontFamily // Font for scoreboard is bigger than default
+    ctx.fillText(snake.data.player.points, snake.config.canvasHeight / 2 - ctx.measureText(snake.data.player.points).width / 2, snake.config.canvasHeight / 2);
+
+
+    // Set font
+    ctx.font = snake.config.fontSize + "px " + snake.config.fontFamily;
+
+
     ctx.fillStyle = "#ff0";
     for(var i = 0; i < snake.data.player.positions.length; i++) {
         var currentGradient = numHex((256 / snake.data.player.positions.length * i));
@@ -116,13 +136,14 @@ function renderFPS() {
     ctx.drawImage(snake.data.spritesheet, 0, 128, 128, 128, snake.data.apple.x * snake.config.oneWidth, snake.data.apple.y * snake.config.oneHeight, snake.config.oneWidth, snake.config.oneHeight);
 
     ctx.fillStyle = "#fff";
-    ctx.font="22px sans-serif";
     ctx.fillText(snake.data.player.x + "; " + snake.data.player.y, 5, snake.config.canvasHeight - 5);
 }
 
 }
 
 function renderTPS() {
+    snake.data.player.points = snake.data.player.positions.length - snake.data.player.initialLength;
+
     if(snake.data.player.direction == "up") {
         if(snake.config.wrapField && snake.data.player.y == 0) {
             snake.data.player.y = snake.config.fieldHeight - 1;
@@ -156,7 +177,7 @@ function renderTPS() {
     snake.data.player.positions.push([snake.data.player.x,snake.data.player.y]);
 
     if(snake.data.apple.spawned == 1) {
-    snake.data.player.positions.shift();
+        snake.data.player.positions.shift();
 
     } else {
         snake.data.apple.x = randomize(snake.config.fieldWidth);
@@ -181,12 +202,14 @@ function renderTPS() {
             }
         }
     }
+
+
     snake.data.player.controlblock = false;
 }
 
 init();
 ctx.fillStyle = "#ff0";
-ctx.font = "30px Arial";
+ctx.font = snake.config.fontSize + "px " + snake.config.fontFamily;
 ctx.fillText("Press 'R' to start", 100,100);
 snake.data.player.pause = 1;
 
@@ -200,7 +223,7 @@ function playerdie() {
     ctx.fillRect(0,0,snake.config.canvasWidth,snake.config.canvasHeight);
     snake.data.player.pause = 1;
     ctx.fillStyle = "#ff0";
-    ctx.font = "30px Arial";
+    ctx.font = snake.config.fontSize + "px " + snake.config.fontFamily;
     ctx.fillText("You died",100,100);
     ctx.fillText("Press 'R' to restart",100,140);
 }

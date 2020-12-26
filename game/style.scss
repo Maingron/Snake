@@ -17,10 +17,17 @@ body {
         justify-content: center;
         flex-direction: column;
     }
+    #canvascontainer {
+        height: auto;
+        width: auto;
+        display: inline-block;
+        canvas {
+            background:url("background.png");
+            background-size: 32px;
+            image-rendering: crisp-edges;
+        }
+    }
+
 }
 
-canvas {
-    background:url("background.png");
-    background-size: 32px;
-    image-rendering: crisp-edges;
-}
+
