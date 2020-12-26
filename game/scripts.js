@@ -101,9 +101,9 @@ function renderFPS() {
     ctx.fillStyle = "#f00";
     ctx.drawImage(snake.data.spritesheet, 0, 128, 128, 128, snake.data.apple.x * snake.config.oneWidth, snake.data.apple.y * snake.config.oneHeight, snake.config.oneWidth, snake.config.oneHeight);
 
-
-
-    snake.elements.coords.innerHTML = snake.data.player.x + ";" + snake.data.player.y;
+    ctx.fillStyle = "#fff";
+    ctx.font="22px sans-serif";
+    ctx.fillText(snake.data.player.x + "; " + snake.data.player.y, 5, snake.config.canvasHeight - 5);
 }
 
 }
