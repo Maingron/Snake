@@ -14,7 +14,9 @@ snake.config = {
     "fieldHeight": 16, // fields
     "fieldWidth": 16, // fields
     "fps": 60, // Probably Dev value
-    "tps": 8 // Ticks per Second
+    "tps": 8, // Ticks per Second
+
+    "wrapField": true
 }
 
 snake.config.oneHeight = snake.config.canvasHeight / snake.config.fieldHeight;
@@ -104,13 +106,33 @@ function renderFPS() {
 
 function renderTPS() {
     if(snake.data.player.direction == "up") {
-        snake.data.player.y--;
+        if(snake.config.wrapField && snake.data.player.y == 0) {
+            snake.data.player.y = snake.config.fieldHeight - 1;
+        } else {
+            snake.data.player.y--;
+        }
+
     } else if(snake.data.player.direction == "down") {
-        snake.data.player.y++;
+        if(snake.config.wrapField && snake.data.player.y == snake.config.fieldHeight - 1) {
+            snake.data.player.y = 0;
+        } else {
+            snake.data.player.y++;
+        }
+
     } else if(snake.data.player.direction == "left") {
-        snake.data.player.x--;
+        if(snake.config.wrapField && snake.data.player.x == 0) {
+            snake.data.player.x = snake.config.fieldWidth - 1;
+        } else {
+            snake.data.player.x--;
+        }
+
     } else if(snake.data.player.direction == "right") {
-        snake.data.player.x++;
+        if(snake.config.wrapField && snake.data.player.x == snake.config.fieldWidth - 1) {
+            snake.data.player.x = 0;
+        } else {
+            snake.data.player.x++;
+        }
+
     }
 
     snake.data.player.positions.push([snake.data.player.x,snake.data.player.y]);
