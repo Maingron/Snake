@@ -133,7 +133,7 @@ function renderFPS() {
 
 
     ctx.fillStyle = "#f00";
-    ctx.drawImage(snake.data.spritesheet, 0, 128, 128, 128, snake.data.apple.x * snake.config.oneWidth, snake.data.apple.y * snake.config.oneHeight, snake.config.oneWidth, snake.config.oneHeight);
+    ctx.drawImage(snake.data.spritesheet, 0, 129, 128, 128, snake.data.apple.x * snake.config.oneWidth, snake.data.apple.y * snake.config.oneHeight, snake.config.oneWidth, snake.config.oneHeight);
 
     ctx.fillStyle = "#fff";
     ctx.fillText(snake.data.player.x + "; " + snake.data.player.y, 5, snake.config.canvasHeight - 5);
