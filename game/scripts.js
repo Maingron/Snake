@@ -44,6 +44,7 @@ function init() {
     snake.data.player.y = 0;
     snake.data.player.length = 1;
     snake.data.player.direction = "right";
+    snake.data.player.controlblock = false;
     snake.data.player.pause = 0;
     
     snake.data.player.positions = [[0,0]]; // [[x,y],[x,y],[x,y],...]
@@ -51,25 +52,28 @@ function init() {
     snake.data.apple = {};
 
     window.addEventListener("keypress",function(e) {
-        if(e.key == "w") {
-            if(snake.data.player.direction != "down") {
-                snake.data.player.direction = "up";
+        if(!snake.data.player.controlblock) {
+            if(e.key == "w") {
+                if(snake.data.player.direction != "down") {
+                    snake.data.player.direction = "up";
+                }
+            } else if (e.key == "s") {
+                if(snake.data.player.direction != "up") {
+                    snake.data.player.direction = "down";
+                }
+            } else if (e.key == "a") {
+                if(snake.data.player.direction != "right") {
+                    snake.data.player.direction = "left";
+                }
+            } else if (e.key == "d") {
+                if(snake.data.player.direction != "left") {
+                    snake.data.player.direction = "right";
+                }
+            } else if (e.key == "r") {
+                init();
             }
-        } else if (e.key == "s") {
-            if(snake.data.player.direction != "up") {
-                snake.data.player.direction = "down";
-            }
-        } else if (e.key == "a") {
-            if(snake.data.player.direction != "right") {
-                snake.data.player.direction = "left";
-            }
-        } else if (e.key == "d") {
-            if(snake.data.player.direction != "left") {
-                snake.data.player.direction = "right";
-            }
-        } else if (e.key == "r") {
-            init();
         }
+        snake.data.player.controlblock = true;
     });
 }
 
@@ -163,6 +167,7 @@ function renderTPS() {
             }
         }
     }
+    snake.data.player.controlblock = false;
 }
 
 init();
