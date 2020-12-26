@@ -9,12 +9,12 @@ snake.config = {};
 snake.data = {};
 
 snake.config = {
-    "canvasHeight": Math.min(document.body.offsetHeight,document.body.offsetWidth) - 20, // px
-    "canvasWidth": Math.min(document.body.offsetHeight,document.body.offsetWidth) - 20, // px
-    "fieldHeight": 16, // fields
-    "fieldWidth": 16, // fields
+    "fieldHeight": 24, // fields
+    "fieldWidth": 24, // fields
+    "canvasHeight": Math.min(document.body.offsetHeight,document.body.offsetWidth) - 60, // px
+    "canvasWidth": Math.min(document.body.offsetHeight,document.body.offsetWidth) - 60, // px
     "fps": 60, // Probably Dev value
-    "tps": 8, // Ticks per Second
+    "tps": 15, // Ticks per Second
 
     "wrapField": true
 }
