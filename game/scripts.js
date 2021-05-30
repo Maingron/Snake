@@ -42,7 +42,7 @@ function init() {
     snake.data.spritesheet = new Image();
     snake.data.spritesheet.src = "spritesheet.png";
 
-    
+
     snake.data.player = {};
     snake.data.player.x = 0;
     snake.data.player.y = 0;
@@ -52,7 +52,7 @@ function init() {
 
     snake.meta.author = "maingron";
     snake.meta.website = "https://maingron.com/snake";
-    
+
     snake.data.player.positions = [[0,0],[0,0]]; // [[x,y],[x,y],[x,y],...]
     snake.data.player.initialLength = snake.data.player.positions.length + 1; // Initial length, used for some calculations like scoreboard
 
@@ -210,7 +210,7 @@ function renderTPS() {
 init();
 ctx.fillStyle = "#ff0";
 ctx.font = snake.config.fontSize + "px " + snake.config.fontFamily;
-ctx.fillText("Press 'R' to start", 100,100);
+ctx.fillText(lang.pressToStart, 100,100);
 snake.data.player.pause = 1;
 
 
@@ -224,6 +224,6 @@ function playerdie() {
     snake.data.player.pause = 1;
     ctx.fillStyle = "#ff0";
     ctx.font = snake.config.fontSize + "px " + snake.config.fontFamily;
-    ctx.fillText("You died",100,100);
-    ctx.fillText("Press 'R' to restart",100,140);
+    ctx.fillText(lang.youDied,100,100);
+    ctx.fillText(lang.pressToRestart,100,140);
 }
