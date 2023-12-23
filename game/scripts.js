@@ -61,24 +61,25 @@ function init() {
     snake.data.apple = {};
 
     window.addEventListener("keypress",function(e) {
+        let inputKey = e.key.toLowerCase();
         if(!snake.data.player.controlblock) {
-            if(e.key == "w") {
+            if(inputKey == "w") {
                 if(snake.data.player.direction != "down") {
                     snake.data.player.direction = "up";
                 }
-            } else if (e.key == "s") {
+            } else if (inputKey == "s") {
                 if(snake.data.player.direction != "up") {
                     snake.data.player.direction = "down";
                 }
-            } else if (e.key == "a") {
+            } else if (inputKey == "a") {
                 if(snake.data.player.direction != "right") {
                     snake.data.player.direction = "left";
                 }
-            } else if (e.key == "d") {
+            } else if (inputKey == "d") {
                 if(snake.data.player.direction != "left") {
                     snake.data.player.direction = "right";
                 }
-            } else if (e.key == "r") {
+            } else if (inputKey == "r") {
                 init();
             }
         }
