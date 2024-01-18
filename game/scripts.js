@@ -131,7 +131,13 @@ function renderFPS() {
         var currentGradient = numHex((256 / snake.data.player.positions.length * i));
 
         ctx.fillStyle="#"+currentGradient+currentGradient+"00";
+
         ctx.fillRect(snake.data.player.positions[i][0] * snake.config.oneWidth, snake.data.player.positions[i][1] * snake.config.oneHeight, snake.config.oneWidth, snake.config.oneHeight);
+
+        if(i == snake.data.player.positions.length - 1) { // Head
+            // draw sprite
+            ctx.drawImage(snake.data.spritesheet, 128, 128, 128, 128, snake.data.player.positions[i][0] * snake.config.oneWidth, snake.data.player.positions[i][1] * snake.config.oneHeight, snake.config.oneWidth, snake.config.oneHeight);
+        }
     }
 
 
