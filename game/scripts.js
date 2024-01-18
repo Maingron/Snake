@@ -129,8 +129,9 @@ function renderFPS() {
     ctx.fillStyle = "#ff0";
     for(var i = 0; i < snake.data.player.positions.length; i++) {
         var currentGradient = numHex((256 / snake.data.player.positions.length * i));
+        var currentGradient2 = numHex((128 / snake.data.player.positions.length * i));
 
-        ctx.fillStyle="#"+currentGradient+currentGradient+"00";
+        ctx.fillStyle="#"+"00"+currentGradient+currentGradient2;
 
         ctx.fillRect(snake.data.player.positions[i][0] * snake.config.oneWidth, snake.data.player.positions[i][1] * snake.config.oneHeight, snake.config.oneWidth, snake.config.oneHeight);
 
