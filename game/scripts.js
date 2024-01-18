@@ -10,12 +10,12 @@ snake.data = {};
 snake.meta = {};
 
 snake.config = {
-    "fieldHeight": 24, // fields
-    "fieldWidth": 24, // fields
+    "fieldHeight": 12, // fields
+    "fieldWidth": 12, // fields
     "canvasHeight": Math.min(document.body.offsetHeight,document.body.offsetWidth) - 60, // px
     "canvasWidth": Math.min(document.body.offsetHeight,document.body.offsetWidth) - 60, // px
     "fps": 60, // Probably Dev value
-    "tps": 15, // Ticks per Second
+    "tps": 6, // Ticks per Second
 
     "fontSize": "32", // px
     "fontFamily":"sans-serif",
