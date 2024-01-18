@@ -42,6 +42,8 @@ function init() {
     snake.data.spritesheet = new Image();
     snake.data.spritesheet.src = "spritesheet.png";
 
+    snake.elements.canvas.style.backgroundSize = (snake.config.canvasHeight / snake.config.fieldHeight + "px");
+
 
     snake.data.player = {};
     snake.data.player.x = 0;
