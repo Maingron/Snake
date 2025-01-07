@@ -20,7 +20,8 @@ snake.config = {
     "fontSize": "32", // px
     "fontFamily":"sans-serif",
 
-    "wrapField": true
+    "wrapField": true,
+    "lang": "en"
 }
 
 snake.config.oneHeight = snake.config.canvasHeight / snake.config.fieldHeight;
@@ -31,8 +32,15 @@ var ctx = snake.data.ctx = snake.elements.canvas.getContext("2d");
 
 snake.elements.coords = document.getElementById("coords");
 
+function initOnce() {
+    // Load lang file
+    let newScriptElement = document.createElement("script");
+    newScriptElement.src = "lang/" + snake.config.lang + ".lang.js";
+    document.body.appendChild(newScriptElement);
+}
 
 function init() {
+
     snake.elements.canvas.height = snake.config.canvasHeight;
     snake.elements.canvas.width = snake.config.canvasWidth;
     snake.elements.canvas.style.border = "1px solid #ff0";
@@ -213,10 +221,10 @@ function renderTPS() {
         }
     }
 
-
     snake.data.player.controlblock = false;
 }
 
+initOnce();
 init();
 ctx.fillStyle = "#ff0";
 ctx.font = snake.config.fontSize + "px " + snake.config.fontFamily;
