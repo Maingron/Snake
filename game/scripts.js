@@ -116,9 +116,7 @@ function startGame() {
     snake.data.apple = {};
 }
 
-
-function numHex(s)
-{
+function numHex(s) {
     s = Math.round(s);
     var a = s.toString(16);
     if ((a.length % 2) > 0) {
@@ -129,11 +127,10 @@ function numHex(s)
 
 function renderFPS() {
     if(snake.data.player.pause == 1) {
-    } else {
-
+        return false;
+    }
 
     ctx.clearRect(0,0,snake.config.canvasWidth,snake.config.canvasHeight);
-
 
     // // Scoreboard
     // ctx.drawImage(snake.data.spritesheet, 0, 128, 128, 128, 5, 5, 24, 24); // Apple
@@ -143,7 +140,6 @@ function renderFPS() {
 
     // Set font
     ctx.font = snake.config.fontSize + "px " + snake.config.fontFamily;
-
 
     ctx.fillStyle = "#ff0";
     for(var i = 0; i < snake.data.player.positions.length; i++) {
@@ -166,8 +162,6 @@ function renderFPS() {
 
     ctx.fillStyle = "#fff";
     ctx.fillText(snake.data.player.x + "; " + snake.data.player.y, 5, snake.config.canvasHeight - 5);
-}
-
 }
 
 function renderTPS() {
@@ -204,7 +198,6 @@ function renderTPS() {
         } else {
             snake.data.player.x++;
         }
-
     }
 
     snake.data.player.positions.push([snake.data.player.x,snake.data.player.y]);
