@@ -234,23 +234,45 @@ function renderTPS() {
             renderTPS();
         }
 
-        for(var i = 0; i < snake.data.player.positions.length; i++) {
-            if(snake.data.player.x == snake.data.player.positions[i][0]) {
-                if(snake.data.player.y == snake.data.player.positions[i][1]) {
-                    if(i != snake.data.player.positions.length - 1) {
-                        playerdie();
-                    }
-                }
-            }
-        }
+        window.setTimeout(function() {
+            checkPlayerPlayerCollision();
+        }, 0);
         snake.data.player.controlblock = false;
     }
 }
 
 function eatApple() {
     snake.data.player.length++;
-    snake.data.apple.x = randomize(snake.config.fieldWidth);
-    snake.data.apple.y = randomize(snake.config.fieldHeight);
+    var randomCoordinates;
+    window.setTimeout(function() {
+        var nopeCount = 10000;
+        do{
+            nopeCount--;
+            randomCoordinates = [randomize(snake.config.fieldWidth), randomize(snake.config.fieldHeight)];
+        } while (checkIfPlayerCollision(randomCoordinates) && nopeCount > 0);
+        snake.data.apple.x = randomCoordinates[0];
+        snake.data.apple.y = randomCoordinates[1];
+    }, 0);
+}
+
+function checkIfPlayerCollision(yourCoordinates) {
+    for(var i = 0; i < snake.data.player.positions.length; i++) {
+        if(yourCoordinates[0] == snake.data.player.positions[i][0]) {
+            if(yourCoordinates[1] == snake.data.player.positions[i][1]) {
+                if(i != snake.data.player.positions.length - 1) {
+                    return true;
+                }
+            }
+        }
+    }
+
+    return false;
+}
+
+function checkPlayerPlayerCollision() {
+    if(checkIfPlayerCollision([snake.data.player.x, snake.data.player.y])) {
+        playerdie();
+    }
 }
 
 function randomize(max) {
