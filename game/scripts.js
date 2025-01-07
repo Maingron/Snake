@@ -228,7 +228,7 @@ initOnce();
 init();
 ctx.fillStyle = "#ff0";
 ctx.font = snake.config.fontSize + "px " + snake.config.fontFamily;
-ctx.fillText(lang.pressToStart, 100,100);
+ctx.fillText(getLang("pressToStart"), 100,100);
 snake.data.player.pause = 1;
 
 
@@ -242,6 +242,14 @@ function playerdie() {
     snake.data.player.pause = 1;
     ctx.fillStyle = "#ff0";
     ctx.font = snake.config.fontSize + "px " + snake.config.fontFamily;
-    ctx.fillText(lang.youDied,100,100);
-    ctx.fillText(lang.pressToRestart,100,140);
+    ctx.fillText(getLang("youDied"),100,100);
+    ctx.fillText(getLang("pressToRestart"),100,140);
+}
+
+function getLang(request) {
+    if(typeof(lang) != "undefined" && lang[request] && lang[request] != "") {
+        return lang[request];
+    } else {
+        return request;
+    }
 }
