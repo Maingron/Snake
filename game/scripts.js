@@ -5,16 +5,20 @@ if(!data) {
 var snake = data["snake"] = {};
 var ctx;
 
-snake.data = {};
+snake.data = {
+    tick: {
+        count: 0
+    }
+};
 snake.meta = {};
 
 snake.config = {
-    "fieldHeight": 12, // fields
-    "fieldWidth": 12, // fields
+    "fieldHeight": 14, // fields
+    "fieldWidth": 14, // fields
     "canvasHeight": Math.min(document.body.offsetHeight,document.body.offsetWidth) - 60, // px
     "canvasWidth": Math.min(document.body.offsetHeight,document.body.offsetWidth) - 60, // px
-    "fps": 60, // Probably Dev value
-    "tps": 6, // Ticks per Second
+    "tps": 120, // Ticks per Second
+    "movespeed": 12, // Move every nth-tick
 
     "fontSize": "32", // px
     "fontFamily":"sans-serif",
@@ -89,11 +93,7 @@ function initOnce() {
     });
 
     window.setInterval(function() {
-        renderFPS();
-    },(1000 / snake.config.fps));
-    
-    window.setInterval(function() {
-        renderTPS();
+        tick();
     },(1000 / snake.config.tps));
 }
 
@@ -104,7 +104,7 @@ function startGame() {
         direction: "right",
         controlblock: false,
         pause: 0,
-        positions: [[0,0],[0,0]], // [[x,y],[x,y],[x,y],...]
+        positions: [[0,0],[0,0],[0,0]], // [[x,y],[x,y],[x,y],...]
         points: 0
     };
 
@@ -114,6 +114,13 @@ function startGame() {
     snake.data.player.initialLength = snake.data.player.positions.length + 1; // Initial length, used for some calculations like scoreboard
 
     snake.data.apple = {};
+    eatApple();
+}
+
+function tick() {
+    snake.data.tick.count++;
+    renderTPS();
+    renderFPS();
 }
 
 function numHex(s) {
@@ -165,71 +172,86 @@ function renderFPS() {
 }
 
 function renderTPS() {
+    var moveThisTick = false;
     if(snake?.data?.player?.pause || !snake?.data?.player?.positions) {
         return false;
     }
 
-    snake.data.player.points = snake.data.player.positions.length - snake.data.player.initialLength;
+    snake.data.player.points = (snake.data.player.positions.length - snake.data.player.initialLength) + 1;
 
-    if(snake.data.player.direction == "up") {
-        if(snake.config.wrapField && snake.data.player.y == 0) {
-            snake.data.player.y = snake.config.fieldHeight - 1;
+    if(snake.data.tick.count % snake.config.movespeed == 0) {
+        let nextPosition = [snake.data.player.x, snake.data.player.y];
+        moveThisTick = true;
+
+        if(snake.data.player.direction == "up") {
+            if(snake.config.wrapField && snake.data.player.y == 0) {
+                nextPosition[1] = snake.config.fieldHeight - 1;
+            } else {
+                nextPosition[1]--;
+            }
+    
+        } else if(snake.data.player.direction == "down") {
+            if(snake.config.wrapField && snake.data.player.y == snake.config.fieldHeight - 1) {
+                nextPosition[1] = 0;
+            } else {
+                nextPosition[1]++;
+            }
+    
+        } else if(snake.data.player.direction == "left") {
+            if(snake.config.wrapField && snake.data.player.x == 0) {
+                nextPosition[0] = snake.config.fieldWidth - 1;
+            } else {
+                nextPosition[0]--;
+            }
+    
+        } else if(snake.data.player.direction == "right") {
+            if(snake.config.wrapField && snake.data.player.x == snake.config.fieldWidth - 1) {
+                nextPosition[0] = 0;
+            } else {
+                nextPosition[0]++;
+            }
+        }
+
+        if(nextPosition[0] != snake.data.player.positions[snake.data.player.positions.length - 2][0] || nextPosition[1] != snake.data.player.positions[snake.data.player.positions.length - 2][1]) {
+            snake.data.player.x = nextPosition[0];
+            snake.data.player.y = nextPosition[1];
+            snake.data.player.positions.push([nextPosition[0],nextPosition[1]]);
+
+            if(snake.data.player.x == snake.data.apple.x && snake.data.player.y == snake.data.apple.y) {
+                eatApple();
+            } else {
+                snake.data.player.positions.shift();
+            }
         } else {
-            snake.data.player.y--;
+            if(snake.data.player.direction == "right") {
+                snake.data.player.direction = "left";
+            } else if(snake.data.player.direction == "left") {
+                snake.data.player.direction = "right";
+            } else if(snake.data.player.direction == "up") {
+                snake.data.player.direction = "down";
+            } else if(snake.data.player.direction == "down") {
+                snake.data.player.direction = "up";
+            }
+            renderTPS();
         }
 
-    } else if(snake.data.player.direction == "down") {
-        if(snake.config.wrapField && snake.data.player.y == snake.config.fieldHeight - 1) {
-            snake.data.player.y = 0;
-        } else {
-            snake.data.player.y++;
-        }
-
-    } else if(snake.data.player.direction == "left") {
-        if(snake.config.wrapField && snake.data.player.x == 0) {
-            snake.data.player.x = snake.config.fieldWidth - 1;
-        } else {
-            snake.data.player.x--;
-        }
-
-    } else if(snake.data.player.direction == "right") {
-        if(snake.config.wrapField && snake.data.player.x == snake.config.fieldWidth - 1) {
-            snake.data.player.x = 0;
-        } else {
-            snake.data.player.x++;
-        }
-    }
-
-    snake.data.player.positions.push([snake.data.player.x,snake.data.player.y]);
-
-    if(snake.data.apple.spawned == 1) {
-        snake.data.player.positions.shift();
-
-    } else {
-        snake.data.apple.x = randomize(snake.config.fieldWidth);
-        snake.data.apple.y = randomize(snake.config.fieldHeight);
-        snake.data.apple.spawned = 1;
-    }
-
-
-    if(snake.data.player.x == snake.data.apple.x) {
-        if(snake.data.player.y == snake.data.apple.y) {
-            snake.data.apple.spawned = 0;
-            snake.data.player.length++;
-        }
-    }
-
-    for(var i = 0; i < snake.data.player.positions.length; i++) {
-        if(snake.data.player.x == snake.data.player.positions[i][0]) {
-            if(snake.data.player.y == snake.data.player.positions[i][1]) {
-                if(i != snake.data.player.positions.length - 1) {
-                    playerdie();
+        for(var i = 0; i < snake.data.player.positions.length; i++) {
+            if(snake.data.player.x == snake.data.player.positions[i][0]) {
+                if(snake.data.player.y == snake.data.player.positions[i][1]) {
+                    if(i != snake.data.player.positions.length - 1) {
+                        playerdie();
+                    }
                 }
             }
         }
+        snake.data.player.controlblock = false;
     }
+}
 
-    snake.data.player.controlblock = false;
+function eatApple() {
+    snake.data.player.length++;
+    snake.data.apple.x = randomize(snake.config.fieldWidth);
+    snake.data.apple.y = randomize(snake.config.fieldHeight);
 }
 
 function randomize(max) {
