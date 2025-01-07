@@ -21,7 +21,7 @@ snake.config = {
     "movespeed": 12, // Move every nth-tick
 
     "fontSize": "32", // px
-    "fontFamily":"sans-serif",
+    "fontFamily": "'system-ui', sans-serif",
 
     "wrapField": true,
     "lang": "en"
@@ -38,10 +38,9 @@ snake.elements = {
 function initOnce() {
     snake.elements.canvas.height = snake.config.canvasHeight;
     snake.elements.canvas.width = snake.config.canvasWidth;
-    snake.elements.canvas.style.border = "1px solid #ff0";
 
     ctx = snake.data.ctx = snake.elements.canvas.getContext("2d");
-    ctx.fillStyle = "#ff0";
+    ctx.fillStyle = "#fff";
     ctx.font = snake.config.fontSize + "px " + snake.config.fontFamily;
 
     // Load lang file
@@ -148,12 +147,12 @@ function renderFPS() {
     // Set font
     ctx.font = snake.config.fontSize + "px " + snake.config.fontFamily;
 
-    ctx.fillStyle = "#ff0";
+    ctx.fillStyle = "#fff";
     for(var i = 0; i < snake.data.player.positions.length; i++) {
         var currentGradient = numHex((256 / snake.data.player.positions.length * i));
         var currentGradient2 = numHex((128 / snake.data.player.positions.length * i));
 
-        ctx.fillStyle="#"+"00"+currentGradient+currentGradient2;
+        ctx.fillStyle="#"+"00"+currentGradient2+currentGradient;
 
         ctx.fillRect(snake.data.player.positions[i][0] * snake.config.oneWidth, snake.data.player.positions[i][1] * snake.config.oneHeight, snake.config.oneWidth, snake.config.oneHeight);
 
@@ -259,10 +258,10 @@ function randomize(max) {
 }
 
 function playerdie() {
-    ctx.fillStyle = "#55300066";
+    ctx.fillStyle = "#44000066";
     ctx.fillRect(0,0,snake.config.canvasWidth,snake.config.canvasHeight);
     snake.data.player.pause = 1;
-    ctx.fillStyle = "#ff0";
+    ctx.fillStyle = "#fff";
     ctx.font = snake.config.fontSize + "px " + snake.config.fontFamily;
     ctx.fillText(getLang("youDied"),100,100);
     ctx.fillText(getLang("pressToRestart"),100,140);
