@@ -3,9 +3,8 @@ if(!data) {
 }
 
 var snake = data["snake"] = {};
+var ctx;
 
-snake.elements = {};
-snake.config = {};
 snake.data = {};
 snake.meta = {};
 
@@ -27,51 +26,44 @@ snake.config = {
 snake.config.oneHeight = snake.config.canvasHeight / snake.config.fieldHeight;
 snake.config.oneWidth = snake.config.canvasWidth / snake.config.fieldWidth;
 
-snake.elements.canvas = document.getElementById("snakecanvas");
-var ctx = snake.data.ctx = snake.elements.canvas.getContext("2d");
-
-snake.elements.coords = document.getElementById("coords");
+snake.elements = {
+    canvas: document.getElementById("snakecanvas"),
+    coords: document.getElementById("coords")
+};
 
 function initOnce() {
+    snake.elements.canvas.height = snake.config.canvasHeight;
+    snake.elements.canvas.width = snake.config.canvasWidth;
+    snake.elements.canvas.style.border = "1px solid #ff0";
+
+    ctx = snake.data.ctx = snake.elements.canvas.getContext("2d");
+    ctx.fillStyle = "#ff0";
+    ctx.font = snake.config.fontSize + "px " + snake.config.fontFamily;
+
     // Load lang file
     let newScriptElement = document.createElement("script");
     newScriptElement.src = "lang/" + snake.config.lang + ".lang.js";
     document.body.appendChild(newScriptElement);
-}
-
-function init() {
-
-    snake.elements.canvas.height = snake.config.canvasHeight;
-    snake.elements.canvas.width = snake.config.canvasWidth;
-    snake.elements.canvas.style.border = "1px solid #ff0";
+    newScriptElement.setAttribute("onload", "ctx.fillText(getLang('pressToStart'), 100,100)");
+    newScriptElement.setAttribute("onerror", "ctx.fillText(getLang('pressToStart'), 100,100)");
 
     snake.data.controls = {};
 
     snake.data.spritesheet = new Image();
     snake.data.spritesheet.src = "spritesheet.png";
 
+    snake.data.player = {
+        pause: 1
+    };
+
     snake.elements.canvas.style.backgroundSize = (snake.config.canvasHeight / snake.config.fieldHeight + "px");
-
-
-    snake.data.player = {};
-    snake.data.player.x = 0;
-    snake.data.player.y = 0;
-    snake.data.player.direction = "right";
-    snake.data.player.controlblock = false;
-    snake.data.player.pause = 0;
-
-    snake.meta.author = "maingron";
-    snake.meta.website = "https://maingron.com/snake";
-
-    snake.data.player.positions = [[0,0],[0,0]]; // [[x,y],[x,y],[x,y],...]
-    snake.data.player.initialLength = snake.data.player.positions.length + 1; // Initial length, used for some calculations like scoreboard
-
-    snake.data.player.points = 0;
-
-    snake.data.apple = {};
 
     window.addEventListener("keypress",function(e) {
         let inputKey = e.key.toLowerCase();
+        if(snake.data.player.pause) {
+            snake.data.player.controlblock = false;
+        }
+
         if(!snake.data.player.controlblock) {
             if(inputKey == "w") {
                 if(snake.data.player.direction != "down") {
@@ -90,20 +82,39 @@ function init() {
                     snake.data.player.direction = "right";
                 }
             } else if (inputKey == "r") {
-                init();
+                startGame();
             }
         }
         snake.data.player.controlblock = true;
     });
+
+    window.setInterval(function() {
+        renderFPS();
+    },(1000 / snake.config.fps));
+    
+    window.setInterval(function() {
+        renderTPS();
+    },(1000 / snake.config.tps));
 }
 
-window.setInterval(function() {
-    renderFPS();
-},(1000 / snake.config.fps));
+function startGame() {
+    snake.data.player = {
+        x: 0,
+        y: 0,
+        direction: "right",
+        controlblock: false,
+        pause: 0,
+        positions: [[0,0],[0,0]], // [[x,y],[x,y],[x,y],...]
+        points: 0
+    };
 
-window.setInterval(function() {
-    renderTPS();
-},(1000 / snake.config.tps));
+    snake.meta.author = "maingron";
+    snake.meta.website = "https://maingron.com/snake";
+
+    snake.data.player.initialLength = snake.data.player.positions.length + 1; // Initial length, used for some calculations like scoreboard
+
+    snake.data.apple = {};
+}
 
 
 function numHex(s)
@@ -160,6 +171,10 @@ function renderFPS() {
 }
 
 function renderTPS() {
+    if(snake?.data?.player?.pause || !snake?.data?.player?.positions) {
+        return false;
+    }
+
     snake.data.player.points = snake.data.player.positions.length - snake.data.player.initialLength;
 
     if(snake.data.player.direction == "up") {
@@ -224,14 +239,6 @@ function renderTPS() {
     snake.data.player.controlblock = false;
 }
 
-initOnce();
-init();
-ctx.fillStyle = "#ff0";
-ctx.font = snake.config.fontSize + "px " + snake.config.fontFamily;
-ctx.fillText(getLang("pressToStart"), 100,100);
-snake.data.player.pause = 1;
-
-
 function randomize(max) {
     return Math.floor(Math.random() * Math.floor(max));
 }
@@ -253,3 +260,5 @@ function getLang(request) {
         return request;
     }
 }
+
+initOnce();
