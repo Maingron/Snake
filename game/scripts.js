@@ -18,7 +18,7 @@ snake.config = {
     "canvasHeight": Math.min(document.body.offsetHeight,document.body.offsetWidth) - 60, // px
     "canvasWidth": Math.min(document.body.offsetHeight,document.body.offsetWidth) - 60, // px
     "tps": 120, // Ticks per Second
-    "movespeed": 12, // Move every nth-tick
+    "movespeed": 18, // Move every nth-tick
 
     "fontSize": "32", // px
     "fontFamily": "'system-ui', sans-serif",
