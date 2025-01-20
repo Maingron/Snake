@@ -21,7 +21,7 @@ snake.config = {
     "movespeed": 18, // Move every nth-tick
 
     "fontSize": "32", // px
-    "fontFamily": "'system-ui', sans-serif",
+    "fontFamily": ['Kristen ITC', 'Ink Free', 'Felix Titling', 'system-ui', 'sans-serif'].map(x=>`'${x}'`).join(","),
 
     "wrapField": true,
     "lang": "en"
@@ -38,6 +38,10 @@ snake.elements = {
 function initOnce() {
     snake.elements.canvas.height = snake.config.canvasHeight;
     snake.elements.canvas.width = snake.config.canvasWidth;
+
+    setTimeout(() => {
+        applyCSS();
+    }, 0);
 
     ctx = snake.data.ctx = snake.elements.canvas.getContext("2d");
     ctx.fillStyle = "#fff";
@@ -295,6 +299,10 @@ function getLang(request) {
     } else {
         return request;
     }
+}
+
+function applyCSS() {
+    document.body.style.setProperty("font-family", snake.config.fontFamily);
 }
 
 initOnce();
