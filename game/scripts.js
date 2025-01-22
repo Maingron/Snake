@@ -33,6 +33,7 @@ async function initOnce() {
         ...snake.data,
         controls: {},
         spritesheet: new Image(),
+        fruits: [],
         player: {
             pause: 1
         }
@@ -84,6 +85,7 @@ async function initOnce() {
 }
 
 function startGame() {
+    snake.data.fruits = [];
     snake.data.player = {
         x: 0,
         y: 0,
@@ -99,8 +101,8 @@ function startGame() {
 
     snake.data.player.initialLength = snake.data.player.positions.length + 1; // Initial length, used for some calculations like scoreboard
 
-    snake.data.apple = {};
-    eatApple();
+    snake.data.fruits.push(new Fruit.Apple());
+    snake.data.fruits[0]?.getEaten();
 }
 
 function tick() {
@@ -151,7 +153,10 @@ function renderFPS() {
 
 
     ctx.fillStyle = "#f00";
-    ctx.drawImage(snake.data.spritesheet, 0, 129, 128, 128, snake.data.apple.x * snake.config.oneWidth, snake.data.apple.y * snake.config.oneHeight, snake.config.oneWidth, snake.config.oneHeight);
+
+    for(let fruit of snake.data.fruits) {
+        ctx.drawImage(snake.data.spritesheet, 0, 129, 128, 128, fruit.pos[0] * snake.config.oneWidth, fruit.pos[1] * snake.config.oneHeight, snake.config.oneWidth, snake.config.oneHeight);
+    }
 
     ctx.fillStyle = "#fff";
     ctx.fillText(snake.data.player.x + "; " + snake.data.player.y, 5, snake.config.canvasHeight - 5);
@@ -201,13 +206,22 @@ function renderTPS() {
         if(nextPosition[0] != snake.data.player.positions[snake.data.player.positions.length - 2][0] || nextPosition[1] != snake.data.player.positions[snake.data.player.positions.length - 2][1]) {
             snake.data.player.x = nextPosition[0];
             snake.data.player.y = nextPosition[1];
+            snake.data.player.positions.shift();
             snake.data.player.positions.push([nextPosition[0],nextPosition[1]]);
 
-            if(snake.data.player.x == snake.data.apple.x && snake.data.player.y == snake.data.apple.y) {
-                eatApple();
-            } else {
-                snake.data.player.positions.shift();
+            for(let fruit of snake.data.fruits) {
+                if(fruit.checkCollision([snake.data.player.x, snake.data.player.y])) {
+                    setTimeout(async() => {
+                        for(let i = 0; i < fruit.points; i++) {
+                            snake.data.player.positions.unshift([snake.data.player.positions[0][0],snake.data.player.positions[0][1]]);
+                        }
+                    },0);
+
+                    fruit.getEaten();
+                    fruit.setNewPosition();
+                }
             }
+
         } else {
             if(snake.data.player.direction == "right") {
                 snake.data.player.direction = "left";
@@ -228,19 +242,6 @@ function renderTPS() {
     }
 }
 
-function eatApple() {
-    snake.data.player.length++;
-    var randomCoordinates;
-    window.setTimeout(function() {
-        var nopeCount = 10000;
-        do{
-            nopeCount--;
-            randomCoordinates = [randomize(snake.config.fieldWidth), randomize(snake.config.fieldHeight)];
-        } while (checkIfPlayerCollision(randomCoordinates) && nopeCount > 0);
-        snake.data.apple.x = randomCoordinates[0];
-        snake.data.apple.y = randomCoordinates[1];
-    }, 0);
-}
 
 function checkIfPlayerCollision(yourCoordinates) {
     for(var i = 0; i < snake.data.player.positions.length; i++) {

@@ -23,6 +23,13 @@
             window.Config = Config;
         </script>
         <script type="module">
+            import {Apple, Orange} from './js/Fruit.js';
+            window.Fruit = {
+                Apple: Apple,
+                Orange: Orange
+            }
+        </script>
+        <script type="module">
             import {Langfun} from './js/Langfun.js';
             window.Langfun = Langfun;
             initOnce();
