@@ -18,44 +18,28 @@ snake.elements = {
     coords: document.getElementById("coords")
 };
 
-function initOnce() {
-
-    snake.config = new Config();
-    window.getLang = snake.config.getLang;
-    snake.config = snake.config.config;
-
-    snake.config.oneHeight = snake.config.canvasHeight / snake.config.fieldHeight;
-    snake.config.oneWidth = snake.config.canvasWidth / snake.config.fieldWidth;
-
+async function initOnce() {
+    snake.config = new Config().config;
 
     snake.elements.canvas.height = snake.config.canvasHeight;
     snake.elements.canvas.width = snake.config.canvasWidth;
 
-    setTimeout(() => {
-        applyCSS();
-    }, 0);
-
     ctx = snake.data.ctx = snake.elements.canvas.getContext("2d");
     ctx.fillStyle = "#fff";
     ctx.font = snake.config.fontSize + "px " + snake.config.fontFamily;
+    snake.elements.canvas.style.backgroundSize = (snake.config.canvasHeight / snake.config.fieldHeight + "px");
 
-    // Load lang file
-    // let newScriptElement = document.createElement("script");
-    // newScriptElement.src = "lang/" + snake.config.lang + ".lang.js";
-    // document.body.appendChild(newScriptElement);
-    // newScriptElement.setAttribute("onload", "ctx.fillText(getLang('pressToStart'), 100,100)");
-    // newScriptElement.setAttribute("onerror", "ctx.fillText(getLang('pressToStart'), 100,100)");
-
-    snake.data.controls = {};
-
-    snake.data.spritesheet = new Image();
+    snake.data = {
+        ...snake.data,
+        controls: {},
+        spritesheet: new Image(),
+        player: {
+            pause: 1
+        }
+    };
     snake.data.spritesheet.src = "spritesheet.png";
 
-    snake.data.player = {
-        pause: 1
-    };
-
-    snake.elements.canvas.style.backgroundSize = (snake.config.canvasHeight / snake.config.fieldHeight + "px");
+    applyCSS();
 
     window.addEventListener("keypress",function(e) {
         let inputKey = e.key.toLowerCase();
@@ -90,6 +74,13 @@ function initOnce() {
     window.setInterval(function() {
         tick();
     },(1000 / snake.config.tps));
+
+
+    window.getLocaleString = await Langfun(snake.config.lang).then(langfun => {
+        return langfun.getLang;
+    });
+
+    ctx.fillText(getLocaleString("pressToStart"),100,140);
 }
 
 function startGame() {
@@ -281,12 +272,8 @@ function playerdie() {
     snake.data.player.pause = 1;
     ctx.fillStyle = "#fff";
     ctx.font = snake.config.fontSize + "px " + snake.config.fontFamily;
-    ctx.fillText(getLang("youDied"),100,100);
-    ctx.fillText(getLang("pressToRestart"),100,140);
-}
-
-function getLang(request) {
-
+    ctx.fillText(getLocaleString("youDied"),100,100);
+    ctx.fillText(getLocaleString("pressToRestart"),100,140);
 }
 
 function applyCSS() {

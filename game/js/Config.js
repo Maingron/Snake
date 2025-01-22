@@ -15,35 +15,18 @@ export function Config() {
 		lang: "en"
 	};
 
-	config.lang = navigator.languages.filter(x=>{
-		if(config.availableLangs.includes(x)) {
-			return true
-		}
-	})[0];
-
-
-	import("../lang/"+ config.lang +".lang.js").then(lang => {
-		gLang = lang.lang;
-		return lang;
-	}).then(lang => {
-		console.log(gLang);
-	});
-
-	window.setInterval(function() {
-		console.log(gLang)
-	},100);
-
-
-	this.getLang = function(request) {
-		if(typeof(gLang) != "undefined" && gLang[request] && gLang[request] != "") {
-			return gLang[request];
-		} else {
-			return request;
-		}
+	config = {
+		...config,
+		lang: navigator.languages.filter(x=>{
+			if(config.availableLangs.includes(x)) {
+				return true
+			}
+		})[0],
+		oneHeight: config.canvasHeight / config.fieldHeight,
+		oneWidth: config.canvasWidth / config.fieldWidth
 	}
 
 	return {
-		config: config,
-		getLang: this.getLang
+		config: config
 	}
 }
