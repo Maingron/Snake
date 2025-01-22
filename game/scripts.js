@@ -2,6 +2,7 @@ if(!data) {
     var data = d = {};
 }
 
+
 var snake = data["snake"] = {};
 var ctx;
 
@@ -12,30 +13,21 @@ snake.data = {
 };
 snake.meta = {};
 
-snake.config = {
-    "fieldHeight": 14, // fields
-    "fieldWidth": 14, // fields
-    "canvasHeight": Math.min(document.body.offsetHeight,document.body.offsetWidth) - 60, // px
-    "canvasWidth": Math.min(document.body.offsetHeight,document.body.offsetWidth) - 60, // px
-    "tps": 120, // Ticks per Second
-    "movespeed": 18, // Move every nth-tick
-
-    "fontSize": "32", // px
-    "fontFamily": ['Kristen ITC', 'Ink Free', 'Felix Titling', 'system-ui', 'sans-serif'].map(x=>`'${x}'`).join(","),
-
-    "wrapField": true,
-    "lang": "en"
-}
-
-snake.config.oneHeight = snake.config.canvasHeight / snake.config.fieldHeight;
-snake.config.oneWidth = snake.config.canvasWidth / snake.config.fieldWidth;
-
 snake.elements = {
     canvas: document.getElementById("snakecanvas"),
     coords: document.getElementById("coords")
 };
 
 function initOnce() {
+
+    snake.config = new Config();
+    window.getLang = snake.config.getLang;
+    snake.config = snake.config.config;
+
+    snake.config.oneHeight = snake.config.canvasHeight / snake.config.fieldHeight;
+    snake.config.oneWidth = snake.config.canvasWidth / snake.config.fieldWidth;
+
+
     snake.elements.canvas.height = snake.config.canvasHeight;
     snake.elements.canvas.width = snake.config.canvasWidth;
 
@@ -48,11 +40,11 @@ function initOnce() {
     ctx.font = snake.config.fontSize + "px " + snake.config.fontFamily;
 
     // Load lang file
-    let newScriptElement = document.createElement("script");
-    newScriptElement.src = "lang/" + snake.config.lang + ".lang.js";
-    document.body.appendChild(newScriptElement);
-    newScriptElement.setAttribute("onload", "ctx.fillText(getLang('pressToStart'), 100,100)");
-    newScriptElement.setAttribute("onerror", "ctx.fillText(getLang('pressToStart'), 100,100)");
+    // let newScriptElement = document.createElement("script");
+    // newScriptElement.src = "lang/" + snake.config.lang + ".lang.js";
+    // document.body.appendChild(newScriptElement);
+    // newScriptElement.setAttribute("onload", "ctx.fillText(getLang('pressToStart'), 100,100)");
+    // newScriptElement.setAttribute("onerror", "ctx.fillText(getLang('pressToStart'), 100,100)");
 
     snake.data.controls = {};
 
@@ -294,15 +286,9 @@ function playerdie() {
 }
 
 function getLang(request) {
-    if(typeof(lang) != "undefined" && lang[request] && lang[request] != "") {
-        return lang[request];
-    } else {
-        return request;
-    }
+
 }
 
 function applyCSS() {
     document.body.style.setProperty("font-family", snake.config.fontFamily);
 }
-
-initOnce();

@@ -14,6 +14,16 @@
                 <canvas id="snakecanvas"></canvas>
             </div>
         </main>
+        <script type="module">
+            import {Player} from './js/Player.js';
+            window.Player = Player;
+        </script>
+        <script type="module">
+            import {Config} from './js/Config.js';
+            window.Config = Config;
+            initOnce();
+        </script>
+
         <script src="scripts.js"></script>
     </body>
 </html>
