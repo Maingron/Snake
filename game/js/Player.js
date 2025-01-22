@@ -6,16 +6,16 @@ export function Player() {
 		controlblock: false,
 		pause: 0,
 		positions: [[0,0],[0,0],[0,0]], // [[x,y],[x,y],[x,y],...]
-		points: 0
+		points: 0,
+		status: "alive"
 	}
 
 	props.initialLength = props.positions.length + 1; // Initial length, used for some calculations like scoreboard
 
-	function checkCollisionWithTail() {
-		console.log("cheggin");
+	function checkCollisionWithTail(coords = [props.x, props.y]) {
 		for(let i = 0; i < props.positions.length - 1; i++) {
-			if(props.x == props.positions[i][0] && props.y == props.positions[i][1]) {
-				return true;
+			if(coords[0] == props.positions[i][0] && coords[1] == props.positions[i][1]) {
+				return coords;
 			}
 		}
 
@@ -23,7 +23,10 @@ export function Player() {
 	}
 
 	function playerdie() {
-		Scenes.playerDied();
+		props.status = "dead";
+		if(snake.data.players.length <= 1) {
+			Scenes.playerDied();
+		}
 	}
 
 	function tickPlayer() {
@@ -93,8 +96,14 @@ export function Player() {
 			}
 	
 			window.setTimeout(function() {
-				if(checkCollisionWithTail()) {
-					playerdie();
+				// if(checkCollisionWithTail()) {
+				// 	playerdie();
+				// }
+
+				for(let playerEntity of snake.data.players) {
+					if(playerEntity.checkCollisionWithTail([props.x, props.y])) {
+						playerdie();
+					}
 				}
 			}, 0);
 

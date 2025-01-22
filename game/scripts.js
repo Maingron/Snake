@@ -187,10 +187,12 @@ function renderTPS() {
     }
 
 
-    for(let player of snake.data.players) {
+    snake.data.players = snake.data.players
+    .filter(player => player.props.status == "alive")
+    .map(player => {
         player.tickPlayer();
-
-    }
+        return player;
+    });
 }
 
 
