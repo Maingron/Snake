@@ -8,7 +8,7 @@ export function Config() {
 		canvasWidth: Math.min(document.body.offsetHeight,document.body.offsetWidth) - 60, // px
 		tps: 120, // Ticks per Second
 		fps: 60, // Frames per Second
-		movespeed: 18, // Move every nth-tick
+		movespeed: 12, // Move every nth-tick
 		fontSize: "32", // px
 		fontFamily: ['Kristen ITC', 'Ink Free', 'Felix Titling', 'system-ui', 'sans-serif'].map(x=>`'${x}'`).join(","),
 		wrapField: true,
