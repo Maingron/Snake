@@ -7,10 +7,34 @@ export function Player() {
 		pause: 0,
 		positions: [[0,0],[0,0],[0,0]], // [[x,y],[x,y],[x,y],...]
 		points: 0,
-		status: "alive"
+		status: "alive",
+		style: {
+			colorChannelR: Math.random(),
+			colorChannelG: Math.random(),
+			colorChannelB: Math.random()
+		},
+		controls: {
+			up: "w",
+			down: "s",
+			left: "a",
+			right: "d",
+			reset: "r",
+			pause: "p"
+		}
 	}
 
 	props.initialLength = props.positions.length + 1; // Initial length, used for some calculations like scoreboard
+
+	if(snake.data.players.length > 0) {
+		props.controls = {
+			up: "arrowup",
+			down: "arrowdown",
+			left: "arrowleft",
+			right: "arrowright",
+			reset: "r",
+			pause: "p"
+		}
+	}
 
 	function checkCollisionWithTail(coords = [props.x, props.y]) {
 		for(let i = 0; i < props.positions.length - 1; i++) {

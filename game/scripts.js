@@ -42,15 +42,19 @@ async function initOnce() {
 
     applyCSS();
 
-    window.addEventListener("keypress",function(e) {
+    window.addEventListener("keydown",function(e) {
         let inputKey = e.key.toLowerCase();
+
+        if (inputKey == "r") {
+            startGame();
+        }
+
+        if(snake.data?.players?.length <= 1 && (inputKey == "arrowup" || inputKey == "arrowdown" || inputKey == "arrowleft" || inputKey == "arrowright")) {
+            snake.data.players.push(new Player());
+        }
 
         for(let player of snake.data.players || [{}]) {
             let playerP = player.props;
-
-            if (inputKey == "r") {
-                startGame();
-            }
 
             if(!player.props) {
                 return false;
@@ -61,19 +65,19 @@ async function initOnce() {
             }
 
             if(!playerP.controlblock) {
-                if(inputKey == "w") {
+                if(inputKey == playerP.controls.up) {
                     if(playerP.direction != "down") {
                         playerP.direction = "up";
                     }
-                } else if (inputKey == "s") {
+                } else if (inputKey == playerP.controls.down) {
                     if(playerP.direction != "up") {
                         playerP.direction = "down";
                     }
-                } else if (inputKey == "a") {
+                } else if (inputKey == playerP.controls.left) {
                     if(playerP.direction != "right") {
                         playerP.direction = "left";
                     }
-                } else if (inputKey == "d") {
+                } else if (inputKey == playerP.controls.right) {
                     if(playerP.direction != "left") {
                         playerP.direction = "right";
                     }
@@ -155,10 +159,11 @@ function renderFPS() {
     for(let player of snake.data.players) {
         player = player.props;
         for(var i = 0; i < player.positions.length; i++) {
-            var currentGradient = numHex((256 / player.positions.length * i));
-            var currentGradient2 = numHex((128 / player.positions.length * i));
+            var currentGradientR = numHex((256 * player.style.colorChannelR / player.positions.length * i));
+            var currentGradientG = numHex((256 * player.style.colorChannelG / player.positions.length * i));
+            var currentGradientB = numHex((256 * player.style.colorChannelB / player.positions.length * i));
     
-            ctx.fillStyle="#"+"00"+currentGradient2+currentGradient;
+            ctx.fillStyle="#"+currentGradientR+currentGradientG+currentGradientB;
     
             ctx.fillRect(player.positions[i][0] * snake.config.oneWidth, player.positions[i][1] * snake.config.oneHeight, snake.config.oneWidth, snake.config.oneHeight);
     
