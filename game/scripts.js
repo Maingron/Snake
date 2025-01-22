@@ -84,9 +84,13 @@ async function initOnce() {
 
     });
 
-    window.setInterval(function() {
+    window.setInterval(() => {
         tick();
     },(1000 / snake.config.tps));
+
+    setInterval(() => {
+        requestAnimationFrame(renderFPS);
+    }, 1000 / snake.config.fps);
 
 
     window.getLocaleString = await Langfun(snake.config.lang).then(langfun => {
@@ -113,7 +117,6 @@ function startGame() {
 function tick() {
     snake.data.tick.count++;
     renderTPS();
-    renderFPS();
 }
 
 function numHex(s) {

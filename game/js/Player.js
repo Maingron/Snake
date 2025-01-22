@@ -34,8 +34,6 @@ export function Player() {
 			moveThisTick = true;
 			var nextPosition = [playerP.x, playerP.y];
 
-			playerP.points = (playerP.positions.length - playerP.initialLength) + 1;
-
 			if(playerP.direction == "up") {
 				if(snake.config.wrapField && playerP.y == 0) {
 					nextPosition[1] = snake.config.fieldHeight - 1;
@@ -73,11 +71,9 @@ export function Player() {
 	
 				for(let fruit of snake.data.fruits) {
 					if(fruit.checkCollision([playerP.x, playerP.y])) {
-						setTimeout(async() => {
-							for(let i = 0; i < fruit.points; i++) {
-								playerP.positions.unshift([playerP.positions[0][0], playerP.positions[0][1]]);
-							}
-						},0);
+						for(let i = 0; i < fruit.points; i++) {
+							playerP.positions.unshift([playerP.positions[0][0], playerP.positions[0][1]]);
+						}
 	
 						fruit.getEaten();
 						fruit.setNewPosition();
@@ -101,6 +97,8 @@ export function Player() {
 					playerdie();
 				}
 			}, 0);
+
+			playerP.points = (playerP.positions.length - playerP.initialLength) + 1;
 
 			playerP.controlblock = false;
 		}
