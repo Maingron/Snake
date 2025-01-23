@@ -9,7 +9,9 @@ var ctx;
 snake.data = {
     tick: {
         count: 0
-    }
+    },
+    windowInnerWidth: window.innerWidth,
+    windowInnerHeight: window.innerHeight
 };
 snake.meta = {};
 
@@ -128,6 +130,8 @@ function startGame() {
 function tick() {
     snake.data.tick.count++;
     renderTPS();
+    snake.data.windowInnerHeight = window.innerHeight;
+    snake.data.windowInnerWidth = window.innerWidth;
 }
 
 function numHex(s) {
@@ -195,7 +199,10 @@ function renderFPS() {
 
     ctx.fillStyle = "#f00";
     for(let fruit of snake.data.fruits) {
-        ctx.drawImage(snake.data.spritesheet, 0, 129, 128, 128, ...calculateRelativeToCamera(fruit.pos[0], fruit.pos[1], 1, 1));
+        let relativeCoords = calculateRelativeToCamera(fruit.pos[0], fruit.pos[1], 1, 1);
+        if(inViewport(...relativeCoords)) {
+            ctx.drawImage(snake.data.spritesheet, 0, 129, 128, 128, ...relativeCoords);
+        }
     }
 
     // Draw border around map boundaries
@@ -240,7 +247,13 @@ function calculateRelativeToCamera(x, y, width, height) {
         return [resX, resY, resWidth, resHeight];
     }
     return [resX, resY];
+}
 
+function inViewport(x, y, width, height) {
+    if(x < 0 - width || y < 0 - height || x > snake.data.windowInnerWidth || y > snake.data.windowInnerHeight) {
+        return false;
+    }
+    return true;
 }
 
 function renderTPS() {
