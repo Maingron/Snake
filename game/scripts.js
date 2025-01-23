@@ -187,10 +187,10 @@ function renderFPS() {
 
             // ctx.fillRect(virtualCoords.centerPointX + (player.positions[i][0] * virtualCoords.oneWidth - player.x * virtualCoords.oneWidth), virtualCoords.centerPointY + (player.positions[i][1] * virtualCoords.oneHeight - player.y * virtualCoords.oneHeight), virtualCoords.oneWidth, virtualCoords.oneHeight);
     
-            // if(i == player.positions.length - 1) { // Head
-            //     // draw sprite
-            //     ctx.drawImage(snake.data.spritesheet, 128, 128, 128, 128, player.positions[i][0] * snake.config.oneWidth, player.positions[i][1] * snake.config.oneHeight, snake.config.oneWidth, snake.config.oneHeight);
-            // }
+            if(i == player.positions.length - 1) { // Head
+                // draw sprite
+                ctx.drawImage(snake.data.spritesheet, 128, 128, 128, 128, ...calculateRelativeToCamera(player.positions[i][0], player.positions[i][1], 1, 1));
+            }
         }
     }
 
