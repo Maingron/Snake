@@ -148,26 +148,6 @@ function renderFPS() {
 
     ctx.clearRect(0,0,snake.config.canvasWidth,snake.config.canvasHeight);
 
-    // This part will track the snake, and move the camera accordingly - by using offset
-    let virtualCoords = {
-        scalar: snake.config.fieldHeight / 16,
-        focusPlayer: snake.data.players[0].props
-    };
-    virtualCoords = {
-        ...virtualCoords,
-        oneWidth: snake.config.oneWidth * virtualCoords.scalar,
-        oneHeight: snake.config.oneHeight * virtualCoords.scalar,
-        xOffset: snake.data.players[0].props.x / virtualCoords.scalar,
-        yOffset: snake.data.players[0].props.y / virtualCoords.scalar,
-        playerX: snake.data.players[0].props.x,
-        playerY: snake.data.players[0].props.y
-    };
-
-    virtualCoords = {
-        ...virtualCoords,
-        centerPointX: (snake.config.canvasWidth - virtualCoords.oneWidth) / 2,
-        centerPointY: (snake.config.canvasHeight - virtualCoords.oneHeight) / 2
-    }
 
 
     // draw background image tiled
@@ -203,9 +183,7 @@ function renderFPS() {
     
             ctx.fillStyle="#"+currentGradientR+currentGradientG+currentGradientB;
 
-            let relativeCoords = calculateRelativeToCamera(player.positions[i][0], player.positions[i][1], 1, 1);
-
-            ctx.fillRect(relativeCoords[0], relativeCoords[1], relativeCoords[2], relativeCoords[3]);
+            ctx.fillRect(...calculateRelativeToCamera(player.positions[i][0], player.positions[i][1], 1, 1));
 
             // ctx.fillRect(virtualCoords.centerPointX + (player.positions[i][0] * virtualCoords.oneWidth - player.x * virtualCoords.oneWidth), virtualCoords.centerPointY + (player.positions[i][1] * virtualCoords.oneHeight - player.y * virtualCoords.oneHeight), virtualCoords.oneWidth, virtualCoords.oneHeight);
     
@@ -220,8 +198,7 @@ function renderFPS() {
 
     ctx.fillStyle = "#f00";
     for(let fruit of snake.data.fruits) {
-        let relativeCoords = calculateRelativeToCamera(fruit.pos[0], fruit.pos[1], 1, 1);
-        ctx.drawImage(snake.data.spritesheet, 0, 129, 128, 128, relativeCoords[0], relativeCoords[1], relativeCoords[2], relativeCoords[3]);
+        ctx.drawImage(snake.data.spritesheet, 0, 129, 128, 128, ...calculateRelativeToCamera(fruit.pos[0], fruit.pos[1], 1, 1));
     }
 
     // Draw border around map boundaries
