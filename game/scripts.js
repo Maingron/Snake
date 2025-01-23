@@ -27,7 +27,11 @@ async function initOnce() {
     ctx = snake.data.ctx = snake.elements.canvas.getContext("2d");
     ctx.fillStyle = "#fff";
     ctx.font = snake.config.fontSize + "px " + snake.config.fontFamily;
-    snake.elements.canvas.style.backgroundSize = (snake.config.canvasHeight / snake.config.fieldHeight + "px");
+    // snake.elements.canvas.style.backgroundSize = (snake.config.canvasHeight / snake.config.fieldHeight + "px");
+
+    // let relativeCoords = calculateRelativeToCamera(0,0,1,1);
+    // snake.elements.canvas.style.backgroundSize = (relativeCoords[2] + "px");
+
 
     snake.data = {
         ...snake.data,
@@ -114,7 +118,10 @@ function startGame() {
     snake.meta.website = "https://maingron.com/snake";
 
 
-    snake.data.fruits.push(new Fruit.Apple());
+    for(var i = 0; i < (snake.config.fieldHeight * snake.config.fieldWidth) / 100; i++) {
+        snake.data.fruits.push(new Fruit.Apple());
+    }
+        
     snake.data.fruits[0]?.getEaten();
 }
 
@@ -141,6 +148,37 @@ function renderFPS() {
 
     ctx.clearRect(0,0,snake.config.canvasWidth,snake.config.canvasHeight);
 
+    // This part will track the snake, and move the camera accordingly - by using offset
+    let virtualCoords = {
+        scalar: snake.config.fieldHeight / 16,
+        focusPlayer: snake.data.players[0].props
+    };
+    virtualCoords = {
+        ...virtualCoords,
+        oneWidth: snake.config.oneWidth * virtualCoords.scalar,
+        oneHeight: snake.config.oneHeight * virtualCoords.scalar,
+        xOffset: snake.data.players[0].props.x / virtualCoords.scalar,
+        yOffset: snake.data.players[0].props.y / virtualCoords.scalar,
+        playerX: snake.data.players[0].props.x,
+        playerY: snake.data.players[0].props.y
+    };
+
+    virtualCoords = {
+        ...virtualCoords,
+        centerPointX: (snake.config.canvasWidth - virtualCoords.oneWidth) / 2,
+        centerPointY: (snake.config.canvasHeight - virtualCoords.oneHeight) / 2
+    }
+
+
+    // draw background image tiled
+    //
+    // for(var i = 0; i < snake.config.fieldWidth; i++) {
+    //     for(var j = 0; j < snake.config.fieldHeight; j++) {
+    //         ctx.drawImage(snake.data.spritesheet, 0, 0, 128, 128, i * virtualCoords.oneWidth, j * virtualCoords.oneHeight, virtualCoords.oneWidth, virtualCoords.oneHeight);
+    //     }
+    // }
+
+
     // // Scoreboard
     // ctx.drawImage(snake.data.spritesheet, 0, 128, 128, 128, 5, 5, 24, 24); // Apple
     ctx.font = snake.config.fontSize * 4 + "px " + snake.config.fontFamily // Font for scoreboard is bigger than default
@@ -164,13 +202,17 @@ function renderFPS() {
             var currentGradientB = numHex((256 * player.style.colorChannelB / player.positions.length * i));
     
             ctx.fillStyle="#"+currentGradientR+currentGradientG+currentGradientB;
+
+            let relativeCoords = calculateRelativeToCamera(player.positions[i][0], player.positions[i][1], 1, 1);
+
+            ctx.fillRect(relativeCoords[0], relativeCoords[1], relativeCoords[2], relativeCoords[3]);
+
+            // ctx.fillRect(virtualCoords.centerPointX + (player.positions[i][0] * virtualCoords.oneWidth - player.x * virtualCoords.oneWidth), virtualCoords.centerPointY + (player.positions[i][1] * virtualCoords.oneHeight - player.y * virtualCoords.oneHeight), virtualCoords.oneWidth, virtualCoords.oneHeight);
     
-            ctx.fillRect(player.positions[i][0] * snake.config.oneWidth, player.positions[i][1] * snake.config.oneHeight, snake.config.oneWidth, snake.config.oneHeight);
-    
-            if(i == player.positions.length - 1) { // Head
-                // draw sprite
-                ctx.drawImage(snake.data.spritesheet, 128, 128, 128, 128, player.positions[i][0] * snake.config.oneWidth, player.positions[i][1] * snake.config.oneHeight, snake.config.oneWidth, snake.config.oneHeight);
-            }
+            // if(i == player.positions.length - 1) { // Head
+            //     // draw sprite
+            //     ctx.drawImage(snake.data.spritesheet, 128, 128, 128, 128, player.positions[i][0] * snake.config.oneWidth, player.positions[i][1] * snake.config.oneHeight, snake.config.oneWidth, snake.config.oneHeight);
+            // }
         }
     }
 
@@ -178,8 +220,38 @@ function renderFPS() {
 
     ctx.fillStyle = "#f00";
     for(let fruit of snake.data.fruits) {
-        ctx.drawImage(snake.data.spritesheet, 0, 129, 128, 128, fruit.pos[0] * snake.config.oneWidth, fruit.pos[1] * snake.config.oneHeight, snake.config.oneWidth, snake.config.oneHeight);
+        let relativeCoords = calculateRelativeToCamera(fruit.pos[0], fruit.pos[1], 1, 1);
+        ctx.drawImage(snake.data.spritesheet, 0, 129, 128, 128, relativeCoords[0], relativeCoords[1], relativeCoords[2], relativeCoords[3]);
     }
+
+    // Draw border around map boundaries
+    ctx.beginPath();
+    ctx.strokeStyle = "black";
+    ctx.lineWidth = 8;
+    let relativeCoords = calculateRelativeToCamera(0,0);
+    let relativeCoords2 = calculateRelativeToCamera(snake.config.fieldWidth, snake.config.fieldHeight);
+    ctx.rect(relativeCoords[0], relativeCoords[1], relativeCoords2[0] - relativeCoords[0], relativeCoords2[1] - relativeCoords[1]);
+    ctx.stroke();
+}
+
+function calculateRelativeToCamera(x, y, width, height) {
+    const playerSnake = snake?.data?.players?.[0] || { props: { x: 0, y: 0 } };
+
+    const { oneWidth, oneHeight, scale, canvasWidth, canvasHeight } = snake.config;
+    const { x: playerX, y: playerY } = playerSnake.props;
+
+    const scaledWidth = oneWidth * scale;
+    const scaledHeight = oneHeight * scale;
+
+    const centerPointX = (canvasWidth - scaledWidth) / 2;
+    const centerPointY = (canvasHeight - scaledHeight) / 2;
+
+    const resX = centerPointX + (x - playerX) * scaledWidth;
+    const resY = centerPointY + (y - playerY) * scaledHeight;
+    const resWidth = width * scaledWidth;
+    const resHeight = height * scaledHeight;
+
+    return [resX, resY, resWidth, resHeight];
 }
 
 function renderTPS() {

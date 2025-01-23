@@ -2,10 +2,10 @@ export function Config() {
 	var gLang = {};
 
 	var config = {
-		fieldHeight: 14, // fields
-		fieldWidth: 14, // fields
-		canvasHeight: Math.min(document.body.offsetHeight,document.body.offsetWidth) - 60, // px
-		canvasWidth: Math.min(document.body.offsetHeight,document.body.offsetWidth) - 60, // px
+		fieldHeight: 50, // fields
+		fieldWidth: 50, // fields
+		canvasHeight: document.body.offsetHeight, // px
+		canvasWidth: document.body.offsetWidth, // px
 		tps: 120, // Ticks per Second
 		fps: 60, // Frames per Second
 		movespeed: 12, // Move every nth-tick
@@ -24,7 +24,8 @@ export function Config() {
 			}
 		})[0],
 		oneHeight: config.canvasHeight / config.fieldHeight,
-		oneWidth: config.canvasWidth / config.fieldWidth
+		oneWidth: config.canvasHeight / config.fieldHeight,
+		scale: config.fieldHeight / 16
 	}
 
 	return {
