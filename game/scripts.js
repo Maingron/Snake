@@ -66,30 +66,23 @@ async function initOnce() {
                 return false;
             }
 
-            if(playerP.pause) {
-                playerP.controlblock = false;
-            }
-
-            if(!playerP.controlblock) {
-                if(inputKey == playerP.controls.up) {
-                    if(playerP.direction != "down") {
-                        playerP.direction = "up";
-                    }
-                } else if (inputKey == playerP.controls.down) {
-                    if(playerP.direction != "up") {
-                        playerP.direction = "down";
-                    }
-                } else if (inputKey == playerP.controls.left) {
-                    if(playerP.direction != "right") {
-                        playerP.direction = "left";
-                    }
-                } else if (inputKey == playerP.controls.right) {
-                    if(playerP.direction != "left") {
-                        playerP.direction = "right";
-                    }
+            if(inputKey == playerP.controls.up) {
+                if(playerP.direction != "down") {
+                    playerP.direction = "up";
+                }
+            } else if (inputKey == playerP.controls.down) {
+                if(playerP.direction != "up") {
+                    playerP.direction = "down";
+                }
+            } else if (inputKey == playerP.controls.left) {
+                if(playerP.direction != "right") {
+                    playerP.direction = "left";
+                }
+            } else if (inputKey == playerP.controls.right) {
+                if(playerP.direction != "left") {
+                    playerP.direction = "right";
                 }
             }
-            playerP.controlblock = true;
         }
 
     });

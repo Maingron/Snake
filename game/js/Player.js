@@ -3,7 +3,6 @@ export function Player() {
 		x: 0,
 		y: 0,
 		direction: "right",
-		controlblock: false,
 		pause: 0,
 		positions: [[0,0],[0,0],[0,0]], // [[x,y],[x,y],[x,y],...]
 		points: 0,
@@ -132,8 +131,6 @@ export function Player() {
 			}, 0);
 
 			playerP.points = (playerP.positions.length - playerP.initialLength) + 1;
-
-			playerP.controlblock = false;
 		}
 	}
 
