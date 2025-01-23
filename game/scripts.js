@@ -161,13 +161,7 @@ function renderFPS() {
 
     // // Scoreboard
     // ctx.drawImage(snake.data.spritesheet, 0, 128, 128, 128, 5, 5, 24, 24); // Apple
-    ctx.font = snake.config.fontSize * 4 + "px " + snake.config.fontFamily // Font for scoreboard is bigger than default
-    for(let player of snake.data.players) {
-        ctx.fillText(player.props.points, snake.config.canvasHeight / 2 - ctx.measureText(player.props.points).width / 2, snake.config.canvasHeight / 2);
-    
-        ctx.font = snake.config.fontSize + "px " + snake.config.fontFamily // Font for scoreboard is bigger than default
-        ctx.fillText(player.props.x + "; " + player.props.y, 5, snake.config.canvasHeight - 5);
-    }
+
 
 
     // Set font
@@ -192,6 +186,9 @@ function renderFPS() {
                 ctx.drawImage(snake.data.spritesheet, 128, 128, 128, 128, ...calculateRelativeToCamera(player.positions[i][0], player.positions[i][1], 1, 1));
             }
         }
+
+        ctx.fillStyle="#fff";
+        ctx.fillText(player.points, ...calculateRelativeToCamera(player.positions[player.positions.length - 2][0] + .1, player.positions[player.positions.length - 2][1] + .75));
     }
 
 
@@ -209,6 +206,17 @@ function renderFPS() {
     let relativeCoords2 = calculateRelativeToCamera(snake.config.fieldWidth, snake.config.fieldHeight);
     ctx.rect(relativeCoords[0], relativeCoords[1], relativeCoords2[0] - relativeCoords[0], relativeCoords2[1] - relativeCoords[1]);
     ctx.stroke();
+
+    // OSD
+    // ctx.fillStyle = "#000";
+    // ctx.fillRect(0, snake.config.canvasHeight * .9, snake.config.canvasWidth / 10, snake.config.canvasHeight / 10);
+
+    ctx.font = snake.config.fontSize * 4 + "px " + snake.config.fontFamily // Font for scoreboard is bigger than default
+        // ctx.fillText(player.props.points, snake.config.canvasHeight / 2 - ctx.measureText(player.props.points).width / 2, snake.config.canvasHeight / 2);
+
+    ctx.fillStyle = "#fff";
+    ctx.font = snake.config.fontSize + "px " + snake.config.fontFamily // Font for scoreboard is bigger than default
+    ctx.fillText(snake.data.players[0].props.x + "; " + snake.data.players[0].props.y, 5, snake.config.canvasHeight - 5);
 }
 
 function calculateRelativeToCamera(x, y, width, height) {
@@ -228,7 +236,11 @@ function calculateRelativeToCamera(x, y, width, height) {
     const resWidth = width * scaledWidth;
     const resHeight = height * scaledHeight;
 
-    return [resX, resY, resWidth, resHeight];
+    if(resWidth && resHeight) {
+        return [resX, resY, resWidth, resHeight];
+    }
+    return [resX, resY];
+
 }
 
 function renderTPS() {
