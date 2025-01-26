@@ -174,8 +174,8 @@ function renderFPS() {
     
             ctx.fillStyle="#"+currentGradientR+currentGradientG+currentGradientB;
 
-            ctx.fillRect(...calculateRelativeToCamera(player.positions[i][0], player.positions[i][1], 1, 1));
-
+            // ctx.fillRect(...calculateRelativeToCamera(player.positions[i][0] + .15, player.positions[i][1] + .15, .7, .7));
+            ctx.drawImage(snake.data.spritesheet, 256, 0, 128, 128, ...calculateRelativeToCamera(player.positions[i][0], player.positions[i][1], 1, 1));
             // ctx.fillRect(virtualCoords.centerPointX + (player.positions[i][0] * virtualCoords.oneWidth - player.x * virtualCoords.oneWidth), virtualCoords.centerPointY + (player.positions[i][1] * virtualCoords.oneHeight - player.y * virtualCoords.oneHeight), virtualCoords.oneWidth, virtualCoords.oneHeight);
     
             if(i == player.positions.length - 1) { // Head
@@ -194,7 +194,11 @@ function renderFPS() {
     for(let fruit of snake.data.fruits) {
         let relativeCoords = calculateRelativeToCamera(fruit.pos[0], fruit.pos[1], 1, 1);
         if(inViewport(...relativeCoords)) {
-            ctx.drawImage(snake.data.spritesheet, 0, 129, 128, 128, ...relativeCoords);
+            if(fruit.type == "Apple") {
+                ctx.drawImage(snake.data.spritesheet, 0, 0, 128, 128, ...relativeCoords);
+            } else if(fruit.type == "Orange") {
+                ctx.drawImage(snake.data.spritesheet, 128, 0, 128, 128, ...relativeCoords);
+            }
         }
     }
 

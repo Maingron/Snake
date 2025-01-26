@@ -1,0 +1,418 @@
+{
+	"inputs": [
+		{
+			"filename": "fruit-apple.png",
+			"sources": [
+				{
+					"index": 0,
+					"spriteIndices": [0]
+				}
+			]
+		},
+		{
+			"filename": "fruit-orange.png",
+			"sources": [
+				{
+					"index": 1,
+					"spriteIndices": [1]
+				}
+			]
+		},
+		{
+			"filename": "snake-alt.png",
+			"sources": [
+				{
+					"index": 2,
+					"spriteIndices": [2]
+				}
+			]
+		},
+		{
+			"filename": "snake-curve.png",
+			"sources": [
+				{
+					"index": 3,
+					"spriteIndices": [3]
+				}
+			]
+		},
+		{
+			"filename": "snake-face.png",
+			"sources": [
+				{
+					"index": 4,
+					"spriteIndices": [4]
+				}
+			]
+		},
+		{
+			"filename": "snake-end.png",
+			"sources": [
+				{
+					"index": 5,
+					"spriteIndices": [5]
+				}
+			]
+		},
+		{
+			"filename": "snake-middle.png",
+			"sources": [
+				{
+					"index": 6,
+					"spriteIndices": [6]
+				}
+			]
+		}
+	],
+	"slices": [
+		{
+			"spriteIndices": [0,1,2,3,4,5,6]
+		}
+	],
+	"sources": [
+		{
+			"filename": "fruit-apple.png",
+			"height": 16,
+			"path": "",
+			"width": 16
+		},
+		{
+			"filename": "fruit-orange.png",
+			"height": 16,
+			"path": "",
+			"width": 16
+		},
+		{
+			"filename": "snake-alt.png",
+			"height": 16,
+			"path": "",
+			"width": 16
+		},
+		{
+			"filename": "snake-curve.png",
+			"height": 16,
+			"path": "",
+			"width": 16
+		},
+		{
+			"filename": "snake-face.png",
+			"height": 16,
+			"path": "",
+			"width": 16
+		},
+		{
+			"filename": "snake-end.png",
+			"height": 16,
+			"path": "",
+			"width": 16
+		},
+		{
+			"filename": "snake-middle.png",
+			"height": 16,
+			"path": "",
+			"width": 16
+		}
+	],
+	"sprites": [
+		{
+			"data": {},
+			"id": "sprite_0",
+			"index": 0,
+			"inputIndex": 0,
+			"inputSpriteIndex": 0,
+			"pivot": {
+				"x": 8.0,
+				"y": 8.0
+			},
+			"rect": {
+				"h": 16,
+				"w": 16,
+				"x": 0,
+				"y": 0
+			},
+			"rotated": false,
+			"sliceIndex": 0,
+			"sliceSpriteIndex": 0,
+			"sourceIndex": 0,
+			"sourceRect": {
+				"h": 16,
+				"w": 16,
+				"x": 0,
+				"y": 0
+			},
+			"tags": {},
+			"trimmedRect": {
+				"h": 16,
+				"w": 16,
+				"x": 0,
+				"y": 0
+			},
+			"trimmedSourceRect": {
+				"h": 16,
+				"w": 16,
+				"x": 0,
+				"y": 0
+			},
+			"vertices": [0.0,0.0,16.0,0.0,16.0,16.0,0.0,16.0]
+		},
+		{
+			"data": {},
+			"id": "sprite_1",
+			"index": 1,
+			"inputIndex": 1,
+			"inputSpriteIndex": 0,
+			"pivot": {
+				"x": 8.0,
+				"y": 8.0
+			},
+			"rect": {
+				"h": 16,
+				"w": 16,
+				"x": 16,
+				"y": 0
+			},
+			"rotated": false,
+			"sliceIndex": 0,
+			"sliceSpriteIndex": 1,
+			"sourceIndex": 1,
+			"sourceRect": {
+				"h": 16,
+				"w": 16,
+				"x": 0,
+				"y": 0
+			},
+			"tags": {},
+			"trimmedRect": {
+				"h": 16,
+				"w": 16,
+				"x": 16,
+				"y": 0
+			},
+			"trimmedSourceRect": {
+				"h": 16,
+				"w": 16,
+				"x": 0,
+				"y": 0
+			},
+			"vertices": [0.0,0.0,16.0,0.0,16.0,16.0,0.0,16.0]
+		},
+		{
+			"data": {},
+			"id": "sprite_2",
+			"index": 2,
+			"inputIndex": 2,
+			"inputSpriteIndex": 0,
+			"pivot": {
+				"x": 8.0,
+				"y": 8.0
+			},
+			"rect": {
+				"h": 16,
+				"w": 16,
+				"x": 32,
+				"y": 0
+			},
+			"rotated": false,
+			"sliceIndex": 0,
+			"sliceSpriteIndex": 2,
+			"sourceIndex": 2,
+			"sourceRect": {
+				"h": 16,
+				"w": 16,
+				"x": 0,
+				"y": 0
+			},
+			"tags": {},
+			"trimmedRect": {
+				"h": 16,
+				"w": 16,
+				"x": 32,
+				"y": 0
+			},
+			"trimmedSourceRect": {
+				"h": 16,
+				"w": 16,
+				"x": 0,
+				"y": 0
+			},
+			"vertices": [0.0,0.0,16.0,0.0,16.0,16.0,0.0,16.0]
+		},
+		{
+			"data": {},
+			"id": "sprite_3",
+			"index": 3,
+			"inputIndex": 3,
+			"inputSpriteIndex": 0,
+			"pivot": {
+				"x": 8.0,
+				"y": 8.0
+			},
+			"rect": {
+				"h": 16,
+				"w": 16,
+				"x": 0,
+				"y": 16
+			},
+			"rotated": false,
+			"sliceIndex": 0,
+			"sliceSpriteIndex": 3,
+			"sourceIndex": 3,
+			"sourceRect": {
+				"h": 16,
+				"w": 16,
+				"x": 0,
+				"y": 0
+			},
+			"tags": {},
+			"trimmedRect": {
+				"h": 16,
+				"w": 16,
+				"x": 0,
+				"y": 16
+			},
+			"trimmedSourceRect": {
+				"h": 16,
+				"w": 16,
+				"x": 0,
+				"y": 0
+			},
+			"vertices": [0.0,0.0,16.0,0.0,16.0,16.0,0.0,16.0]
+		},
+		{
+			"data": {},
+			"id": "sprite_4",
+			"index": 4,
+			"inputIndex": 4,
+			"inputSpriteIndex": 0,
+			"pivot": {
+				"x": 8.0,
+				"y": 8.0
+			},
+			"rect": {
+				"h": 16,
+				"w": 16,
+				"x": 16,
+				"y": 16
+			},
+			"rotated": false,
+			"sliceIndex": 0,
+			"sliceSpriteIndex": 4,
+			"sourceIndex": 4,
+			"sourceRect": {
+				"h": 16,
+				"w": 16,
+				"x": 0,
+				"y": 0
+			},
+			"tags": {},
+			"trimmedRect": {
+				"h": 16,
+				"w": 16,
+				"x": 16,
+				"y": 16
+			},
+			"trimmedSourceRect": {
+				"h": 16,
+				"w": 16,
+				"x": 0,
+				"y": 0
+			},
+			"vertices": [0.0,0.0,16.0,0.0,16.0,16.0,0.0,16.0]
+		},
+		{
+			"data": {},
+			"id": "sprite_5",
+			"index": 5,
+			"inputIndex": 5,
+			"inputSpriteIndex": 0,
+			"pivot": {
+				"x": 8.0,
+				"y": 8.0
+			},
+			"rect": {
+				"h": 16,
+				"w": 16,
+				"x": 32,
+				"y": 16
+			},
+			"rotated": false,
+			"sliceIndex": 0,
+			"sliceSpriteIndex": 5,
+			"sourceIndex": 5,
+			"sourceRect": {
+				"h": 16,
+				"w": 16,
+				"x": 0,
+				"y": 0
+			},
+			"tags": {},
+			"trimmedRect": {
+				"h": 16,
+				"w": 16,
+				"x": 32,
+				"y": 16
+			},
+			"trimmedSourceRect": {
+				"h": 16,
+				"w": 16,
+				"x": 0,
+				"y": 0
+			},
+			"vertices": [0.0,0.0,16.0,0.0,16.0,16.0,0.0,16.0]
+		},
+		{
+			"data": {},
+			"id": "sprite_6",
+			"index": 6,
+			"inputIndex": 6,
+			"inputSpriteIndex": 0,
+			"pivot": {
+				"x": 8.0,
+				"y": 8.0
+			},
+			"rect": {
+				"h": 16,
+				"w": 16,
+				"x": 0,
+				"y": 32
+			},
+			"rotated": false,
+			"sliceIndex": 0,
+			"sliceSpriteIndex": 6,
+			"sourceIndex": 6,
+			"sourceRect": {
+				"h": 16,
+				"w": 16,
+				"x": 0,
+				"y": 0
+			},
+			"tags": {},
+			"trimmedRect": {
+				"h": 16,
+				"w": 16,
+				"x": 0,
+				"y": 32
+			},
+			"trimmedSourceRect": {
+				"h": 16,
+				"w": 16,
+				"x": 0,
+				"y": 0
+			},
+			"vertices": [0.0,0.0,16.0,0.0,16.0,16.0,0.0,16.0]
+		}
+	],
+	"tags": {},
+	"textures": [
+		{
+			"filename": "../../spritesheet.png",
+			"height": 384,
+			"map": "",
+			"path": "",
+			"scale": 8.0,
+			"sliceIndex": 0,
+			"spriteIndices": [0,1,2,3,4,5,6],
+			"width": 384
+		}
+	]
+}
