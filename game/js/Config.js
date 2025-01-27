@@ -7,7 +7,6 @@ export function Config() {
 		canvasHeight: document.body.offsetHeight, // px
 		canvasWidth: document.body.offsetWidth, // px
 		tps: 120, // Ticks per Second
-		fps: 60, // Frames per Second
 		movespeed: 12, // Move every nth-tick
 		fontSize: "32", // px
 		fontFamily: ['Kristen ITC', 'Ink Free', 'Felix Titling', 'system-ui', 'sans-serif'].map(x=>`'${x}'`).join(","),

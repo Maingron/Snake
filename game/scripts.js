@@ -94,9 +94,7 @@ async function initOnce() {
         tick();
     },(1000 / snake.config.tps));
 
-    setInterval(() => {
-        requestAnimationFrame(renderFPS);
-    }, 1000 / snake.config.fps);
+    window.requestAnimationFrame(renderFPS);
 
 
     window.getLocaleString = await Langfun(snake.config.lang).then(langfun => {
@@ -141,6 +139,8 @@ function numHex(s) {
 }
 
 function renderFPS() {
+    requestAnimationFrame(renderFPS);
+
     if(snake.data.player.pause == 1) {
         return false;
     }
@@ -229,7 +229,7 @@ function renderFPS() {
 
     ctx.fillText("TPS: " + snake.tickcounter.getFPS(), 100, 100);
     ctx.fillText("FPS: " + snake.framecounter.getFPS(), 100, 150)
-;
+
     snake.framecounter.pushRenderCall();
 }
 
