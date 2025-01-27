@@ -46,6 +46,9 @@ async function initOnce() {
     };
     snake.data.spritesheet.src = "spritesheet.png";
 
+    snake.tickcounter = new Framecounter();
+    snake.framecounter = new Framecounter();
+
     applyCSS();
 
     window.addEventListener("keydown",function(e) {
@@ -125,6 +128,7 @@ function tick() {
     renderTPS();
     snake.data.windowInnerHeight = window.innerHeight;
     snake.data.windowInnerWidth = window.innerWidth;
+    snake.tickcounter.pushRenderCall();
 }
 
 function numHex(s) {
@@ -221,6 +225,12 @@ function renderFPS() {
     ctx.fillStyle = "#fff";
     ctx.font = snake.config.fontSize + "px " + snake.config.fontFamily // Font for scoreboard is bigger than default
     ctx.fillText(snake.data.players[0].props.x + "; " + snake.data.players[0].props.y, 5, snake.config.canvasHeight - 5);
+
+
+    ctx.fillText("TPS: " + snake.tickcounter.getFPS(), 100, 100);
+    ctx.fillText("FPS: " + snake.framecounter.getFPS(), 100, 150)
+;
+    snake.framecounter.pushRenderCall();
 }
 
 function calculateRelativeToCamera(x, y, width, height) {
