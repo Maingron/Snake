@@ -2,6 +2,7 @@ export function Player() {
 	var props = {
 		x: 0,
 		y: 0,
+		previousMove: [0,0,"right"], // [x,y,direction]
 		direction: "right",
 		pause: 0,
 		positions: [[0,0],[0,0],[0,0]], // [[x,y],[x,y],[x,y],...]
@@ -131,6 +132,7 @@ export function Player() {
 			}, 0);
 
 			playerP.points = (playerP.positions.length - playerP.initialLength) + 1;
+			this.props.previousMove = [this.props.x, this.props.y, this.props.direction];
 		}
 	}
 
