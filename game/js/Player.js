@@ -4,6 +4,15 @@ export function Player() {
 		y: 0,
 		previousMove: [0,0,"right"], // [x,y,direction]
 		direction: "right",
+		directionNext: "right",
+		stunFrames: 0,
+		smoothMovement: {
+			disableFrames: 0
+		},
+		portal: {
+			ignoreFrames: 0
+		},
+		inactiveElements: [],
 		pause: 0,
 		positions: [[0,0],[0,0],[0,0]], // [[x,y],[x,y],[x,y],...]
 		points: 0,
@@ -56,11 +65,21 @@ export function Player() {
 	function tickPlayer() {
 		let playerP = this.props;
 		var moveThisTick = false;
+		var nextPosition = [playerP.x, playerP.y];
+
+		if(snake.data.tick.count % snake.config.movespeed == snake.config.movespeed - 1) {
+			playerP.direction = playerP.directionNext;
+		}
 
 		if(snake.data.tick.count % snake.config.movespeed == 0) {
+			if(playerP.smoothMovement.disableFrames > 0) {
+				playerP.smoothMovement.disableFrames--;
+			}
+			if(playerP.stunFrames > 0) {
+				playerP.stunFrames--;
+				return;
+			}
 			moveThisTick = true;
-			var nextPosition = [playerP.x, playerP.y];
-
 			if(playerP.direction == "up") {
 				if(snake.config.wrapField && playerP.y == 0) {
 					nextPosition[1] = snake.config.fieldHeight - 1;
@@ -93,8 +112,6 @@ export function Player() {
 			if(nextPosition[0] != playerP.positions[playerP.positions.length - 2][0] || nextPosition[1] != playerP.positions[playerP.positions.length - 2][1]) {
 				playerP.x = nextPosition[0];
 				playerP.y = nextPosition[1];
-				playerP.positions.shift();
-				playerP.positions.push([nextPosition[0],nextPosition[1]]);
 	
 				for(let fruit of snake.data.fruits) {
 					if(fruit.checkCollision([playerP.x, playerP.y])) {
@@ -106,15 +123,54 @@ export function Player() {
 						fruit.setNewPosition();
 					}
 				}
+
+				for(let wall of snake.data.walls) {
+					switch(wall.face) {
+						case "all":
+							if(wall.checkCollision([playerP.x, playerP.y])) {
+								playerdie();
+								return;
+							}
+							break;
+						case "bottom":
+							if(playerP.direction == "down" && wall.checkCollision([playerP.x, playerP.y])) {
+								playerdie();
+								return;
+							}
+							break;
+						case "top":
+							if(playerP.direction == "up" && wall.checkCollision([playerP.x, playerP.y])) {
+								playerdie();
+								return;
+							}
+							break;
+						case "right":
+							if(playerP.direction == "right" && wall.checkCollision([playerP.x, playerP.y])) {
+								playerdie();
+								return;
+							}
+
+							break;
+						case "left":
+							if(playerP.direction == "left" && wall.checkCollision([playerP.x, playerP.y])) {
+								playerdie();
+								return;
+							}
+							break;
+					}
+				}
+
+				playerP.positions.shift();
+				playerP.positions.push([nextPosition[0],nextPosition[1]]);
 	
 			} else {
-				if(playerP.direction == "right") {
+				if(playerP.directionNext == "right") {
 					playerP.direction = "left";
-				} else if(playerP.direction == "left") {
+				} else if(playerP.directionNext == "left") {
 					playerP.direction = "right";
-				} else if(playerP.direction == "up") {
+				} else if(playerP.directionNext == "up") {
 					playerP.direction = "down";
-				} else if(playerP.direction == "down") {
+				} else if(playerP.directionNext == "down") {
 					playerP.direction = "up";
 				}
 			}
@@ -133,6 +189,58 @@ export function Player() {
 
 			playerP.points = (playerP.positions.length - playerP.initialLength) + 1;
 			this.props.previousMove = [this.props.x, this.props.y, this.props.direction];
+		} else if(snake.data.tick.count % snake.config.movespeed == snake.config.movespeed - 1) {
+			if(playerP.portal.ignoreFrames > 0) {
+				playerP.portal.ignoreFrames--;
+				return;
+			}
+			if(playerP.inactiveElements.includes("portal")) {
+				playerP.inactiveElements = playerP.inactiveElements.filter(e => e !== "portal");
+			}
+			let isCollidingWithPortal = false;
+
+			for(let portal of snake.data.portals) {
+				// if(isCollidingWithPortal) {
+				// 	break;
+				// }
+
+				if(portal.checkCollision([playerP.x, playerP.y])) {
+					switch(portal.face) {
+						case "all":
+							isCollidingWithPortal = true;
+							break;
+						case "right":
+						case "left":
+							if(playerP.directionNext == portal.face) {
+								isCollidingWithPortal = true;
+							}
+							break;
+
+						case "top":
+							if(playerP.directionNext == "up") {
+								isCollidingWithPortal = true;
+							}
+							break;
+						case "bottom":
+							if(playerP.directionNext == "down") {
+								isCollidingWithPortal = true;
+							}
+							break;
+						}
+				}
+
+				if(isCollidingWithPortal) {
+					playerP.stunFrames = 5;
+					playerP.smoothMovement.disableFrames = 6;
+					playerP.portal.ignoreFrames = 12;
+					props.inactiveElements.push("portal");
+					nextPosition[0] = portal.posDest[0];
+					nextPosition[1] = portal.posDest[1];
+					snake.data.players[0].props.x = portal.posDest[0];
+					snake.data.players[0].props.y = portal.posDest[1];
+					break;
+				}
+			}
 		}
 	}
 

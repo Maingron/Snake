@@ -10,9 +10,9 @@ export function Config() {
 		get canvasWidth() {
 			return document.body.offsetWidth; // px
 		},
-		tps: 120, // Ticks per Second
+		tps: 60, // Ticks per Second
 		lazyTPS: 10,
-		movespeed: 20, // Move every nth-tick
+		movespeed: 12, // Move every nth-tick
 		fontSize: "32", // px
 		fontFamily: ['Kristen ITC', 'Ink Free', 'Felix Titling', 'system-ui', 'sans-serif'].map(x=>`'${x}'`).join(","),
 		wrapField: true,

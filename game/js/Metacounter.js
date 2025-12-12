@@ -1,19 +1,28 @@
 export function Framecounter() {
-	var fpsTimings = [];
-	fpsTimings[0] = performance.now();
-	fpsTimings[1] = performance.now();
+    const fpsTimings = [];
 
-	function pushRenderCall() {
-		fpsTimings[0] = fpsTimings[1];
-		fpsTimings[1] = performance.now();
-	}
+    function pushRenderCall() {
+        const now = performance.now();
+        fpsTimings.push(now);
 
-	function getFPS() {
-		return Math.round(1000 / Math.max(1, (fpsTimings[1] - fpsTimings[0])));
-	}
+        // Remove old timestamps beyond the last second
+        while (fpsTimings.length > 0 && now - fpsTimings[0] > 1000) {
+            fpsTimings.shift();
+        }
+    }
 
-	return {
-		pushRenderCall: pushRenderCall,
-		getFPS: getFPS
-	}
+    function getFPS() {
+        if (fpsTimings.length < 2) {
+            return 0; // Not enough data to calculate FPS
+        }
+
+        const timeSpan = fpsTimings[fpsTimings.length - 1] - fpsTimings[0];
+        const frameCount = fpsTimings.length - 1;
+        return Math.round((frameCount / timeSpan) * 1000);
+    }
+
+    return {
+        pushRenderCall,
+        getFPS
+    };
 }
