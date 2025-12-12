@@ -44,7 +44,8 @@ export class Apple extends Fruit {
 export class Orange extends Fruit {
 	constructor() {
 		super({
-			type: "Orange"
+			type: "Orange",
+			points: 5
 		});
 	}
 }
