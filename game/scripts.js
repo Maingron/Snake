@@ -138,10 +138,18 @@ function numHex(s) {
     return a;
 }
 
+function getSpritePos(x,y) {
+    let x1 = x * 136 + 8;
+    let y1 = y * 136 + 8;
+    return [x1,y1];
+}
+
 function renderFPS() {
     requestAnimationFrame(renderFPS);
 
-    if(snake.data.player.pause == 1) {
+    ctx.imageSmoothingEnabled = false;
+
+    if(!snake?.data?.players) {
         return false;
     }
 
@@ -179,12 +187,12 @@ function renderFPS() {
             ctx.fillStyle="#"+currentGradientR+currentGradientG+currentGradientB;
 
             // ctx.fillRect(...calculateRelativeToCamera(player.positions[i][0] + .15, player.positions[i][1] + .15, .7, .7));
-            ctx.drawImage(snake.data.spritesheet, 256, 0, 128, 128, ...calculateRelativeToCamera(player.positions[i][0], player.positions[i][1], 1, 1));
+            ctx.drawImage(snake.data.spritesheet, ...getSpritePos(2,0), 128, 128, ...calculateRelativeToCamera(player.positions[i][0], player.positions[i][1], 1, 1));
             // ctx.fillRect(virtualCoords.centerPointX + (player.positions[i][0] * virtualCoords.oneWidth - player.x * virtualCoords.oneWidth), virtualCoords.centerPointY + (player.positions[i][1] * virtualCoords.oneHeight - player.y * virtualCoords.oneHeight), virtualCoords.oneWidth, virtualCoords.oneHeight);
     
             if(i == player.positions.length - 1) { // Head
                 // draw sprite
-                ctx.drawImage(snake.data.spritesheet, 128, 128, 128, 128, ...calculateRelativeToCamera(player.positions[i][0], player.positions[i][1], 1, 1));
+                ctx.drawImage(snake.data.spritesheet, ...getSpritePos(1,1), 128, 128, ...calculateRelativeToCamera(player.positions[i][0], player.positions[i][1], 1, 1));
             }
         }
 
@@ -199,9 +207,9 @@ function renderFPS() {
         let relativeCoords = calculateRelativeToCamera(fruit.pos[0], fruit.pos[1], 1, 1);
         if(inViewport(...relativeCoords)) {
             if(fruit.type == "Apple") {
-                ctx.drawImage(snake.data.spritesheet, 0, 0, 128, 128, ...relativeCoords);
+                ctx.drawImage(snake.data.spritesheet, ...getSpritePos(1,0), 128, 128, ...relativeCoords);
             } else if(fruit.type == "Orange") {
-                ctx.drawImage(snake.data.spritesheet, 128, 0, 128, 128, ...relativeCoords);
+                ctx.drawImage(snake.data.spritesheet, ...getSpritePos(1,0), 128, 0, 128, 128, ...relativeCoords);
             }
         }
     }

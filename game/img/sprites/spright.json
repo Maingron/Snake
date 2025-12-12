@@ -62,11 +62,101 @@
 					"spriteIndices": [6]
 				}
 			]
+		},
+		{
+			"filename": "wall-all.png",
+			"sources": [
+				{
+					"index": 7,
+					"spriteIndices": [7]
+				}
+			]
+		},
+		{
+			"filename": "wall-right.png",
+			"sources": [
+				{
+					"index": 8,
+					"spriteIndices": [8]
+				}
+			]
+		},
+		{
+			"filename": "wall-left.png",
+			"sources": [
+				{
+					"index": 9,
+					"spriteIndices": [9]
+				}
+			]
+		},
+		{
+			"filename": "wall-top.png",
+			"sources": [
+				{
+					"index": 10,
+					"spriteIndices": [10]
+				}
+			]
+		},
+		{
+			"filename": "wall-bottom.png",
+			"sources": [
+				{
+					"index": 11,
+					"spriteIndices": [11]
+				}
+			]
+		},
+		{
+			"filename": "portal-all.png",
+			"sources": [
+				{
+					"index": 12,
+					"spriteIndices": [12]
+				}
+			]
+		},
+		{
+			"filename": "portal-right.png",
+			"sources": [
+				{
+					"index": 13,
+					"spriteIndices": [13]
+				}
+			]
+		},
+		{
+			"filename": "portal-left.png",
+			"sources": [
+				{
+					"index": 14,
+					"spriteIndices": [14]
+				}
+			]
+		},
+		{
+			"filename": "portal-top.png",
+			"sources": [
+				{
+					"index": 15,
+					"spriteIndices": [15]
+				}
+			]
+		},
+		{
+			"filename": "portal-bottom.png",
+			"sources": [
+				{
+					"index": 16,
+					"spriteIndices": [16]
+				}
+			]
 		}
 	],
 	"slices": [
 		{
-			"spriteIndices": [0,1,2,3,4,5,6]
+			"spriteIndices": [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]
 		}
 	],
 	"sources": [
@@ -111,6 +201,66 @@
 			"height": 16,
 			"path": "",
 			"width": 16
+		},
+		{
+			"filename": "wall-all.png",
+			"height": 16,
+			"path": "",
+			"width": 16
+		},
+		{
+			"filename": "wall-right.png",
+			"height": 16,
+			"path": "",
+			"width": 16
+		},
+		{
+			"filename": "wall-left.png",
+			"height": 16,
+			"path": "",
+			"width": 16
+		},
+		{
+			"filename": "wall-top.png",
+			"height": 16,
+			"path": "",
+			"width": 16
+		},
+		{
+			"filename": "wall-bottom.png",
+			"height": 16,
+			"path": "",
+			"width": 16
+		},
+		{
+			"filename": "portal-all.png",
+			"height": 16,
+			"path": "",
+			"width": 16
+		},
+		{
+			"filename": "portal-right.png",
+			"height": 16,
+			"path": "",
+			"width": 16
+		},
+		{
+			"filename": "portal-left.png",
+			"height": 16,
+			"path": "",
+			"width": 16
+		},
+		{
+			"filename": "portal-top.png",
+			"height": 16,
+			"path": "",
+			"width": 16
+		},
+		{
+			"filename": "portal-bottom.png",
+			"height": 16,
+			"path": "",
+			"width": 16
 		}
 	],
 	"sprites": [
@@ -127,8 +277,8 @@
 			"rect": {
 				"h": 16,
 				"w": 16,
-				"x": 0,
-				"y": 0
+				"x": 1,
+				"y": 1
 			},
 			"rotated": false,
 			"sliceIndex": 0,
@@ -144,8 +294,8 @@
 			"trimmedRect": {
 				"h": 16,
 				"w": 16,
-				"x": 0,
-				"y": 0
+				"x": 1,
+				"y": 1
 			},
 			"trimmedSourceRect": {
 				"h": 16,
@@ -168,8 +318,8 @@
 			"rect": {
 				"h": 16,
 				"w": 16,
-				"x": 16,
-				"y": 0
+				"x": 18,
+				"y": 1
 			},
 			"rotated": false,
 			"sliceIndex": 0,
@@ -185,8 +335,8 @@
 			"trimmedRect": {
 				"h": 16,
 				"w": 16,
-				"x": 16,
-				"y": 0
+				"x": 18,
+				"y": 1
 			},
 			"trimmedSourceRect": {
 				"h": 16,
@@ -209,8 +359,8 @@
 			"rect": {
 				"h": 16,
 				"w": 16,
-				"x": 32,
-				"y": 0
+				"x": 35,
+				"y": 1
 			},
 			"rotated": false,
 			"sliceIndex": 0,
@@ -226,8 +376,8 @@
 			"trimmedRect": {
 				"h": 16,
 				"w": 16,
-				"x": 32,
-				"y": 0
+				"x": 35,
+				"y": 1
 			},
 			"trimmedSourceRect": {
 				"h": 16,
@@ -250,8 +400,8 @@
 			"rect": {
 				"h": 16,
 				"w": 16,
-				"x": 0,
-				"y": 16
+				"x": 1,
+				"y": 18
 			},
 			"rotated": false,
 			"sliceIndex": 0,
@@ -267,8 +417,8 @@
 			"trimmedRect": {
 				"h": 16,
 				"w": 16,
-				"x": 0,
-				"y": 16
+				"x": 1,
+				"y": 18
 			},
 			"trimmedSourceRect": {
 				"h": 16,
@@ -291,8 +441,8 @@
 			"rect": {
 				"h": 16,
 				"w": 16,
-				"x": 16,
-				"y": 16
+				"x": 18,
+				"y": 18
 			},
 			"rotated": false,
 			"sliceIndex": 0,
@@ -308,8 +458,8 @@
 			"trimmedRect": {
 				"h": 16,
 				"w": 16,
-				"x": 16,
-				"y": 16
+				"x": 18,
+				"y": 18
 			},
 			"trimmedSourceRect": {
 				"h": 16,
@@ -332,8 +482,8 @@
 			"rect": {
 				"h": 16,
 				"w": 16,
-				"x": 32,
-				"y": 16
+				"x": 35,
+				"y": 18
 			},
 			"rotated": false,
 			"sliceIndex": 0,
@@ -349,8 +499,8 @@
 			"trimmedRect": {
 				"h": 16,
 				"w": 16,
-				"x": 32,
-				"y": 16
+				"x": 35,
+				"y": 18
 			},
 			"trimmedSourceRect": {
 				"h": 16,
@@ -373,8 +523,8 @@
 			"rect": {
 				"h": 16,
 				"w": 16,
-				"x": 0,
-				"y": 32
+				"x": 1,
+				"y": 35
 			},
 			"rotated": false,
 			"sliceIndex": 0,
@@ -390,8 +540,418 @@
 			"trimmedRect": {
 				"h": 16,
 				"w": 16,
+				"x": 1,
+				"y": 35
+			},
+			"trimmedSourceRect": {
+				"h": 16,
+				"w": 16,
 				"x": 0,
-				"y": 32
+				"y": 0
+			},
+			"vertices": [0.0,0.0,16.0,0.0,16.0,16.0,0.0,16.0]
+		},
+		{
+			"data": {},
+			"id": "sprite_7",
+			"index": 7,
+			"inputIndex": 7,
+			"inputSpriteIndex": 0,
+			"pivot": {
+				"x": 8.0,
+				"y": 8.0
+			},
+			"rect": {
+				"h": 16,
+				"w": 16,
+				"x": 18,
+				"y": 35
+			},
+			"rotated": false,
+			"sliceIndex": 0,
+			"sliceSpriteIndex": 7,
+			"sourceIndex": 7,
+			"sourceRect": {
+				"h": 16,
+				"w": 16,
+				"x": 0,
+				"y": 0
+			},
+			"tags": {},
+			"trimmedRect": {
+				"h": 16,
+				"w": 16,
+				"x": 18,
+				"y": 35
+			},
+			"trimmedSourceRect": {
+				"h": 16,
+				"w": 16,
+				"x": 0,
+				"y": 0
+			},
+			"vertices": [0.0,0.0,16.0,0.0,16.0,16.0,0.0,16.0]
+		},
+		{
+			"data": {},
+			"id": "sprite_8",
+			"index": 8,
+			"inputIndex": 8,
+			"inputSpriteIndex": 0,
+			"pivot": {
+				"x": 8.0,
+				"y": 8.0
+			},
+			"rect": {
+				"h": 16,
+				"w": 16,
+				"x": 35,
+				"y": 35
+			},
+			"rotated": false,
+			"sliceIndex": 0,
+			"sliceSpriteIndex": 8,
+			"sourceIndex": 8,
+			"sourceRect": {
+				"h": 16,
+				"w": 16,
+				"x": 0,
+				"y": 0
+			},
+			"tags": {},
+			"trimmedRect": {
+				"h": 16,
+				"w": 16,
+				"x": 35,
+				"y": 35
+			},
+			"trimmedSourceRect": {
+				"h": 16,
+				"w": 16,
+				"x": 0,
+				"y": 0
+			},
+			"vertices": [0.0,0.0,16.0,0.0,16.0,16.0,0.0,16.0]
+		},
+		{
+			"data": {},
+			"id": "sprite_9",
+			"index": 9,
+			"inputIndex": 9,
+			"inputSpriteIndex": 0,
+			"pivot": {
+				"x": 8.0,
+				"y": 8.0
+			},
+			"rect": {
+				"h": 16,
+				"w": 16,
+				"x": 1,
+				"y": 52
+			},
+			"rotated": false,
+			"sliceIndex": 0,
+			"sliceSpriteIndex": 9,
+			"sourceIndex": 9,
+			"sourceRect": {
+				"h": 16,
+				"w": 16,
+				"x": 0,
+				"y": 0
+			},
+			"tags": {},
+			"trimmedRect": {
+				"h": 16,
+				"w": 16,
+				"x": 1,
+				"y": 52
+			},
+			"trimmedSourceRect": {
+				"h": 16,
+				"w": 16,
+				"x": 0,
+				"y": 0
+			},
+			"vertices": [0.0,0.0,16.0,0.0,16.0,16.0,0.0,16.0]
+		},
+		{
+			"data": {},
+			"id": "sprite_10",
+			"index": 10,
+			"inputIndex": 10,
+			"inputSpriteIndex": 0,
+			"pivot": {
+				"x": 8.0,
+				"y": 8.0
+			},
+			"rect": {
+				"h": 16,
+				"w": 16,
+				"x": 18,
+				"y": 52
+			},
+			"rotated": false,
+			"sliceIndex": 0,
+			"sliceSpriteIndex": 10,
+			"sourceIndex": 10,
+			"sourceRect": {
+				"h": 16,
+				"w": 16,
+				"x": 0,
+				"y": 0
+			},
+			"tags": {},
+			"trimmedRect": {
+				"h": 16,
+				"w": 16,
+				"x": 18,
+				"y": 52
+			},
+			"trimmedSourceRect": {
+				"h": 16,
+				"w": 16,
+				"x": 0,
+				"y": 0
+			},
+			"vertices": [0.0,0.0,16.0,0.0,16.0,16.0,0.0,16.0]
+		},
+		{
+			"data": {},
+			"id": "sprite_11",
+			"index": 11,
+			"inputIndex": 11,
+			"inputSpriteIndex": 0,
+			"pivot": {
+				"x": 8.0,
+				"y": 8.0
+			},
+			"rect": {
+				"h": 16,
+				"w": 16,
+				"x": 35,
+				"y": 52
+			},
+			"rotated": false,
+			"sliceIndex": 0,
+			"sliceSpriteIndex": 11,
+			"sourceIndex": 11,
+			"sourceRect": {
+				"h": 16,
+				"w": 16,
+				"x": 0,
+				"y": 0
+			},
+			"tags": {},
+			"trimmedRect": {
+				"h": 16,
+				"w": 16,
+				"x": 35,
+				"y": 52
+			},
+			"trimmedSourceRect": {
+				"h": 16,
+				"w": 16,
+				"x": 0,
+				"y": 0
+			},
+			"vertices": [0.0,0.0,16.0,0.0,16.0,16.0,0.0,16.0]
+		},
+		{
+			"data": {},
+			"id": "sprite_12",
+			"index": 12,
+			"inputIndex": 12,
+			"inputSpriteIndex": 0,
+			"pivot": {
+				"x": 8.0,
+				"y": 8.0
+			},
+			"rect": {
+				"h": 16,
+				"w": 16,
+				"x": 1,
+				"y": 69
+			},
+			"rotated": false,
+			"sliceIndex": 0,
+			"sliceSpriteIndex": 12,
+			"sourceIndex": 12,
+			"sourceRect": {
+				"h": 16,
+				"w": 16,
+				"x": 0,
+				"y": 0
+			},
+			"tags": {},
+			"trimmedRect": {
+				"h": 16,
+				"w": 16,
+				"x": 1,
+				"y": 69
+			},
+			"trimmedSourceRect": {
+				"h": 16,
+				"w": 16,
+				"x": 0,
+				"y": 0
+			},
+			"vertices": [0.0,0.0,16.0,0.0,16.0,16.0,0.0,16.0]
+		},
+		{
+			"data": {},
+			"id": "sprite_13",
+			"index": 13,
+			"inputIndex": 13,
+			"inputSpriteIndex": 0,
+			"pivot": {
+				"x": 8.0,
+				"y": 8.0
+			},
+			"rect": {
+				"h": 16,
+				"w": 16,
+				"x": 18,
+				"y": 69
+			},
+			"rotated": false,
+			"sliceIndex": 0,
+			"sliceSpriteIndex": 13,
+			"sourceIndex": 13,
+			"sourceRect": {
+				"h": 16,
+				"w": 16,
+				"x": 0,
+				"y": 0
+			},
+			"tags": {},
+			"trimmedRect": {
+				"h": 16,
+				"w": 16,
+				"x": 18,
+				"y": 69
+			},
+			"trimmedSourceRect": {
+				"h": 16,
+				"w": 16,
+				"x": 0,
+				"y": 0
+			},
+			"vertices": [0.0,0.0,16.0,0.0,16.0,16.0,0.0,16.0]
+		},
+		{
+			"data": {},
+			"id": "sprite_14",
+			"index": 14,
+			"inputIndex": 14,
+			"inputSpriteIndex": 0,
+			"pivot": {
+				"x": 8.0,
+				"y": 8.0
+			},
+			"rect": {
+				"h": 16,
+				"w": 16,
+				"x": 35,
+				"y": 69
+			},
+			"rotated": false,
+			"sliceIndex": 0,
+			"sliceSpriteIndex": 14,
+			"sourceIndex": 14,
+			"sourceRect": {
+				"h": 16,
+				"w": 16,
+				"x": 0,
+				"y": 0
+			},
+			"tags": {},
+			"trimmedRect": {
+				"h": 16,
+				"w": 16,
+				"x": 35,
+				"y": 69
+			},
+			"trimmedSourceRect": {
+				"h": 16,
+				"w": 16,
+				"x": 0,
+				"y": 0
+			},
+			"vertices": [0.0,0.0,16.0,0.0,16.0,16.0,0.0,16.0]
+		},
+		{
+			"data": {},
+			"id": "sprite_15",
+			"index": 15,
+			"inputIndex": 15,
+			"inputSpriteIndex": 0,
+			"pivot": {
+				"x": 8.0,
+				"y": 8.0
+			},
+			"rect": {
+				"h": 16,
+				"w": 16,
+				"x": 1,
+				"y": 86
+			},
+			"rotated": false,
+			"sliceIndex": 0,
+			"sliceSpriteIndex": 15,
+			"sourceIndex": 15,
+			"sourceRect": {
+				"h": 16,
+				"w": 16,
+				"x": 0,
+				"y": 0
+			},
+			"tags": {},
+			"trimmedRect": {
+				"h": 16,
+				"w": 16,
+				"x": 1,
+				"y": 86
+			},
+			"trimmedSourceRect": {
+				"h": 16,
+				"w": 16,
+				"x": 0,
+				"y": 0
+			},
+			"vertices": [0.0,0.0,16.0,0.0,16.0,16.0,0.0,16.0]
+		},
+		{
+			"data": {},
+			"id": "sprite_16",
+			"index": 16,
+			"inputIndex": 16,
+			"inputSpriteIndex": 0,
+			"pivot": {
+				"x": 8.0,
+				"y": 8.0
+			},
+			"rect": {
+				"h": 16,
+				"w": 16,
+				"x": 18,
+				"y": 86
+			},
+			"rotated": false,
+			"sliceIndex": 0,
+			"sliceSpriteIndex": 16,
+			"sourceIndex": 16,
+			"sourceRect": {
+				"h": 16,
+				"w": 16,
+				"x": 0,
+				"y": 0
+			},
+			"tags": {},
+			"trimmedRect": {
+				"h": 16,
+				"w": 16,
+				"x": 18,
+				"y": 86
 			},
 			"trimmedSourceRect": {
 				"h": 16,
@@ -406,13 +966,13 @@
 	"textures": [
 		{
 			"filename": "../../spritesheet.png",
-			"height": 384,
+			"height": 824,
 			"map": "",
 			"path": "",
 			"scale": 8.0,
 			"sliceIndex": 0,
-			"spriteIndices": [0,1,2,3,4,5,6],
-			"width": 384
+			"spriteIndices": [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16],
+			"width": 416
 		}
 	]
 }
