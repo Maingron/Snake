@@ -21,7 +21,9 @@ snake.elements = {
 };
 
 async function initOnce() {
-    snake.config = new Config().config;
+	snake.config = new Config().config;
+	lazyfun = new Lazyfun();
+	lazyfun.init();
 
     snake.elements.canvas.height = snake.config.canvasHeight;
     snake.elements.canvas.width = snake.config.canvasWidth;
