@@ -4,10 +4,14 @@ export function Config() {
 	var config = {
 		fieldHeight: 50, // fields
 		fieldWidth: 50, // fields
-		canvasHeight: document.body.offsetHeight, // px
-		canvasWidth: document.body.offsetWidth, // px
+		get canvasHeight() {
+			return document.body.offsetHeight; // px
+		},
+		get canvasWidth() {
+			return document.body.offsetWidth; // px
+		},
 		tps: 120, // Ticks per Second
-		movespeed: 12, // Move every nth-tick
+		movespeed: 20, // Move every nth-tick
 		fontSize: "32", // px
 		fontFamily: ['Kristen ITC', 'Ink Free', 'Felix Titling', 'system-ui', 'sans-serif'].map(x=>`'${x}'`).join(","),
 		wrapField: true,
@@ -22,9 +26,15 @@ export function Config() {
 				return true
 			}
 		})[0],
-		oneHeight: config.canvasHeight / config.fieldHeight,
-		oneWidth: config.canvasHeight / config.fieldHeight,
-		scale: config.fieldHeight / 16
+		get oneHeight() {
+			return this.canvasHeight / this.fieldHeight;
+		},
+		get oneWidth() {
+			return this.canvasHeight / this.fieldHeight;
+		},
+		get scale() {
+			return this.fieldHeight / 16;
+		}
 	}
 
 	return {
