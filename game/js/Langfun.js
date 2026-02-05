@@ -1,4 +1,4 @@
-export function Langfun(reqLang) {
+export function Langfun(reqLang = "en") {
     var gLang = {};
 
     return import("../lang/" + reqLang + ".lang.js").then(lang => {
