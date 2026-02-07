@@ -236,8 +236,8 @@ export function Player() {
 					props.inactiveElements.push("portal");
 					nextPosition[0] = portal.posDest[0];
 					nextPosition[1] = portal.posDest[1];
-					snake.data.players[0].props.x = portal.posDest[0];
-					snake.data.players[0].props.y = portal.posDest[1];
+					playerP.x = portal.posDest[0];
+					playerP.y = portal.posDest[1];
 					break;
 				}
 			}
