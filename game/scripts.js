@@ -100,7 +100,7 @@ async function initOnce() {
                 snake.data.players.push(new Player());
             }
 
-            for(let player of snake.data.players || [{}]) {
+            for(let player of snake.data.players ?? []) {
                 let playerP = player.props;
 
                 if(!player.props) {
@@ -254,7 +254,7 @@ function renderFPS() {
     ctx.font = snake.config.fontSize + "px " + snake.config.fontFamily;
 
     ctx.fillStyle = "#fff";
-    for(let player of snake.data.players) {
+    for(let player of snake.data.players ?? []) {
         player = player.props;
         for(var i = 0; i < player.positions.length; i++) {
             var currentGradientR = numHex((256 * player.style.colorChannelR / player.positions.length * i));
@@ -265,26 +265,29 @@ function renderFPS() {
 
             if(i == 0 || i == player.positions.length - 1) { // Tail or head
                 if(i == 0) {
-                    let tailRotation = player.positions[1][2].split("_")[0];
-                    ctx.drawImage(snake.sprites.player.spritesheets[0], ...snake.sprites.player.getSprite("tail_" + tailRotation).correctedRectArr, ...calculateRelativeToCamera(player.positions[0][0], player.positions[0][1], 1, 1));
+                    let tailRotation = player.positions[1][2] ?? "down";
+                    if(player.positions[1][2]?.split("_")[1]) {
+                        tailRotation = player.positions[1][2].split("_")[0];
+                    }
+                    ctx.drawImage(snake.sprites.player.spritesheets[0], ...snake.sprites.player.getSprite("tail_" + tailRotation)?.correctedRectArr, ...calculateRelativeToCamera(player.positions[0][0], player.positions[0][1], 1, 1));
                 } else {
-                    ctx.drawImage(snake.sprites.player.spritesheets[0], ...snake.sprites.player.getSprite("face_" + player.direction).correctedRectArr, ...calculateRelativeToCamera(player.positions[i][0], player.positions[i][1], 1, 1));
+                    ctx.drawImage(snake.sprites.player.spritesheets[0], ...snake.sprites.player.getSprite("face_" + player.direction)?.correctedRectArr, ...calculateRelativeToCamera(player.positions[i][0], player.positions[i][1], 1, 1));
                 }
             } else if(player.positions[i][2] != player.positions[i+1][2]) {
                 let out = [player.positions[i][2], player.positions[i+1][2]];
 
-                ctx.drawImage(snake.sprites.player.spritesheets[0], ...snake.sprites.player.getSprite('curve_' + out[0] + '_' + out[1]).correctedRectArr, ...calculateRelativeToCamera(player.positions[i][0], player.positions[i][1], 1, 1));
+                ctx.drawImage(snake.sprites.player.spritesheets[0], ...snake.sprites.player.getSprite('curve_' + out[0] + '_' + out[1])?.correctedRectArr, ...calculateRelativeToCamera(player.positions[i][0], player.positions[i][1], 1, 1));
 
             } else if(player.positions[i][2] == "down") {
-                ctx.drawImage(snake.sprites.player.spritesheets[0], ...snake.sprites.player.getSprite("straight_down").correctedRectArr, ...calculateRelativeToCamera(player.positions[i][0], player.positions[i][1], 1, 1));
+                ctx.drawImage(snake.sprites.player.spritesheets[0], ...snake.sprites.player.getSprite("straight_down")?.correctedRectArr, ...calculateRelativeToCamera(player.positions[i][0], player.positions[i][1], 1, 1));
             } else if(player.positions[i][2] == "up") {
-                ctx.drawImage(snake.sprites.player.spritesheets[0], ...snake.sprites.player.getSprite("straight_up").correctedRectArr, ...calculateRelativeToCamera(player.positions[i][0], player.positions[i][1], 1, 1));
+                ctx.drawImage(snake.sprites.player.spritesheets[0], ...snake.sprites.player.getSprite("straight_up")?.correctedRectArr, ...calculateRelativeToCamera(player.positions[i][0], player.positions[i][1], 1, 1));
             } else if(player.positions[i][2] == "right") {
-                ctx.drawImage(snake.sprites.player.spritesheets[0], ...snake.sprites.player.getSprite("straight_right").correctedRectArr, ...calculateRelativeToCamera(player.positions[i][0], player.positions[i][1], 1, 1));
+                ctx.drawImage(snake.sprites.player.spritesheets[0], ...snake.sprites.player.getSprite("straight_right")?.correctedRectArr, ...calculateRelativeToCamera(player.positions[i][0], player.positions[i][1], 1, 1));
             } else if(player.positions[i][2] == "left") {
-                ctx.drawImage(snake.sprites.player.spritesheets[0], ...snake.sprites.player.getSprite("straight_left").correctedRectArr, ...calculateRelativeToCamera(player.positions[i][0], player.positions[i][1], 1, 1));
+                ctx.drawImage(snake.sprites.player.spritesheets[0], ...snake.sprites.player.getSprite("straight_left")?.correctedRectArr, ...calculateRelativeToCamera(player.positions[i][0], player.positions[i][1], 1, 1));
             } else {
-                ctx.drawImage(snake.sprites.player.spritesheets[0], ...snake.sprites.player.getSprite("alt").correctedRectArr, ...calculateRelativeToCamera(player.positions[i][0], player.positions[i][1], 1, 1));
+                ctx.drawImage(snake.sprites.player.spritesheets[0], ...snake.sprites.player.getSprite("alt")?.correctedRectArr, ...calculateRelativeToCamera(player.positions[i][0], player.positions[i][1], 1, 1));
             }
         }
 
@@ -453,7 +456,7 @@ function renderTPS() {
 
 
 function checkIfPlayerCollision(yourCoordinates) {
-    for(let player of snake.data.players) {
+    for(let player of snake.data.players ?? []) {
         for(var i = 0; i < player.props.positions.length; i++) {
             if(yourCoordinates[0] == player.props.positions[i][0]) {
                 if(yourCoordinates[1] == player.props.positions[i][1]) {

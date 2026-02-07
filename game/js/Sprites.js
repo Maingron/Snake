@@ -64,6 +64,11 @@ export class Sprites {
 	}
 
 	getSprite(id) {
-		return this.sprites.find(x => x.id == id);
+		let foundSprite = this.sprites.find(x => x.id == id) || null;
+		if(!foundSprite) {
+			console.warn("Sprite with id " + id + " not found");
+			foundSprite = this.sprites[0] || null;
+		}
+		return foundSprite;
 	}
 }
