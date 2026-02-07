@@ -64,13 +64,18 @@ async function initOnce() {
         water: new Sprites({
             jsonPath: 'img/sprites/spright.json',
             sheetId: 'water'
+        }),
+        food: new Sprites({
+            jsonPath: 'img/sprites/spright.json',
+            sheetId: 'food'
         })
     }
 
     Promise.all([
         snake.sprites.player.load(),
         snake.sprites.main.load(),
-        snake.sprites.water.load()
+        snake.sprites.water.load(),
+        snake.sprites.food.load()
     ]).then(() => {
         window.addEventListener("keydown",function(e) {
             let inputKey = e.key.toLowerCase();
@@ -303,11 +308,7 @@ function renderFPS() {
     for(let fruit of snake.data.fruits) {
         let relativeCoords = calculateRelativeToCamera(fruit.pos[0], fruit.pos[1], 1, 1);
         if(inViewport(...relativeCoords)) {
-            if(fruit.type == "Apple") {
-                ctx.drawImage(snake.data.spritesheet, ...getSpritePos(1,0), 128, 128, ...relativeCoords);
-            } else if(fruit.type == "Orange") {
-                ctx.drawImage(snake.data.spritesheet, ...getSpritePos(1,0), 128, 128, ...relativeCoords);
-			}
+            fruit.draw(ctx);
         }
     }
 

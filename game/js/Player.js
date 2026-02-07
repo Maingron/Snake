@@ -116,11 +116,11 @@ export function Player() {
 				for(let fruit of snake.data.fruits) {
 					if(fruit.checkCollision([playerP.x, playerP.y])) {
 						for(let i = 0; i < fruit.points; i++) {
-							playerP.positions.unshift([playerP.positions[0][0], playerP.positions[0][1]]);
+							playerP.positions.unshift([playerP.positions[0][0], playerP.positions[0][1], playerP.positions[0][2]]);
 						}
 	
 						fruit.getEaten();
-						fruit.setNewPosition();
+						fruit.newPosition();
 					}
 				}
 

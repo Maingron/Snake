@@ -1,33 +1,33 @@
-class Fruit {
+export class Fruit extends GenericEntity {
 	constructor(props) {
-		Object.assign(this, {
+		const thisFruit = super(props);
+		Object.assign(thisFruit, {
 			type: "Apple",
 			points: 1,
-			pos: this.getPos(),
+			pos: this.newPosition(),
+			sprite: {
+				...thisFruit.sprite,
+				id: thisFruit.type.toLowerCase(),
+				sheetObject: snake.sprites.food,
+			},
 			...props
 		});
-
-		this.getEaten = function() {
-			snake.data.player.length++;
-		};
-
-		this.setNewPosition = function(newPosition = this.getPos()) {
-			this.pos = newPosition;
-		}
-
-		this.checkCollision = function(otherObjectPos) {
-			return this.pos[0] == otherObjectPos[0] && this.pos[1] == otherObjectPos[1];
-		}
 	}
 
-	getPos() {
+	getEaten() {
+		snake.data.player.length++;
+	}
+
+	newPosition() {
 		var randomCoordinates;
-		var nopeCount = 10000;
+		var nopeCount = 20000;
 
 		do {
 			nopeCount--;
 			randomCoordinates = [randomize(snake.config.fieldWidth), randomize(snake.config.fieldHeight)];
 		} while (checkIfPlayerCollision(randomCoordinates) && nopeCount > 0);
+
+		this.pos = randomCoordinates;
 
 		return randomCoordinates;
 	}
