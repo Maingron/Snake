@@ -33,8 +33,8 @@ async function initOnce() {
     snake.elements.canvas.width = snake.config.canvasWidth;
 
     ctx = snake.data.ctx = snake.elements.canvas.getContext("2d");
-    ctx.fillStyle = "#fff";
-    ctx.font = snake.config.fontSize + "px " + snake.config.fontFamily;
+    canvasFunctions.applyDefaults();
+
     // snake.elements.canvas.style.backgroundSize = (snake.config.canvasHeight / snake.config.fieldHeight + "px");
 
     // let relativeCoords = calculateRelativeToCamera(0,0,1,1);
@@ -454,5 +454,12 @@ var Scenes = {
         ctx.font = snake.config.fontSize + "px " + snake.config.fontFamily;
         ctx.fillText(getLocaleString("youDied"),100,100);
         ctx.fillText(getLocaleString("pressToRestart"),100,140);
+    }
+}
+
+const canvasFunctions = {
+    applyDefaults: function() {
+        ctx.fillStyle = "#fff";
+        ctx.font = snake.config.fontSize + "px " + snake.config.fontFamily;
     }
 }
