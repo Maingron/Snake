@@ -14,22 +14,17 @@ export class Fruit extends GenericEntity {
 		});
 	}
 
-	getEaten() {
-		snake.data.player.length++;
+	collide(otherObject) {
+		if(otherObject instanceof Player) {
+			otherObject.gainPoints(this.points);
+		}
+		this.newPosition();
 	}
 
 	newPosition() {
-		var randomCoordinates;
-		var nopeCount = 20000;
+		this.pos = [randomize(snake.config.fieldWidth), randomize(snake.config.fieldHeight)];
 
-		do {
-			nopeCount--;
-			randomCoordinates = [randomize(snake.config.fieldWidth), randomize(snake.config.fieldHeight)];
-		} while (checkIfPlayerCollision(randomCoordinates) && nopeCount > 0);
-
-		this.pos = randomCoordinates;
-
-		return randomCoordinates;
+		return this.pos;
 	}
 }
 

@@ -81,6 +81,9 @@ async function initOnce() {
             let inputKey = e.key.toLowerCase();
 
             if (inputKey == "r") {
+                for(let entity of GenericEntity.allInstances) {
+                    entity.die();
+                }
                 startGame();
             } else if(inputKey == "p") {
                 snake.data.player.pause = !snake.data.player.pause;
@@ -101,32 +104,26 @@ async function initOnce() {
                 }
                 snake.data.server.pause = true;
             }
-            if(snake.data?.players?.length <= 1 && (inputKey == "arrowup" || inputKey == "arrowdown" || inputKey == "arrowleft" || inputKey == "arrowright")) {
+            if(snake.data?.players?.snakeLength <= 1 && (inputKey == "arrowup" || inputKey == "arrowdown" || inputKey == "arrowleft" || inputKey == "arrowright")) {
                 snake.data.players.push(new Player());
             }
 
             for(let player of snake.data.players ?? []) {
-                let playerP = player.props;
-
-                if(!player.props) {
-                    return false;
-                }
-
-                if(inputKey == playerP.controls.up) {
-                    if(playerP.direction != "down") {
-                        playerP.directionNext = "up";
+                if(inputKey == player.controls.up) {
+                    if(player.direction != "down") {
+                        player.directionNext = "up";
                     }
-                } else if (inputKey == playerP.controls.down) {
-                    if(playerP.direction != "up") {
-                        playerP.directionNext = "down";
+                } else if (inputKey == player.controls.down) {
+                    if(player.direction != "up") {
+                        player.directionNext = "down";
                     }
-                } else if (inputKey == playerP.controls.left) {
-                    if(playerP.direction != "right") {
-                        playerP.directionNext = "left";
+                } else if (inputKey == player.controls.left) {
+                    if(player.direction != "right") {
+                        player.directionNext = "left";
                     }
-                } else if (inputKey == playerP.controls.right) {
-                    if(playerP.direction != "left") {
-                        playerP.directionNext = "right";
+                } else if (inputKey == player.controls.right) {
+                    if(player.direction != "left") {
+                        player.directionNext = "right";
                     }
                 }
             }
@@ -162,8 +159,8 @@ function startGame() {
     snake.data.players = [];
     snake.data.walls = [];
     snake.data.portals = [];
-    snake.data.player = new Player().props;
-    snake.data.players.push(new Player());
+    snake.data.player = new Player();
+    snake.data.players.push(snake.data.player);
 
     snake.meta.author = "maingron";
     snake.meta.website = "https://maingron.com/snake";
@@ -173,14 +170,14 @@ function startGame() {
         snake.data.fruits.push(new Fruit.Apple());
     }
         
-    snake.data.fruits[0]?.getEaten();
-
     snake.data.walls.push(new Wall({pos:[6,6], face: "left"}));
     snake.data.walls.push(new Wall({pos:[7,6], face: "right"}));
 
+    snake.data.walls.push(new Wall({pos:[12,15], face: "right"}));
+
     for(let x = 7; x <= 12; x++) {
-        snake.data.walls.push(new Wall({pos:[x,5], face: "top"}))
-        snake.data.walls.push(new Wall({pos:[x,6], face: "bottom"}))
+        snake.data.walls.push(new Wall({pos:[x,5], face: "up"}))
+        snake.data.walls.push(new Wall({pos:[x,6], face: "down"}))
     }
 
     snake.data.portals.push(new Portal({pos: [5,5], posDest: [12,12], face: "all"}));
@@ -188,21 +185,8 @@ function startGame() {
 
     snake.data.portals.push(new Portal({pos: [10,10], posDest: [0,10], face: "right"}));
     snake.data.portals.push(new Portal({pos: [15,17], posDest: [5,5], face: "left"}));
-    snake.data.portals.push(new Portal({pos: [17,15], posDest: [5,5], face: "top"}));
-    snake.data.portals.push(new Portal({pos: [17,17], posDest: [5,5], face: "bottom"}));
-
-
-
-    // snake.data.walls.push(new Wall({pos: [3,3], face: "right"}));
-    // snake.data.walls.push(new Wall({pos: [4,3], face: "top"}));
-    // snake.data.walls.push(new Wall({pos: [4,6], face: "bottom"}));
-    // snake.data.walls.push(new Wall({pos: [2,3], face: "left"}));
-
-    // snake.data.portals.push(new Portal({pos: [7,3], posDest: [12,12], face: "all"}));
-    // snake.data.portals.push(new Portal({pos: [2,5], posDest: [12,12], face: "left"}));
-    // snake.data.portals.push(new Portal({pos: [2,6], posDest: [12,12], face: "right"}));
-    // snake.data.portals.push(new Portal({pos: [2,7], posDest: [12,12], face: "top"}));
-    // snake.data.portals.push(new Portal({pos: [2,8], posDest: [12,12], face: "bottom"}));
+    snake.data.portals.push(new Portal({pos: [17,15], posDest: [5,5], face: "up"}));
+    snake.data.portals.push(new Portal({pos: [17,17], posDest: [5,5], face: "down"}));
 
 	tick();
 }
@@ -214,6 +198,10 @@ function tick() {
 		renderTPS();
 	}
 	snake.tickcounter.pushRenderCall();
+
+    for(let entity of GenericEntity.allInstances) {
+        entity.tick();
+    }
 }
 
 function numHex(s) {
@@ -260,41 +248,7 @@ function renderFPS() {
 
     ctx.fillStyle = "#fff";
     for(let player of snake.data.players ?? []) {
-        player = player.props;
-        for(var i = 0; i < player.positions.length; i++) {
-            var currentGradientR = numHex((256 * player.style.colorChannelR / player.positions.length * i));
-            var currentGradientG = numHex((256 * player.style.colorChannelG / player.positions.length * i));
-            var currentGradientB = numHex((256 * player.style.colorChannelB / player.positions.length * i));
-    
-            ctx.fillStyle="#"+currentGradientR+currentGradientG+currentGradientB;
 
-            if(i == 0 || i == player.positions.length - 1) { // Tail or head
-                if(i == 0) {
-                    let tailRotation = player.positions[1][2] ?? "down";
-                    if(player.positions[1][2]?.split("_")[1]) {
-                        tailRotation = player.positions[1][2].split("_")[0];
-                    }
-                    ctx.drawImage(snake.sprites.player.spritesheets[0], ...snake.sprites.player.getSprite("tail_" + tailRotation)?.correctedRectArr, ...calculateRelativeToCamera(player.positions[0][0], player.positions[0][1], 1, 1));
-                } else {
-                    ctx.drawImage(snake.sprites.player.spritesheets[0], ...snake.sprites.player.getSprite("face_" + player.direction)?.correctedRectArr, ...calculateRelativeToCamera(player.positions[i][0], player.positions[i][1], 1, 1));
-                }
-            } else if(player.positions[i][2] != player.positions[i+1][2]) {
-                let out = [player.positions[i][2], player.positions[i+1][2]];
-
-                ctx.drawImage(snake.sprites.player.spritesheets[0], ...snake.sprites.player.getSprite('curve_' + out[0] + '_' + out[1])?.correctedRectArr, ...calculateRelativeToCamera(player.positions[i][0], player.positions[i][1], 1, 1));
-
-            } else if(player.positions[i][2] == "down") {
-                ctx.drawImage(snake.sprites.player.spritesheets[0], ...snake.sprites.player.getSprite("straight_down")?.correctedRectArr, ...calculateRelativeToCamera(player.positions[i][0], player.positions[i][1], 1, 1));
-            } else if(player.positions[i][2] == "up") {
-                ctx.drawImage(snake.sprites.player.spritesheets[0], ...snake.sprites.player.getSprite("straight_up")?.correctedRectArr, ...calculateRelativeToCamera(player.positions[i][0], player.positions[i][1], 1, 1));
-            } else if(player.positions[i][2] == "right") {
-                ctx.drawImage(snake.sprites.player.spritesheets[0], ...snake.sprites.player.getSprite("straight_right")?.correctedRectArr, ...calculateRelativeToCamera(player.positions[i][0], player.positions[i][1], 1, 1));
-            } else if(player.positions[i][2] == "left") {
-                ctx.drawImage(snake.sprites.player.spritesheets[0], ...snake.sprites.player.getSprite("straight_left")?.correctedRectArr, ...calculateRelativeToCamera(player.positions[i][0], player.positions[i][1], 1, 1));
-            } else {
-                ctx.drawImage(snake.sprites.player.spritesheets[0], ...snake.sprites.player.getSprite("alt")?.correctedRectArr, ...calculateRelativeToCamera(player.positions[i][0], player.positions[i][1], 1, 1));
-            }
-        }
 
         ctx.textAlign = "right";
         ctx.fillStyle = "#fff";
@@ -302,90 +256,41 @@ function renderFPS() {
         ctx.textAlign = "left";
     }
 
-
-
     ctx.fillStyle = "#f00";
-    for(let fruit of snake.data.fruits) {
-        let relativeCoords = calculateRelativeToCamera(fruit.pos[0], fruit.pos[1], 1, 1);
-        if(inViewport(...relativeCoords)) {
-            fruit.draw(ctx);
+
+    for(let entity of GenericEntity.allInstances) {
+        if(entity.inViewport()) {
+            entity.draw(ctx);
         }
     }
-
-    for(let entityType of [
-        ["wall", snake.data.walls, {
-            all: [1, 2],
-            left: [0, 3],
-            right: [2, 2],
-            bottom: [2, 3],
-            top: [1, 3]
-        }],
-        ["portal", snake.data.portals, {
-            all: [0, 4],
-            right: [2, 4],
-            left: [1, 4],
-            top: [1, 5],
-            bottom: [0, 5]
-        }]]) {
-
-        for(let entity of entityType[1]) {
-			if(entity?.inactive || snake?.data?.players[0]?.props?.inactiveElements?.includes(entity.type)) {
-				ctx.filter = "grayscale(.8) opacity(.5)";
-			}
-            let relativeCoords = calculateRelativeToCamera(entity.pos[0], entity.pos[1], 1, 1);
-            if(inViewport(...relativeCoords)) {
-                switch (entity.face) {
-                    case "all":
-                        ctx.drawImage(snake.data.spritesheet, ...getSpritePos(...entityType[2]["all"]), 128, 128, ...relativeCoords);
-                        break;
-                    case "right":
-                        ctx.drawImage(snake.data.spritesheet, ...getSpritePos(...entityType[2]["right"]), 128, 128, ...relativeCoords);
-                        break;
-                    case "left":
-                        ctx.drawImage(snake.data.spritesheet, ...getSpritePos(...entityType[2]["left"]), 128, 128, ...relativeCoords);
-                        break;
-                    case "top":
-                        ctx.drawImage(snake.data.spritesheet, ...getSpritePos(...entityType[2]["top"]), 128, 128, ...relativeCoords);
-                        break;
-                    case "bottom":
-                        ctx.drawImage(snake.data.spritesheet, ...getSpritePos(...entityType[2]["bottom"]), 128, 128, ...relativeCoords);
-                        break;
-                }
-            }
-
-			ctx.filter = "none";
-        }
-    }
-
-    for(let wall of snake.data.walls) {
-        let relativeCoords = calculateRelativeToCamera(wall.pos[0], wall.pos[1], 1, 1);
-    }
-
-    // Draw border around map boundaries
-    // ctx.beginPath();
-    // ctx.strokeStyle = "black";
-    // ctx.lineWidth = 8;
-    // let relativeCoords = calculateRelativeToCamera(0,0);
-    // let relativeCoords2 = calculateRelativeToCamera(snake.config.fieldWidth, snake.config.fieldHeight);
-    // ctx.rect(relativeCoords[0], relativeCoords[1], relativeCoords2[0] - relativeCoords[0], relativeCoords2[1] - relativeCoords[1]);
-    // ctx.stroke();
-
-    // OSD
-    // ctx.fillStyle = "#000";
-    // ctx.fillRect(0, snake.config.canvasHeight * .9, snake.config.canvasWidth / 10, snake.config.canvasHeight / 10);
 
     ctx.font = snake.config.fontSize * 4 + "px " + snake.config.fontFamily // Font for scoreboard is bigger than default
-        // ctx.fillText(player.props.points, snake.config.canvasHeight / 2 - ctx.measureText(player.props.points).width / 2, snake.config.canvasHeight / 2);
 
     ctx.fillStyle = "#fff";
+    if(snake.config.dev.osdDebug) {
+        ctx.font = 20 + "px " + "monospace" // Font for scoreboard is bigger than default
+        ctx.fillText("Position: x: " + snake.data.players[0].pos[0] + " y: " + snake.data.players[0].pos[1], 5, snake.config.canvasHeight - 5);
+        ctx.fillText("GenericEntities: " + GenericEntity.allInstances.length, 5, snake.config.canvasHeight - 25);
+        let entitiesInViewport = 0;
+        for(let i = 0; i < GenericEntity.allInstances.length; i++) {
+            if(GenericEntity.allInstances[i].inViewport()) {
+                entitiesInViewport++;
+            }
+        }
+        ctx.fillText("GenericEntities in Viewport: " + entitiesInViewport, 5, snake.config.canvasHeight - 45);
+        ctx.fillText("FPS: " + snake.framecounter.getFPS() + " TPS: " + snake.tickcounter.getFPS(), 5, snake.config.canvasHeight - 65);
+        let ignoreInstances = "";
+        for (let i = 0; i < snake.data.players[0].ignoreInstances.length; i++) {
+            ignoreInstances += snake.data.players[0].ignoreInstances[i][0].name + ":" + snake.data.players[0].ignoreInstances[i][1] + " ";
+        }
+        ctx.fillText("Player Ignores Instances: " + ignoreInstances, 5, snake.config.canvasHeight - 85);
+    }
+
     ctx.font = snake.config.fontSize + "px " + snake.config.fontFamily // Font for scoreboard is bigger than default
-    ctx.fillText(snake.data.players[0].props.x + "; " + snake.data.players[0].props.y, 5, snake.config.canvasHeight - 5);
 
 
-    ctx.fillText("TPS: " + snake.tickcounter.getFPS(), 100, 100);
-    ctx.fillText("FPS: " + snake.framecounter.getFPS(), 100, 150);
 
-    if(snake.data.players[0].props.status == "dead") {
+    if(snake.data.players[0].status == "dead") {
         Scenes.playerDied();
     }
 
@@ -394,20 +299,21 @@ function renderFPS() {
 }
 
 function calculateRelativeToCamera(x, y, width, height) {
-    const playerSnake = snake?.data?.players?.[0] || { props: { x: 0, y: 0 } };
+    const playerSnake = snake?.data?.players[0] || { props: { pos: [0, 0] } };
 
     const { oneWidth, oneHeight, scale, canvasWidth, canvasHeight } = snake.config;
-    let { x: playerX, y: playerY } = playerSnake.props;
+    let playerX = playerSnake.pos[0];
+    let playerY = playerSnake.pos[1];
 	const somethingMath1 = (snake.data.tick.count % snake.config.movespeed) / (snake.config.movespeed);
 	const somethingMath2 = ( 1 / snake.config.movespeed * ( snake.config.movespeed - 1 ) );
-	if(!playerSnake.props.stunFrames && !playerSnake.props.smoothMovement.disableFrames) {
-		if(playerSnake.props.direction == "left") {
+	if(!playerSnake.stunFrames && !playerSnake.smoothMovement.disableFrames) {
+		if(playerSnake.direction == "left") {
 			x = x + somethingMath1 - somethingMath2;
-		} else if(playerSnake.props.direction == "right") {
+		} else if(playerSnake.direction == "right") {
 			x = x - somethingMath1 + somethingMath2;
-		} else if(playerSnake.props.direction == "up") {
+		} else if(playerSnake.direction == "up") {
 			y = y + somethingMath1 - somethingMath2;
-		} else if(playerSnake.props.direction == "down") {
+		} else if(playerSnake.direction == "down") {
 			y = y - somethingMath1 + somethingMath2;
 		}
 	}
@@ -448,36 +354,11 @@ function renderTPS() {
 
 
     snake.data.players = snake.data.players
-    .filter(player => player.props.status == "alive")
+    .filter(player => player.status == "alive")
     .map(player => {
         player.tickPlayer();
         return player;
     });
-}
-
-
-function checkIfPlayerCollision(yourCoordinates) {
-    for(let player of snake.data.players ?? []) {
-        for(var i = 0; i < player.props.positions.length; i++) {
-            if(yourCoordinates[0] == player.props.positions[i][0]) {
-                if(yourCoordinates[1] == player.props.positions[i][1]) {
-                    if(i != player.props.positions.length - 1) {
-                        return true;
-                    }
-                }
-            }
-        }
-    }
-
-    return false;
-}
-
-function checkPlayerPlayerCollision() {
-    // for(let player of snake.data.players) {
-    //     if(player.checkCollisionWithTail()) {
-    //         playerdie();
-    //     }
-    // }
 }
 
 function randomize(max) {

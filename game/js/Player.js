@@ -1,53 +1,46 @@
-export function Player() {
-	var props = {
-		x: 0,
-		y: 0,
-		previousMove: [0,0,"right"], // [x,y,direction]
-		direction: "right",
-		directionNext: "right",
-		stunFrames: 0,
-		smoothMovement: {
-			disableFrames: 0
-		},
-		portal: {
-			ignoreFrames: 0
-		},
-		inactiveElements: [],
-		pause: 0,
-		positions: [[0, 0,'down'],[0,0,'down'],[0,0,'right']], // [[x,y],[x,y],[x,y],...]
-		points: 0,
-		status: "alive",
-		style: {
-			colorChannelR: Math.random(),
-			colorChannelG: Math.random(),
-			colorChannelB: Math.random()
-		},
-		controls: {
-			up: "w",
-			down: "s",
-			left: "a",
-			right: "d",
-			reset: "r",
-			pause: "p"
-		}
+export class Player extends GenericEntity {
+	constructor(props) {
+		const thisPlayer = super(props);
+		Object.assign(thisPlayer, {
+			pos: [0, 0],
+			previousMove: [0,0,"right"], // [x,y,direction]
+			direction: "right",
+			directionNext: "right",
+			stunFrames: 0,
+			smoothMovement: {
+				disableFrames: 0
+			},
+			portal: {
+				ignoreFrames: 0
+			},
+			ignoreInstances: [],
+			inactiveElements: [],
+			pause: 0,
+			positions: [[0, 0,'down'],[0,0,'down'],[0,0,'right']], // [[x,y],[x,y],[x,y],...]
+			points: 0,
+			status: "alive",
+			style: {
+				colorChannelR: Math.random(),
+				colorChannelG: Math.random(),
+				colorChannelB: Math.random()
+			},
+			controls: {
+				up: "w",
+				down: "s",
+				left: "a",
+				right: "d",
+				reset: "r",
+				pause: "p"
+			},
+			...props
+		});
+
+		this.initialLength = this.positions.length + 1; // Initial length, used for some calculations like scoreboard
 	}
 
-	props.initialLength = props.positions.length + 1; // Initial length, used for some calculations like scoreboard
-
-	if(snake.data.players.length > 0) {
-		props.controls = {
-			up: "arrowup",
-			down: "arrowdown",
-			left: "arrowleft",
-			right: "arrowright",
-			reset: "r",
-			pause: "p"
-		}
-	}
-
-	function checkCollisionWithTail(coords = [props.x, props.y]) {
-		for(let i = 0; i < props.positions.length - 1; i++) {
-			if(coords[0] == props.positions[i][0] && coords[1] == props.positions[i][1]) {
+	checkCollisionWithTail(coords = [this.pos[0], this.pos[1]]) {
+		for(let i = 0; i < this.positions.length - 1; i++) {
+			if(coords[0] == this.positions[i][0] && coords[1] == this.positions[i][1]) {
 				return coords;
 			}
 		}
@@ -55,199 +48,156 @@ export function Player() {
 		return false;
 	}
 
-	function playerdie() {
-		props.status = "dead";
+	collide(otherObject) {
+		if(otherObject instanceof GenericEntity) {
+			if(otherObject.pos[0] == this.pos[0] && otherObject.pos[1] == this.pos[1]) {
+				this.die();
+			}
+		}
+	}
+
+	die() {
+		let thisBeforeDeath = this;
+		super.die();
+		thisBeforeDeath.status = "dead";
 		if(snake.data.players.length <= 1) {
 			Scenes.playerDied();
 		}
 	}
 
-	function tickPlayer() {
-		let playerP = this.props;
+	draw(ctx) {
+		// Tail
+		let tailRotation = this.positions[1][2] ?? "down";
+		if(this.positions[1][2]?.split("_")[1]) {
+			tailRotation = this.positions[1][2].split("_")[0];
+		}
+		ctx.drawImage(snake.sprites.player.spritesheets[0], ...snake.sprites.player.getSprite("tail_" + tailRotation)?.correctedRectArr, ...calculateRelativeToCamera(this.positions[0][0], this.positions[0][1], 1, 1));
+		
+		// Head
+		ctx.drawImage(snake.sprites.player.spritesheets[0], ...snake.sprites.player.getSprite("face_" + this.direction)?.correctedRectArr, ...calculateRelativeToCamera(this.positions[this.positions.length - 1][0], this.positions[this.positions.length - 1][1], 1, 1));
+
+		// Body
+		for(let i = 1; i < this.positions.length - 1; i++) {
+			let out = [this.positions[i][2], this.positions[i+1][2]];
+			if(this.positions[i][2] != this.positions[i+1][2]) {
+				ctx.drawImage(snake.sprites.player.spritesheets[0], ...snake.sprites.player.getSprite('curve_' + out[0] + '_' + out[1])?.correctedRectArr, ...calculateRelativeToCamera(this.positions[i][0], this.positions[i][1], 1, 1));
+			} else {
+				ctx.drawImage(snake.sprites.player.spritesheets[0], ...snake.sprites.player.getSprite("straight_" + out[0])?.correctedRectArr, ...calculateRelativeToCamera(this.positions[i][0], this.positions[i][1], 1, 1));
+			}
+		}
+	}
+
+	gainPoints(amount) {
+		this.points += amount;
+	}
+
+	crawlTo(nextPosition) {
+		this.pos[0] = nextPosition[0];
+		this.pos[1] = nextPosition[1];
+
+		this.positionTail = this.positions.shift();
+		this.positions.push([nextPosition[0], nextPosition[1], this.direction]);
+		this.invincibleTicks = 50;
+	}
+
+	tickPlayer() {
 		let moveThisTick = false;
-		let nextPosition = [playerP.x, playerP.y];
+		let nextPosition = [this.pos[0], this.pos[1]];
 
 		if(snake.data.tick.count % snake.config.movespeed == snake.config.movespeed - 1) {
-			playerP.direction = playerP.directionNext;
+			this.direction = this.directionNext;
 		}
 
 		if(snake.data.tick.count % snake.config.movespeed == 0) {
-			if(playerP.smoothMovement.disableFrames > 0) {
-				playerP.smoothMovement.disableFrames--;
+			if(this.smoothMovement.disableFrames > 0) {
+				this.smoothMovement.disableFrames--;
 			}
-			if(playerP.stunFrames > 0) {
-				playerP.stunFrames--;
+			if(this.stunFrames > 0) {
+				this.stunFrames--;
 				return;
 			}
 			moveThisTick = true;
-			if(playerP.direction == "up") {
-				if(snake.config.wrapField && playerP.y == 0) {
+			if(this.direction == "up") {
+				if(snake.config.wrapField && this.pos[1] == 0) {
 					nextPosition[1] = snake.config.fieldHeight - 1;
 				} else {
 					nextPosition[1]--;
 				}
 		
-			} else if(playerP.direction == "down") {
-				if(snake.config.wrapField && playerP.y == snake.config.fieldHeight - 1) {
+			} else if(this.direction == "down") {
+				if(snake.config.wrapField && this.pos[1] == snake.config.fieldHeight - 1) {
 					nextPosition[1] = 0;
 				} else {
 					nextPosition[1]++;
 				}
 		
-			} else if(playerP.direction == "left") {
-				if(snake.config.wrapField && playerP.x == 0) {
+			} else if(this.direction == "left") {
+				if(snake.config.wrapField && this.pos[0] == 0) {
 					nextPosition[0] = snake.config.fieldWidth - 1;
 				} else {
 					nextPosition[0]--;
 				}
 		
-			} else if(playerP.direction == "right") {
-				if(snake.config.wrapField && playerP.x == snake.config.fieldWidth - 1) {
+			} else if(this.direction == "right") {
+				if(snake.config.wrapField && this.pos[0] == snake.config.fieldWidth - 1) {
 					nextPosition[0] = 0;
 				} else {
 					nextPosition[0]++;
 				}
 			}
 	
-			if(nextPosition[0] != playerP.positions[playerP.positions.length - 2][0] || nextPosition[1] != playerP.positions[playerP.positions.length - 2][1]) {
-				playerP.x = nextPosition[0];
-				playerP.y = nextPosition[1];
-	
+			if(nextPosition[0] != this.positions[this.positions.length - 2][0] || nextPosition[1] != this.positions[this.positions.length - 2][1]) {
+				this.crawlTo(nextPosition);
+
 				for(let fruit of snake.data.fruits) {
-					if(fruit.checkCollision([playerP.x, playerP.y])) {
+					if(fruit.checkCollision(this)) {
+						fruit.collide(this);
 						for(let i = 0; i < fruit.points; i++) {
-							playerP.positions.unshift([playerP.positions[0][0], playerP.positions[0][1], playerP.positions[0][2]]);
+							this.positions.unshift([this.positions[0][0], this.positions[0][1], this.positions[0][2]]);
 						}
-	
-						fruit.getEaten();
-						fruit.newPosition();
+					}
+				}
+
+				for(let portal of snake.data.portals) {
+					if(this.ignoresInstance(portal) || portal.ignoresInstance(this)) {
+						continue;
+					}
+					if(portal.checkCollision(this)) {
+						portal.collide(this);
 					}
 				}
 
 				for(let wall of snake.data.walls) {
-					switch(wall.face) {
-						case "all":
-							if(wall.checkCollision([playerP.x, playerP.y])) {
-								playerdie();
-								return;
-							}
-							break;
-						case "bottom":
-							if(playerP.direction == "down" && wall.checkCollision([playerP.x, playerP.y])) {
-								playerdie();
-								return;
-							}
-							break;
-						case "top":
-							if(playerP.direction == "up" && wall.checkCollision([playerP.x, playerP.y])) {
-								playerdie();
-								return;
-							}
-							break;
-						case "right":
-							if(playerP.direction == "right" && wall.checkCollision([playerP.x, playerP.y])) {
-								playerdie();
-								return;
-							}
-
-							break;
-						case "left":
-							if(playerP.direction == "left" && wall.checkCollision([playerP.x, playerP.y])) {
-								playerdie();
-								return;
-							}
-							break;
+					if(wall.checkCollision(this)) {
+						wall.collide(this);
 					}
 				}
-
-				playerP.positionTail = playerP.positions.shift();
-				playerP.positions.push([nextPosition[0], nextPosition[1], playerP.direction]);
-	
 			} else {
-				if(playerP.directionNext == "right") {
-					playerP.direction = "left";
-				} else if(playerP.directionNext == "left") {
-					playerP.direction = "right";
-				} else if(playerP.directionNext == "up") {
-					playerP.direction = "down";
-				} else if(playerP.directionNext == "down") {
-					playerP.direction = "up";
+				if(this.directionNext == "right") {
+					this.direction = "left";
+				} else if(this.directionNext == "left") {
+					this.direction = "right";
+				} else if(this.directionNext == "up") {
+					this.direction = "down";
+				} else if(this.directionNext == "down") {
+					this.direction = "up";
 				}
 			}
+
+			if(this.checkCollisionWithTail()) {
+				this.collide(this);
+			}
 	
-			window.setTimeout(function() {
-				// if(checkCollisionWithTail()) {
-				// 	playerdie();
-				// }
-
-				for(let playerEntity of snake.data.players) {
-					if(playerEntity.checkCollisionWithTail([props.x, props.y])) {
-						playerdie();
-					}
-				}
-			}, 0);
-
-			playerP.points = (playerP.positions.length - playerP.initialLength) + 1;
-			this.props.previousMove = [this.props.x, this.props.y, this.props.direction];
+			this.points = (this.positions.length - this.initialLength) + 1;
+			this.previousMove = [this.pos[0], this.pos[1], this.direction];
 		} else if(snake.data.tick.count % snake.config.movespeed == snake.config.movespeed - 1) {
-			if(playerP.portal.ignoreFrames > 0) {
-				playerP.portal.ignoreFrames--;
+			if(this.portal.ignoreFrames > 0) {
+				this.portal.ignoreFrames--;
 				return;
 			}
-			if(playerP.inactiveElements.includes("portal")) {
-				playerP.inactiveElements = playerP.inactiveElements.filter(e => e !== "portal");
-			}
-			let isCollidingWithPortal = false;
-
-			for(let portal of snake.data.portals) {
-				// if(isCollidingWithPortal) {
-				// 	break;
-				// }
-
-				if(portal.checkCollision([playerP.x, playerP.y])) {
-					switch(portal.face) {
-						case "all":
-							isCollidingWithPortal = true;
-							break;
-						case "right":
-						case "left":
-							if(playerP.directionNext == portal.face) {
-								isCollidingWithPortal = true;
-							}
-							break;
-
-						case "top":
-							if(playerP.directionNext == "up") {
-								isCollidingWithPortal = true;
-							}
-							break;
-						case "bottom":
-							if(playerP.directionNext == "down") {
-								isCollidingWithPortal = true;
-							}
-							break;
-						}
-				}
-
-				if(isCollidingWithPortal) {
-					playerP.stunFrames = 5;
-					playerP.smoothMovement.disableFrames = 6;
-					playerP.portal.ignoreFrames = 12;
-					props.inactiveElements.push("portal");
-					nextPosition[0] = portal.posDest[0];
-					nextPosition[1] = portal.posDest[1];
-					playerP.x = portal.posDest[0];
-					playerP.y = portal.posDest[1];
-					break;
-				}
+			if(this.inactiveElements.includes("portal")) {
+				this.inactiveElements = this.inactiveElements.filter(e => e !== "portal");
 			}
 		}
-	}
-
-	return {
-		props,
-		checkCollisionWithTail,
-		playerdie,
-		tickPlayer
 	}
 }

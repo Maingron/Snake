@@ -17,7 +17,13 @@ export function Config() {
 		fontFamily: ['Kristen ITC', 'Ink Free', 'Felix Titling', 'system-ui', 'sans-serif'].map(x=>`'${x}'`).join(","),
 		wrapField: true,
 		availableLangs: ["en", "de"],
-		lang: "en"
+		lang: "en",
+		dev: {
+			osdDebug: true,
+			portals: {
+				drawConnectionLines: true
+			}
+		}
 	};
 
 	config = {

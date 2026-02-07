@@ -1,23 +1,23 @@
-export class Wall {
+export class Wall extends GenericEntity {
 	constructor(props) {
-		Object.assign(this, {
+		const thisWall = super(props);
+		Object.assign(thisWall, {
 			type: "wall",
 			face: "all",
 			pos: [0,0],
+			collisionDirectional: "same",
+			sprite: {
+				...thisWall.sprite,
+				id: "wall",
+				sheetObject: snake.sprites.main,
+			},
 			...props
 		});
+	}
 
-
-		this.checkCollision = function(otherObjectPos) {
-			return this.pos[0] == otherObjectPos[0] && this.pos[1] == otherObjectPos[1];
+	collide(otherObject) {
+		if(otherObject instanceof Player) {
+			otherObject.die();
 		}
 	}
 }
-
-// export class Wall extends Wall {
-// 	constructor() {
-// 		super({
-// 			type: "Apple"
-// 		});
-// 	}
-// }

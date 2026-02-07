@@ -44,7 +44,7 @@
 		},
 		{
 			"index": 2,
-			"id": "sprite_2",
+			"id": "wall_all",
 			"inputIndex": 2,
 			"inputSpriteIndex": 0,
 			"sourceIndex": 2,
@@ -63,7 +63,7 @@
 		},
 		{
 			"index": 3,
-			"id": "sprite_3",
+			"id": "wall_right",
 			"inputIndex": 3,
 			"inputSpriteIndex": 0,
 			"sourceIndex": 3,
@@ -82,7 +82,7 @@
 		},
 		{
 			"index": 4,
-			"id": "sprite_4",
+			"id": "wall_left",
 			"inputIndex": 4,
 			"inputSpriteIndex": 0,
 			"sourceIndex": 4,
@@ -101,7 +101,7 @@
 		},
 		{
 			"index": 5,
-			"id": "sprite_5",
+			"id": "wall_up",
 			"inputIndex": 5,
 			"inputSpriteIndex": 0,
 			"sourceIndex": 5,
@@ -120,7 +120,7 @@
 		},
 		{
 			"index": 6,
-			"id": "sprite_6",
+			"id": "wall_down",
 			"inputIndex": 6,
 			"inputSpriteIndex": 0,
 			"sourceIndex": 6,
@@ -139,7 +139,7 @@
 		},
 		{
 			"index": 7,
-			"id": "sprite_7",
+			"id": "portal_all",
 			"inputIndex": 7,
 			"inputSpriteIndex": 0,
 			"sourceIndex": 7,
@@ -158,7 +158,7 @@
 		},
 		{
 			"index": 8,
-			"id": "sprite_8",
+			"id": "portal_right",
 			"inputIndex": 8,
 			"inputSpriteIndex": 0,
 			"sourceIndex": 8,
@@ -177,7 +177,7 @@
 		},
 		{
 			"index": 9,
-			"id": "sprite_9",
+			"id": "portal_left",
 			"inputIndex": 9,
 			"inputSpriteIndex": 0,
 			"sourceIndex": 9,
@@ -196,7 +196,7 @@
 		},
 		{
 			"index": 10,
-			"id": "sprite_10",
+			"id": "portal_up",
 			"inputIndex": 10,
 			"inputSpriteIndex": 0,
 			"sourceIndex": 10,
@@ -215,7 +215,7 @@
 		},
 		{
 			"index": 11,
-			"id": "sprite_11",
+			"id": "portal_down",
 			"inputIndex": 11,
 			"inputSpriteIndex": 0,
 			"sourceIndex": 11,
@@ -234,7 +234,7 @@
 		},
 		{
 			"index": 12,
-			"id": "top",
+			"id": "up",
 			"inputIndex": 12,
 			"inputSpriteIndex": 0,
 			"sourceIndex": 12,
@@ -253,7 +253,7 @@
 		},
 		{
 			"index": 13,
-			"id": "top_right",
+			"id": "up_right",
 			"inputIndex": 13,
 			"inputSpriteIndex": 0,
 			"sourceIndex": 13,
@@ -774,7 +774,7 @@
 			]
 		},
 		{
-			"filename": "wall-all.png",
+			"filename": "wall_all.png",
 			"sourceSprites": [
 				{
 					"sourceIndex": 2,
@@ -783,7 +783,7 @@
 			]
 		},
 		{
-			"filename": "wall-right.png",
+			"filename": "wall_right.png",
 			"sourceSprites": [
 				{
 					"sourceIndex": 3,
@@ -792,7 +792,7 @@
 			]
 		},
 		{
-			"filename": "wall-left.png",
+			"filename": "wall_left.png",
 			"sourceSprites": [
 				{
 					"sourceIndex": 4,
@@ -801,7 +801,7 @@
 			]
 		},
 		{
-			"filename": "wall-top.png",
+			"filename": "wall_top.png",
 			"sourceSprites": [
 				{
 					"sourceIndex": 5,
@@ -810,7 +810,7 @@
 			]
 		},
 		{
-			"filename": "wall-bottom.png",
+			"filename": "wall_bottom.png",
 			"sourceSprites": [
 				{
 					"sourceIndex": 6,
@@ -819,7 +819,7 @@
 			]
 		},
 		{
-			"filename": "portal-all.png",
+			"filename": "portal_all.png",
 			"sourceSprites": [
 				{
 					"sourceIndex": 7,
@@ -828,7 +828,7 @@
 			]
 		},
 		{
-			"filename": "portal-right.png",
+			"filename": "portal_right.png",
 			"sourceSprites": [
 				{
 					"sourceIndex": 8,
@@ -837,7 +837,7 @@
 			]
 		},
 		{
-			"filename": "portal-left.png",
+			"filename": "portal_left.png",
 			"sourceSprites": [
 				{
 					"sourceIndex": 9,
@@ -846,7 +846,7 @@
 			]
 		},
 		{
-			"filename": "portal-top.png",
+			"filename": "portal_up.png",
 			"sourceSprites": [
 				{
 					"sourceIndex": 10,
@@ -855,7 +855,7 @@
 			]
 		},
 		{
-			"filename": "portal-bottom.png",
+			"filename": "portal_down.png",
 			"sourceSprites": [
 				{
 					"sourceIndex": 11,
@@ -1122,61 +1122,61 @@
 		},
 		{
 			"path": "src/main",
-			"filename": "wall-all.png",
+			"filename": "wall_all.png",
 			"width": 16,
 			"height": 16
 		},
 		{
 			"path": "src/main",
-			"filename": "wall-right.png",
+			"filename": "wall_right.png",
 			"width": 16,
 			"height": 16
 		},
 		{
 			"path": "src/main",
-			"filename": "wall-left.png",
+			"filename": "wall_left.png",
 			"width": 16,
 			"height": 16
 		},
 		{
 			"path": "src/main",
-			"filename": "wall-top.png",
+			"filename": "wall_top.png",
 			"width": 16,
 			"height": 16
 		},
 		{
 			"path": "src/main",
-			"filename": "wall-bottom.png",
+			"filename": "wall_bottom.png",
 			"width": 16,
 			"height": 16
 		},
 		{
 			"path": "src/main",
-			"filename": "portal-all.png",
+			"filename": "portal_all.png",
 			"width": 16,
 			"height": 16
 		},
 		{
 			"path": "src/main",
-			"filename": "portal-right.png",
+			"filename": "portal_right.png",
 			"width": 16,
 			"height": 16
 		},
 		{
 			"path": "src/main",
-			"filename": "portal-left.png",
+			"filename": "portal_left.png",
 			"width": 16,
 			"height": 16
 		},
 		{
 			"path": "src/main",
-			"filename": "portal-top.png",
+			"filename": "portal_up.png",
 			"width": 16,
 			"height": 16
 		},
 		{
 			"path": "src/main",
-			"filename": "portal-bottom.png",
+			"filename": "portal_down.png",
 			"width": 16,
 			"height": 16
 		},
