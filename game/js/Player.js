@@ -14,7 +14,7 @@ export function Player() {
 		},
 		inactiveElements: [],
 		pause: 0,
-		positions: [[0,0],[0,0],[0,0]], // [[x,y],[x,y],[x,y],...]
+		positions: [[0, 0,'down'],[0,0,'down'],[0,0,'right']], // [[x,y],[x,y],[x,y],...]
 		points: 0,
 		status: "alive",
 		style: {
@@ -64,8 +64,8 @@ export function Player() {
 
 	function tickPlayer() {
 		let playerP = this.props;
-		var moveThisTick = false;
-		var nextPosition = [playerP.x, playerP.y];
+		let moveThisTick = false;
+		let nextPosition = [playerP.x, playerP.y];
 
 		if(snake.data.tick.count % snake.config.movespeed == snake.config.movespeed - 1) {
 			playerP.direction = playerP.directionNext;
@@ -160,8 +160,8 @@ export function Player() {
 					}
 				}
 
-				playerP.positions.shift();
-				playerP.positions.push([nextPosition[0],nextPosition[1]]);
+				playerP.positionTail = playerP.positions.shift();
+				playerP.positions.push([nextPosition[0], nextPosition[1], playerP.direction]);
 	
 			} else {
 				if(playerP.directionNext == "right") {
