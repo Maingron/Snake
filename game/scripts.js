@@ -52,75 +52,100 @@ async function initOnce() {
     };
     snake.data.spritesheet.src = "spritesheet.png";
 
+    snake.sprites = {
+        player: new Sprites({
+            jsonPath: 'img/sprites/spright.json',
+            sheetId: 'player'
+        }),
+        main: new Sprites({
+            jsonPath: 'img/sprites/spright.json',
+            sheetId: 'main'
+        }),
+        water: new Sprites({
+            jsonPath: 'img/sprites/spright.json',
+            sheetId: 'water'
+        })
+    }
+
+    Promise.all([
+        snake.sprites.player.load(),
+        snake.sprites.main.load(),
+        snake.sprites.water.load()
+    ]).then(() => {
+        window.addEventListener("keydown",function(e) {
+            let inputKey = e.key.toLowerCase();
+
+            if (inputKey == "r") {
+                startGame();
+            } else if(inputKey == "p") {
+                snake.data.player.pause = !snake.data.player.pause;
+                tick();
+            } else if(inputKey == "ü") {
+                snake.data.server.pause = !snake.data.server.pause;
+                tick();
+            } else if(inputKey == ",") {
+                snake.data.player.pause = false;
+                snake.data.server.pause = false;
+                tick(true);
+                snake.data.player.pause = true;
+                snake.data.server.pause = true;
+            } else if(inputKey == ".") {
+                snake.data.server.pause = false;
+                for(let i = 0; i < snake.config.movespeed; i++) {
+                    tick();
+                }
+                snake.data.server.pause = true;
+            }
+            if(snake.data?.players?.length <= 1 && (inputKey == "arrowup" || inputKey == "arrowdown" || inputKey == "arrowleft" || inputKey == "arrowright")) {
+                snake.data.players.push(new Player());
+            }
+
+            for(let player of snake.data.players || [{}]) {
+                let playerP = player.props;
+
+                if(!player.props) {
+                    return false;
+                }
+
+                if(inputKey == playerP.controls.up) {
+                    if(playerP.direction != "down") {
+                        playerP.directionNext = "up";
+                    }
+                } else if (inputKey == playerP.controls.down) {
+                    if(playerP.direction != "up") {
+                        playerP.directionNext = "down";
+                    }
+                } else if (inputKey == playerP.controls.left) {
+                    if(playerP.direction != "right") {
+                        playerP.directionNext = "left";
+                    }
+                } else if (inputKey == playerP.controls.right) {
+                    if(playerP.direction != "left") {
+                        playerP.directionNext = "right";
+                    }
+                }
+            }
+        });
+
+        ctx.reset();
+        canvasFunctions.applyDefaults();
+
+        ctx.fillText(getLocaleString("pressToStart"),100,140);
+
+        tick();
+        window.requestAnimationFrame(renderFPS);
+    });
+
     snake.tickcounter = new Framecounter();
     snake.framecounter = new Framecounter();
 
     applyCSS();
 
-    window.addEventListener("keydown",function(e) {
-        let inputKey = e.key.toLowerCase();
-
-        if (inputKey == "r") {
-            startGame();
-        } else if(inputKey == "p") {
-            snake.data.player.pause = !snake.data.player.pause;
-			tick();
-        } else if(inputKey == "ü") {
-            snake.data.server.pause = !snake.data.server.pause;
-			tick();
-        } else if(inputKey == ",") {
-            snake.data.player.pause = false;
-            snake.data.server.pause = false;
-            tick(true);
-            snake.data.player.pause = true;
-            snake.data.server.pause = true;
-        } else if(inputKey == ".") {
-            snake.data.server.pause = false;
-            for(let i = 0; i < snake.config.movespeed; i++) {
-                tick();
-            }
-            snake.data.server.pause = true;
-        }
-        if(snake.data?.players?.length <= 1 && (inputKey == "arrowup" || inputKey == "arrowdown" || inputKey == "arrowleft" || inputKey == "arrowright")) {
-            snake.data.players.push(new Player());
-        }
-
-        for(let player of snake.data.players || [{}]) {
-            let playerP = player.props;
-
-            if(!player.props) {
-                return false;
-            }
-
-            if(inputKey == playerP.controls.up) {
-                if(playerP.direction != "down") {
-                    playerP.directionNext = "up";
-                }
-            } else if (inputKey == playerP.controls.down) {
-                if(playerP.direction != "up") {
-                    playerP.directionNext = "down";
-                }
-            } else if (inputKey == playerP.controls.left) {
-                if(playerP.direction != "right") {
-                    playerP.directionNext = "left";
-                }
-            } else if (inputKey == playerP.controls.right) {
-                if(playerP.direction != "left") {
-                    playerP.directionNext = "right";
-                }
-            }
-        }
-
-    });
-
     window.getLocaleString = await Langfun(snake.config.lang).then(langfun => {
         return langfun.getLang;
     });
 
-    ctx.fillText(getLocaleString("pressToStart"),100,140);
-
-	tick();
-    window.requestAnimationFrame(renderFPS);
+    ctx.fillText(getLocaleString("loading"),100,140);
 }
 
 function startGame() {
@@ -237,15 +262,30 @@ function renderFPS() {
             var currentGradientB = numHex((256 * player.style.colorChannelB / player.positions.length * i));
     
             ctx.fillStyle="#"+currentGradientR+currentGradientG+currentGradientB;
-            // ctx.fillRect(...calculateRelativeToCamera(player.positions[i][0] + .15, player.positions[i][1] + .15, .7, .7));
-            ctx.drawImage(snake.data.spritesheet, ...getSpritePos(2,0), 128, 128, ...calculateRelativeToCamera(player.positions[i][0], player.positions[i][1], 1, 1));
-            // ctx.fillRect(virtualCoords.centerPointX + (player.positions[i][0] * virtualCoords.oneWidth - player.x * virtualCoords.oneWidth), virtualCoords.centerPointY + (player.positions[i][1] * virtualCoords.oneHeight - player.y * virtualCoords.oneHeight), virtualCoords.oneWidth, virtualCoords.oneHeight);
-    
-            if(i == player.positions.length - 1) { // Head
-                // draw sprite
-                ctx.drawImage(snake.data.spritesheet, ...getSpritePos(1,1), 128, 128, ...calculateRelativeToCamera(player.positions[i][0], player.positions[i][1], 1, 1));
+
+            if(i == 0 || i == player.positions.length - 1) { // Tail or head
+                if(i == 0) {
+                    let tailRotation = player.positions[1][2].split("_")[0];
+                    ctx.drawImage(snake.sprites.player.spritesheets[0], ...snake.sprites.player.getSprite("tail_" + tailRotation).correctedRectArr, ...calculateRelativeToCamera(player.positions[0][0], player.positions[0][1], 1, 1));
+                } else {
+                    ctx.drawImage(snake.sprites.player.spritesheets[0], ...snake.sprites.player.getSprite("face_" + player.direction).correctedRectArr, ...calculateRelativeToCamera(player.positions[i][0], player.positions[i][1], 1, 1));
+                }
+            } else if(player.positions[i][2] != player.positions[i+1][2]) {
+                let out = [player.positions[i][2], player.positions[i+1][2]];
+
+                ctx.drawImage(snake.sprites.player.spritesheets[0], ...snake.sprites.player.getSprite('curve_' + out[0] + '_' + out[1]).correctedRectArr, ...calculateRelativeToCamera(player.positions[i][0], player.positions[i][1], 1, 1));
+
+            } else if(player.positions[i][2] == "down") {
+                ctx.drawImage(snake.sprites.player.spritesheets[0], ...snake.sprites.player.getSprite("straight_down").correctedRectArr, ...calculateRelativeToCamera(player.positions[i][0], player.positions[i][1], 1, 1));
+            } else if(player.positions[i][2] == "up") {
+                ctx.drawImage(snake.sprites.player.spritesheets[0], ...snake.sprites.player.getSprite("straight_up").correctedRectArr, ...calculateRelativeToCamera(player.positions[i][0], player.positions[i][1], 1, 1));
+            } else if(player.positions[i][2] == "right") {
+                ctx.drawImage(snake.sprites.player.spritesheets[0], ...snake.sprites.player.getSprite("straight_right").correctedRectArr, ...calculateRelativeToCamera(player.positions[i][0], player.positions[i][1], 1, 1));
+            } else if(player.positions[i][2] == "left") {
+                ctx.drawImage(snake.sprites.player.spritesheets[0], ...snake.sprites.player.getSprite("straight_left").correctedRectArr, ...calculateRelativeToCamera(player.positions[i][0], player.positions[i][1], 1, 1));
+            } else {
+                ctx.drawImage(snake.sprites.player.spritesheets[0], ...snake.sprites.player.getSprite("alt").correctedRectArr, ...calculateRelativeToCamera(player.positions[i][0], player.positions[i][1], 1, 1));
             }
-			
         }
 
         ctx.textAlign = "right";
