@@ -29,18 +29,20 @@ export class Fruit extends GenericEntity {
 }
 
 export class Apple extends Fruit {
-	constructor() {
+	constructor(props) {
 		super({
-			type: "Apple"
+			type: "Apple",
+			...props
 		});
 	}
 }
 
 export class Orange extends Fruit {
-	constructor() {
+	constructor(props) {
 		super({
 			type: "Orange",
-			points: 5
+			points: 5,
+			...props
 		});
 	}
 }
