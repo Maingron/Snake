@@ -10,4 +10,5 @@ Bookmark the game on itch.io for updates and news:
 ## Screenshots
 ![](docs/screenshots/banner.png)  
 ![](docs/screenshots/screenshot-2.png)  
-![](game/img/sprites/fruit-orange.png) ![](game/img/sprites/fruit-apple.png)
+![](docs/screenshots/screenshot-3.png)  
+![](game/img/sprites/src/food/orange.png) ![](game/img/sprites/src/food/apple.png)
