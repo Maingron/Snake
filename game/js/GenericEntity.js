@@ -13,22 +13,30 @@ export default class GenericEntity {
 				active: true
 			},
 			ignoreInstances: [],
-			sprite: {
-				sheetObject: null,
-				id: null,
-				getSprite: function(id = thisEntity.sprite.id) {
-					let idStringResult = id;
-					if(thisEntity.variant != null) {
-						idStringResult += thisEntity.variant;
-					}
-					if(thisEntity.face != null) {
-						idStringResult += "_" + thisEntity.face;
-					}
-					return thisEntity.sprite.sheetObject.getSprite(idStringResult);
-				}
-			},
+			sprite: {},
 			...props
 		});
+
+		this.sprite = {
+			sheetObject: snake.sprites.main,
+			id: thisEntity.spriteId,
+			opacity: 1,
+			rotate: 0,
+			animate: null,
+			getSprite: function(id = thisEntity.sprite.id) {
+				let idStringResult = id;
+				if(thisEntity.variant != null) {
+					idStringResult += thisEntity.variant;
+				}
+				if(thisEntity.face != null) {
+					idStringResult += "_" + thisEntity.face;
+				}
+				return thisEntity.sprite.sheetObject.getSprite(idStringResult);
+			},
+			...this.sprite,
+		}
+
+
 		GenericEntity.allInstances.push(this);
 	}
 	checkCollision(otherObject) {
@@ -77,6 +85,7 @@ export default class GenericEntity {
 	}
 
 	draw(ctx) {
+		ctx.globalAlpha = this.sprite.opacity;
 		ctx.drawImage(this.sprite.sheetObject.spritesheets[0], ...this.sprite.getSprite().correctedRectArr, ...calculateRelativeToCamera(...this.pos, 1, 1));
 	}
 
