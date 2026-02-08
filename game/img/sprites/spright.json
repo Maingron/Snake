@@ -63,16 +63,16 @@
 		},
 		{
 			"index": 3,
-			"id": "wall_right",
-			"inputIndex": 3,
-			"inputSpriteIndex": 0,
-			"sourceIndex": 3,
-			"sourceRect": {"x":0,"y":0,"w":16,"h":16},
+			"id": "wall_up",
+			"inputIndex": 2,
+			"inputSpriteIndex": 1,
+			"sourceIndex": 2,
+			"sourceRect": {"x":0,"y":16,"w":16,"h":16},
 			"sliceIndex": 1,
 			"sliceSpriteIndex": 1,
 			"rect": {"x":16,"y":0,"w":16,"h":16},
 			"trimmedRect": {"x":16,"y":0,"w":16,"h":16},
-			"trimmedSourceRect": {"x":0,"y":0,"w":16,"h":16},
+			"trimmedSourceRect": {"x":0,"y":16,"w":16,"h":16},
 			"pivot": {"x":8.0,"y":8.0},
 			"margin": {"l":0.0,"t":0.0,"r":0.0,"b":0.0},
 			"rotated": false,
@@ -82,16 +82,16 @@
 		},
 		{
 			"index": 4,
-			"id": "wall_left",
-			"inputIndex": 4,
-			"inputSpriteIndex": 0,
-			"sourceIndex": 4,
-			"sourceRect": {"x":0,"y":0,"w":16,"h":16},
+			"id": "wall_down",
+			"inputIndex": 2,
+			"inputSpriteIndex": 2,
+			"sourceIndex": 2,
+			"sourceRect": {"x":0,"y":32,"w":16,"h":16},
 			"sliceIndex": 1,
 			"sliceSpriteIndex": 2,
 			"rect": {"x":32,"y":0,"w":16,"h":16},
 			"trimmedRect": {"x":32,"y":0,"w":16,"h":16},
-			"trimmedSourceRect": {"x":0,"y":0,"w":16,"h":16},
+			"trimmedSourceRect": {"x":0,"y":32,"w":16,"h":16},
 			"pivot": {"x":8.0,"y":8.0},
 			"margin": {"l":0.0,"t":0.0,"r":0.0,"b":0.0},
 			"rotated": false,
@@ -101,16 +101,16 @@
 		},
 		{
 			"index": 5,
-			"id": "wall_up",
-			"inputIndex": 5,
-			"inputSpriteIndex": 0,
-			"sourceIndex": 5,
-			"sourceRect": {"x":0,"y":0,"w":16,"h":16},
+			"id": "wall_left",
+			"inputIndex": 2,
+			"inputSpriteIndex": 3,
+			"sourceIndex": 2,
+			"sourceRect": {"x":0,"y":48,"w":16,"h":16},
 			"sliceIndex": 1,
 			"sliceSpriteIndex": 3,
 			"rect": {"x":48,"y":0,"w":16,"h":16},
 			"trimmedRect": {"x":48,"y":0,"w":16,"h":16},
-			"trimmedSourceRect": {"x":0,"y":0,"w":16,"h":16},
+			"trimmedSourceRect": {"x":0,"y":48,"w":16,"h":16},
 			"pivot": {"x":8.0,"y":8.0},
 			"margin": {"l":0.0,"t":0.0,"r":0.0,"b":0.0},
 			"rotated": false,
@@ -120,16 +120,16 @@
 		},
 		{
 			"index": 6,
-			"id": "wall_down",
-			"inputIndex": 6,
-			"inputSpriteIndex": 0,
-			"sourceIndex": 6,
-			"sourceRect": {"x":0,"y":0,"w":16,"h":16},
+			"id": "wall_right",
+			"inputIndex": 2,
+			"inputSpriteIndex": 4,
+			"sourceIndex": 2,
+			"sourceRect": {"x":0,"y":64,"w":16,"h":16},
 			"sliceIndex": 1,
 			"sliceSpriteIndex": 4,
 			"rect": {"x":64,"y":0,"w":16,"h":16},
 			"trimmedRect": {"x":64,"y":0,"w":16,"h":16},
-			"trimmedSourceRect": {"x":0,"y":0,"w":16,"h":16},
+			"trimmedSourceRect": {"x":0,"y":64,"w":16,"h":16},
 			"pivot": {"x":8.0,"y":8.0},
 			"margin": {"l":0.0,"t":0.0,"r":0.0,"b":0.0},
 			"rotated": false,
@@ -140,9 +140,9 @@
 		{
 			"index": 7,
 			"id": "portal_all",
-			"inputIndex": 7,
+			"inputIndex": 3,
 			"inputSpriteIndex": 0,
-			"sourceIndex": 7,
+			"sourceIndex": 3,
 			"sourceRect": {"x":0,"y":0,"w":16,"h":16},
 			"sliceIndex": 1,
 			"sliceSpriteIndex": 5,
@@ -159,9 +159,9 @@
 		{
 			"index": 8,
 			"id": "portal_right",
-			"inputIndex": 8,
+			"inputIndex": 4,
 			"inputSpriteIndex": 0,
-			"sourceIndex": 8,
+			"sourceIndex": 4,
 			"sourceRect": {"x":0,"y":0,"w":16,"h":16},
 			"sliceIndex": 1,
 			"sliceSpriteIndex": 6,
@@ -178,9 +178,9 @@
 		{
 			"index": 9,
 			"id": "portal_left",
-			"inputIndex": 9,
+			"inputIndex": 5,
 			"inputSpriteIndex": 0,
-			"sourceIndex": 9,
+			"sourceIndex": 5,
 			"sourceRect": {"x":0,"y":0,"w":16,"h":16},
 			"sliceIndex": 1,
 			"sliceSpriteIndex": 7,
@@ -197,9 +197,9 @@
 		{
 			"index": 10,
 			"id": "portal_up",
-			"inputIndex": 10,
+			"inputIndex": 6,
 			"inputSpriteIndex": 0,
-			"sourceIndex": 10,
+			"sourceIndex": 6,
 			"sourceRect": {"x":0,"y":0,"w":16,"h":16},
 			"sliceIndex": 1,
 			"sliceSpriteIndex": 8,
@@ -216,9 +216,9 @@
 		{
 			"index": 11,
 			"id": "portal_down",
-			"inputIndex": 11,
+			"inputIndex": 7,
 			"inputSpriteIndex": 0,
-			"sourceIndex": 11,
+			"sourceIndex": 7,
 			"sourceRect": {"x":0,"y":0,"w":16,"h":16},
 			"sliceIndex": 1,
 			"sliceSpriteIndex": 9,
@@ -235,9 +235,9 @@
 		{
 			"index": 12,
 			"id": "log_down",
-			"inputIndex": 12,
+			"inputIndex": 8,
 			"inputSpriteIndex": 0,
-			"sourceIndex": 12,
+			"sourceIndex": 8,
 			"sourceRect": {"x":0,"y":0,"w":16,"h":16},
 			"sliceIndex": 1,
 			"sliceSpriteIndex": 10,
@@ -254,9 +254,9 @@
 		{
 			"index": 13,
 			"id": "log_right",
-			"inputIndex": 12,
+			"inputIndex": 8,
 			"inputSpriteIndex": 1,
-			"sourceIndex": 12,
+			"sourceIndex": 8,
 			"sourceRect": {"x":16,"y":0,"w":16,"h":16},
 			"sliceIndex": 1,
 			"sliceSpriteIndex": 11,
@@ -273,9 +273,9 @@
 		{
 			"index": 14,
 			"id": "log_horizontal",
-			"inputIndex": 12,
+			"inputIndex": 8,
 			"inputSpriteIndex": 2,
-			"sourceIndex": 12,
+			"sourceIndex": 8,
 			"sourceRect": {"x":32,"y":0,"w":16,"h":16},
 			"sliceIndex": 1,
 			"sliceSpriteIndex": 12,
@@ -292,9 +292,9 @@
 		{
 			"index": 15,
 			"id": "log_left",
-			"inputIndex": 12,
+			"inputIndex": 8,
 			"inputSpriteIndex": 3,
-			"sourceIndex": 12,
+			"sourceIndex": 8,
 			"sourceRect": {"x":48,"y":0,"w":16,"h":16},
 			"sliceIndex": 1,
 			"sliceSpriteIndex": 13,
@@ -311,9 +311,9 @@
 		{
 			"index": 16,
 			"id": "log_vertical",
-			"inputIndex": 12,
+			"inputIndex": 8,
 			"inputSpriteIndex": 4,
-			"sourceIndex": 12,
+			"sourceIndex": 8,
 			"sourceRect": {"x":0,"y":16,"w":16,"h":16},
 			"sliceIndex": 1,
 			"sliceSpriteIndex": 14,
@@ -330,9 +330,9 @@
 		{
 			"index": 17,
 			"id": "log_vertical_right",
-			"inputIndex": 12,
+			"inputIndex": 8,
 			"inputSpriteIndex": 5,
-			"sourceIndex": 12,
+			"sourceIndex": 8,
 			"sourceRect": {"x":16,"y":16,"w":16,"h":16},
 			"sliceIndex": 1,
 			"sliceSpriteIndex": 15,
@@ -349,9 +349,9 @@
 		{
 			"index": 18,
 			"id": "log_up",
-			"inputIndex": 12,
+			"inputIndex": 8,
 			"inputSpriteIndex": 6,
-			"sourceIndex": 12,
+			"sourceIndex": 8,
 			"sourceRect": {"x":0,"y":32,"w":16,"h":16},
 			"sliceIndex": 1,
 			"sliceSpriteIndex": 16,
@@ -368,9 +368,9 @@
 		{
 			"index": 19,
 			"id": "castle_up_left",
-			"inputIndex": 13,
+			"inputIndex": 9,
 			"inputSpriteIndex": 0,
-			"sourceIndex": 13,
+			"sourceIndex": 9,
 			"sourceRect": {"x":0,"y":0,"w":16,"h":16},
 			"sliceIndex": 1,
 			"sliceSpriteIndex": 17,
@@ -387,9 +387,9 @@
 		{
 			"index": 20,
 			"id": "castle_up",
-			"inputIndex": 13,
+			"inputIndex": 9,
 			"inputSpriteIndex": 1,
-			"sourceIndex": 13,
+			"sourceIndex": 9,
 			"sourceRect": {"x":16,"y":0,"w":16,"h":16},
 			"sliceIndex": 1,
 			"sliceSpriteIndex": 18,
@@ -406,9 +406,9 @@
 		{
 			"index": 21,
 			"id": "castle_up1",
-			"inputIndex": 13,
+			"inputIndex": 9,
 			"inputSpriteIndex": 2,
-			"sourceIndex": 13,
+			"sourceIndex": 9,
 			"sourceRect": {"x":32,"y":0,"w":16,"h":16},
 			"sliceIndex": 1,
 			"sliceSpriteIndex": 19,
@@ -425,9 +425,9 @@
 		{
 			"index": 22,
 			"id": "castle_up_right",
-			"inputIndex": 13,
+			"inputIndex": 9,
 			"inputSpriteIndex": 3,
-			"sourceIndex": 13,
+			"sourceIndex": 9,
 			"sourceRect": {"x":48,"y":0,"w":16,"h":16},
 			"sliceIndex": 1,
 			"sliceSpriteIndex": 20,
@@ -444,9 +444,9 @@
 		{
 			"index": 23,
 			"id": "castle_left",
-			"inputIndex": 13,
+			"inputIndex": 9,
 			"inputSpriteIndex": 4,
-			"sourceIndex": 13,
+			"sourceIndex": 9,
 			"sourceRect": {"x":0,"y":16,"w":16,"h":16},
 			"sliceIndex": 1,
 			"sliceSpriteIndex": 21,
@@ -463,9 +463,9 @@
 		{
 			"index": 24,
 			"id": "castle_all",
-			"inputIndex": 13,
+			"inputIndex": 9,
 			"inputSpriteIndex": 5,
-			"sourceIndex": 13,
+			"sourceIndex": 9,
 			"sourceRect": {"x":16,"y":16,"w":16,"h":16},
 			"sliceIndex": 1,
 			"sliceSpriteIndex": 22,
@@ -482,9 +482,9 @@
 		{
 			"index": 25,
 			"id": "castle_window",
-			"inputIndex": 13,
+			"inputIndex": 9,
 			"inputSpriteIndex": 6,
-			"sourceIndex": 13,
+			"sourceIndex": 9,
 			"sourceRect": {"x":32,"y":16,"w":16,"h":16},
 			"sliceIndex": 1,
 			"sliceSpriteIndex": 23,
@@ -501,9 +501,9 @@
 		{
 			"index": 26,
 			"id": "castle_right",
-			"inputIndex": 13,
+			"inputIndex": 9,
 			"inputSpriteIndex": 7,
-			"sourceIndex": 13,
+			"sourceIndex": 9,
 			"sourceRect": {"x":48,"y":16,"w":16,"h":16},
 			"sliceIndex": 1,
 			"sliceSpriteIndex": 24,
@@ -520,9 +520,9 @@
 		{
 			"index": 27,
 			"id": "castle_down_left",
-			"inputIndex": 13,
+			"inputIndex": 9,
 			"inputSpriteIndex": 8,
-			"sourceIndex": 13,
+			"sourceIndex": 9,
 			"sourceRect": {"x":0,"y":32,"w":16,"h":16},
 			"sliceIndex": 1,
 			"sliceSpriteIndex": 25,
@@ -539,9 +539,9 @@
 		{
 			"index": 28,
 			"id": "castle_down",
-			"inputIndex": 13,
+			"inputIndex": 9,
 			"inputSpriteIndex": 9,
-			"sourceIndex": 13,
+			"sourceIndex": 9,
 			"sourceRect": {"x":16,"y":32,"w":16,"h":16},
 			"sliceIndex": 1,
 			"sliceSpriteIndex": 26,
@@ -558,9 +558,9 @@
 		{
 			"index": 29,
 			"id": "castle_down_door",
-			"inputIndex": 13,
+			"inputIndex": 9,
 			"inputSpriteIndex": 10,
-			"sourceIndex": 13,
+			"sourceIndex": 9,
 			"sourceRect": {"x":32,"y":32,"w":16,"h":16},
 			"sliceIndex": 1,
 			"sliceSpriteIndex": 27,
@@ -577,9 +577,9 @@
 		{
 			"index": 30,
 			"id": "castle_down_right",
-			"inputIndex": 13,
+			"inputIndex": 9,
 			"inputSpriteIndex": 11,
-			"sourceIndex": 13,
+			"sourceIndex": 9,
 			"sourceRect": {"x":48,"y":32,"w":16,"h":16},
 			"sliceIndex": 1,
 			"sliceSpriteIndex": 28,
@@ -596,9 +596,9 @@
 		{
 			"index": 31,
 			"id": "coin[0]",
-			"inputIndex": 14,
+			"inputIndex": 10,
 			"inputSpriteIndex": 0,
-			"sourceIndex": 14,
+			"sourceIndex": 10,
 			"sourceRect": {"x":0,"y":0,"w":16,"h":16},
 			"sliceIndex": 1,
 			"sliceSpriteIndex": 29,
@@ -617,9 +617,9 @@
 		{
 			"index": 32,
 			"id": "coin[1]",
-			"inputIndex": 14,
+			"inputIndex": 10,
 			"inputSpriteIndex": 1,
-			"sourceIndex": 14,
+			"sourceIndex": 10,
 			"sourceRect": {"x":16,"y":0,"w":16,"h":16},
 			"sliceIndex": 1,
 			"sliceSpriteIndex": 30,
@@ -638,9 +638,9 @@
 		{
 			"index": 33,
 			"id": "coin[2]",
-			"inputIndex": 14,
+			"inputIndex": 10,
 			"inputSpriteIndex": 2,
-			"sourceIndex": 14,
+			"sourceIndex": 10,
 			"sourceRect": {"x":32,"y":0,"w":16,"h":16},
 			"sliceIndex": 1,
 			"sliceSpriteIndex": 31,
@@ -659,9 +659,9 @@
 		{
 			"index": 34,
 			"id": "coin[3]",
-			"inputIndex": 14,
+			"inputIndex": 10,
 			"inputSpriteIndex": 3,
-			"sourceIndex": 14,
+			"sourceIndex": 10,
 			"sourceRect": {"x":48,"y":0,"w":16,"h":16},
 			"sliceIndex": 1,
 			"sliceSpriteIndex": 32,
@@ -680,9 +680,9 @@
 		{
 			"index": 35,
 			"id": "coin[4]",
-			"inputIndex": 14,
+			"inputIndex": 10,
 			"inputSpriteIndex": 4,
-			"sourceIndex": 14,
+			"sourceIndex": 10,
 			"sourceRect": {"x":64,"y":0,"w":16,"h":16},
 			"sliceIndex": 1,
 			"sliceSpriteIndex": 33,
@@ -701,9 +701,9 @@
 		{
 			"index": 36,
 			"id": "coin[5]",
-			"inputIndex": 14,
+			"inputIndex": 10,
 			"inputSpriteIndex": 5,
-			"sourceIndex": 14,
+			"sourceIndex": 10,
 			"sourceRect": {"x":80,"y":0,"w":16,"h":16},
 			"sliceIndex": 1,
 			"sliceSpriteIndex": 34,
@@ -722,9 +722,9 @@
 		{
 			"index": 37,
 			"id": "coin[6]",
-			"inputIndex": 14,
+			"inputIndex": 10,
 			"inputSpriteIndex": 6,
-			"sourceIndex": 14,
+			"sourceIndex": 10,
 			"sourceRect": {"x":96,"y":0,"w":16,"h":16},
 			"sliceIndex": 1,
 			"sliceSpriteIndex": 35,
@@ -743,9 +743,9 @@
 		{
 			"index": 38,
 			"id": "coin[7]",
-			"inputIndex": 14,
+			"inputIndex": 10,
 			"inputSpriteIndex": 7,
-			"sourceIndex": 14,
+			"sourceIndex": 10,
 			"sourceRect": {"x":112,"y":0,"w":16,"h":16},
 			"sliceIndex": 1,
 			"sliceSpriteIndex": 36,
@@ -764,9 +764,9 @@
 		{
 			"index": 39,
 			"id": "coin[8]",
-			"inputIndex": 14,
+			"inputIndex": 10,
 			"inputSpriteIndex": 8,
-			"sourceIndex": 14,
+			"sourceIndex": 10,
 			"sourceRect": {"x":128,"y":0,"w":16,"h":16},
 			"sliceIndex": 1,
 			"sliceSpriteIndex": 37,
@@ -785,9 +785,9 @@
 		{
 			"index": 40,
 			"id": "coin[9]",
-			"inputIndex": 14,
+			"inputIndex": 10,
 			"inputSpriteIndex": 9,
-			"sourceIndex": 14,
+			"sourceIndex": 10,
 			"sourceRect": {"x":144,"y":0,"w":16,"h":16},
 			"sliceIndex": 1,
 			"sliceSpriteIndex": 38,
@@ -806,9 +806,9 @@
 		{
 			"index": 41,
 			"id": "coin[10]",
-			"inputIndex": 14,
+			"inputIndex": 10,
 			"inputSpriteIndex": 10,
-			"sourceIndex": 14,
+			"sourceIndex": 10,
 			"sourceRect": {"x":160,"y":0,"w":16,"h":16},
 			"sliceIndex": 1,
 			"sliceSpriteIndex": 39,
@@ -827,9 +827,9 @@
 		{
 			"index": 42,
 			"id": "coin[11]",
-			"inputIndex": 14,
+			"inputIndex": 10,
 			"inputSpriteIndex": 11,
-			"sourceIndex": 14,
+			"sourceIndex": 10,
 			"sourceRect": {"x":176,"y":0,"w":16,"h":16},
 			"sliceIndex": 1,
 			"sliceSpriteIndex": 40,
@@ -848,9 +848,9 @@
 		{
 			"index": 43,
 			"id": "water_up_left",
-			"inputIndex": 15,
+			"inputIndex": 11,
 			"inputSpriteIndex": 0,
-			"sourceIndex": 15,
+			"sourceIndex": 11,
 			"sourceRect": {"x":0,"y":0,"w":16,"h":16},
 			"sliceIndex": 2,
 			"sliceSpriteIndex": 0,
@@ -867,9 +867,9 @@
 		{
 			"index": 44,
 			"id": "water_up",
-			"inputIndex": 15,
+			"inputIndex": 11,
 			"inputSpriteIndex": 1,
-			"sourceIndex": 15,
+			"sourceIndex": 11,
 			"sourceRect": {"x":16,"y":0,"w":16,"h":16},
 			"sliceIndex": 2,
 			"sliceSpriteIndex": 1,
@@ -886,9 +886,9 @@
 		{
 			"index": 45,
 			"id": "water_up_right",
-			"inputIndex": 15,
+			"inputIndex": 11,
 			"inputSpriteIndex": 2,
-			"sourceIndex": 15,
+			"sourceIndex": 11,
 			"sourceRect": {"x":32,"y":0,"w":16,"h":16},
 			"sliceIndex": 2,
 			"sliceSpriteIndex": 2,
@@ -905,9 +905,9 @@
 		{
 			"index": 46,
 			"id": "water_left",
-			"inputIndex": 15,
+			"inputIndex": 11,
 			"inputSpriteIndex": 3,
-			"sourceIndex": 15,
+			"sourceIndex": 11,
 			"sourceRect": {"x":0,"y":16,"w":16,"h":16},
 			"sliceIndex": 2,
 			"sliceSpriteIndex": 3,
@@ -924,9 +924,9 @@
 		{
 			"index": 47,
 			"id": "water_middle",
-			"inputIndex": 15,
+			"inputIndex": 11,
 			"inputSpriteIndex": 4,
-			"sourceIndex": 15,
+			"sourceIndex": 11,
 			"sourceRect": {"x":16,"y":16,"w":16,"h":16},
 			"sliceIndex": 2,
 			"sliceSpriteIndex": 4,
@@ -943,9 +943,9 @@
 		{
 			"index": 48,
 			"id": "water_right",
-			"inputIndex": 15,
+			"inputIndex": 11,
 			"inputSpriteIndex": 5,
-			"sourceIndex": 15,
+			"sourceIndex": 11,
 			"sourceRect": {"x":32,"y":16,"w":16,"h":16},
 			"sliceIndex": 2,
 			"sliceSpriteIndex": 5,
@@ -962,9 +962,9 @@
 		{
 			"index": 49,
 			"id": "water_down_left",
-			"inputIndex": 15,
+			"inputIndex": 11,
 			"inputSpriteIndex": 6,
-			"sourceIndex": 15,
+			"sourceIndex": 11,
 			"sourceRect": {"x":0,"y":32,"w":16,"h":16},
 			"sliceIndex": 2,
 			"sliceSpriteIndex": 6,
@@ -981,9 +981,9 @@
 		{
 			"index": 50,
 			"id": "water_down",
-			"inputIndex": 15,
+			"inputIndex": 11,
 			"inputSpriteIndex": 7,
-			"sourceIndex": 15,
+			"sourceIndex": 11,
 			"sourceRect": {"x":16,"y":32,"w":16,"h":16},
 			"sliceIndex": 2,
 			"sliceSpriteIndex": 7,
@@ -1000,9 +1000,9 @@
 		{
 			"index": 51,
 			"id": "water_down_right",
-			"inputIndex": 15,
+			"inputIndex": 11,
 			"inputSpriteIndex": 8,
-			"sourceIndex": 15,
+			"sourceIndex": 11,
 			"sourceRect": {"x":32,"y":32,"w":16,"h":16},
 			"sliceIndex": 2,
 			"sliceSpriteIndex": 8,
@@ -1019,9 +1019,9 @@
 		{
 			"index": 52,
 			"id": "water_stone1",
-			"inputIndex": 15,
+			"inputIndex": 11,
 			"inputSpriteIndex": 9,
-			"sourceIndex": 15,
+			"sourceIndex": 11,
 			"sourceRect": {"x":0,"y":48,"w":16,"h":16},
 			"sliceIndex": 2,
 			"sliceSpriteIndex": 9,
@@ -1038,9 +1038,9 @@
 		{
 			"index": 53,
 			"id": "water_stone2",
-			"inputIndex": 15,
+			"inputIndex": 11,
 			"inputSpriteIndex": 10,
-			"sourceIndex": 15,
+			"sourceIndex": 11,
 			"sourceRect": {"x":16,"y":48,"w":16,"h":16},
 			"sliceIndex": 2,
 			"sliceSpriteIndex": 10,
@@ -1057,9 +1057,9 @@
 		{
 			"index": 54,
 			"id": "water_feature1",
-			"inputIndex": 15,
+			"inputIndex": 11,
 			"inputSpriteIndex": 11,
-			"sourceIndex": 15,
+			"sourceIndex": 11,
 			"sourceRect": {"x":0,"y":64,"w":16,"h":16},
 			"sliceIndex": 2,
 			"sliceSpriteIndex": 11,
@@ -1076,9 +1076,9 @@
 		{
 			"index": 55,
 			"id": "water_feature2",
-			"inputIndex": 15,
+			"inputIndex": 11,
 			"inputSpriteIndex": 12,
-			"sourceIndex": 15,
+			"sourceIndex": 11,
 			"sourceRect": {"x":16,"y":64,"w":16,"h":16},
 			"sliceIndex": 2,
 			"sliceSpriteIndex": 12,
@@ -1095,9 +1095,9 @@
 		{
 			"index": 56,
 			"id": "island1_up_left",
-			"inputIndex": 16,
+			"inputIndex": 12,
 			"inputSpriteIndex": 0,
-			"sourceIndex": 16,
+			"sourceIndex": 12,
 			"sourceRect": {"x":0,"y":0,"w":16,"h":16},
 			"sliceIndex": 3,
 			"sliceSpriteIndex": 0,
@@ -1114,9 +1114,9 @@
 		{
 			"index": 57,
 			"id": "island1_up",
-			"inputIndex": 16,
+			"inputIndex": 12,
 			"inputSpriteIndex": 1,
-			"sourceIndex": 16,
+			"sourceIndex": 12,
 			"sourceRect": {"x":16,"y":0,"w":16,"h":16},
 			"sliceIndex": 3,
 			"sliceSpriteIndex": 1,
@@ -1133,9 +1133,9 @@
 		{
 			"index": 58,
 			"id": "island1_up_right",
-			"inputIndex": 16,
+			"inputIndex": 12,
 			"inputSpriteIndex": 2,
-			"sourceIndex": 16,
+			"sourceIndex": 12,
 			"sourceRect": {"x":32,"y":0,"w":16,"h":16},
 			"sliceIndex": 3,
 			"sliceSpriteIndex": 2,
@@ -1152,9 +1152,9 @@
 		{
 			"index": 59,
 			"id": "island1_left",
-			"inputIndex": 16,
+			"inputIndex": 12,
 			"inputSpriteIndex": 3,
-			"sourceIndex": 16,
+			"sourceIndex": 12,
 			"sourceRect": {"x":0,"y":16,"w":16,"h":16},
 			"sliceIndex": 3,
 			"sliceSpriteIndex": 3,
@@ -1171,9 +1171,9 @@
 		{
 			"index": 60,
 			"id": "island1_all",
-			"inputIndex": 16,
+			"inputIndex": 12,
 			"inputSpriteIndex": 4,
-			"sourceIndex": 16,
+			"sourceIndex": 12,
 			"sourceRect": {"x":16,"y":16,"w":16,"h":16},
 			"sliceIndex": 3,
 			"sliceSpriteIndex": 4,
@@ -1190,9 +1190,9 @@
 		{
 			"index": 61,
 			"id": "island1_right",
-			"inputIndex": 16,
+			"inputIndex": 12,
 			"inputSpriteIndex": 5,
-			"sourceIndex": 16,
+			"sourceIndex": 12,
 			"sourceRect": {"x":32,"y":16,"w":16,"h":16},
 			"sliceIndex": 3,
 			"sliceSpriteIndex": 5,
@@ -1209,9 +1209,9 @@
 		{
 			"index": 62,
 			"id": "island1_down_left",
-			"inputIndex": 16,
+			"inputIndex": 12,
 			"inputSpriteIndex": 6,
-			"sourceIndex": 16,
+			"sourceIndex": 12,
 			"sourceRect": {"x":0,"y":32,"w":16,"h":16},
 			"sliceIndex": 3,
 			"sliceSpriteIndex": 6,
@@ -1228,9 +1228,9 @@
 		{
 			"index": 63,
 			"id": "island1_down",
-			"inputIndex": 16,
+			"inputIndex": 12,
 			"inputSpriteIndex": 7,
-			"sourceIndex": 16,
+			"sourceIndex": 12,
 			"sourceRect": {"x":16,"y":32,"w":16,"h":16},
 			"sliceIndex": 3,
 			"sliceSpriteIndex": 7,
@@ -1247,9 +1247,9 @@
 		{
 			"index": 64,
 			"id": "island1_down_right",
-			"inputIndex": 16,
+			"inputIndex": 12,
 			"inputSpriteIndex": 8,
-			"sourceIndex": 16,
+			"sourceIndex": 12,
 			"sourceRect": {"x":32,"y":32,"w":16,"h":16},
 			"sliceIndex": 3,
 			"sliceSpriteIndex": 8,
@@ -1266,9 +1266,9 @@
 		{
 			"index": 65,
 			"id": "island1_debris1",
-			"inputIndex": 16,
+			"inputIndex": 12,
 			"inputSpriteIndex": 9,
-			"sourceIndex": 16,
+			"sourceIndex": 12,
 			"sourceRect": {"x":0,"y":48,"w":16,"h":16},
 			"sliceIndex": 3,
 			"sliceSpriteIndex": 9,
@@ -1285,9 +1285,9 @@
 		{
 			"index": 66,
 			"id": "island1_feature1",
-			"inputIndex": 16,
+			"inputIndex": 12,
 			"inputSpriteIndex": 10,
-			"sourceIndex": 16,
+			"sourceIndex": 12,
 			"sourceRect": {"x":0,"y":64,"w":16,"h":16},
 			"sliceIndex": 3,
 			"sliceSpriteIndex": 10,
@@ -1304,9 +1304,9 @@
 		{
 			"index": 67,
 			"id": "island1_feature2",
-			"inputIndex": 16,
+			"inputIndex": 12,
 			"inputSpriteIndex": 11,
-			"sourceIndex": 16,
+			"sourceIndex": 12,
 			"sourceRect": {"x":16,"y":64,"w":16,"h":16},
 			"sliceIndex": 3,
 			"sliceSpriteIndex": 11,
@@ -1323,9 +1323,9 @@
 		{
 			"index": 68,
 			"id": "face_down",
-			"inputIndex": 17,
+			"inputIndex": 13,
 			"inputSpriteIndex": 0,
-			"sourceIndex": 17,
+			"sourceIndex": 13,
 			"sourceRect": {"x":0,"y":0,"w":16,"h":16},
 			"sliceIndex": 4,
 			"sliceSpriteIndex": 0,
@@ -1342,9 +1342,9 @@
 		{
 			"index": 69,
 			"id": "face_up",
-			"inputIndex": 17,
+			"inputIndex": 13,
 			"inputSpriteIndex": 1,
-			"sourceIndex": 17,
+			"sourceIndex": 13,
 			"sourceRect": {"x":16,"y":0,"w":16,"h":16},
 			"sliceIndex": 4,
 			"sliceSpriteIndex": 1,
@@ -1361,9 +1361,9 @@
 		{
 			"index": 70,
 			"id": "face_right",
-			"inputIndex": 17,
+			"inputIndex": 13,
 			"inputSpriteIndex": 2,
-			"sourceIndex": 17,
+			"sourceIndex": 13,
 			"sourceRect": {"x":32,"y":0,"w":16,"h":16},
 			"sliceIndex": 4,
 			"sliceSpriteIndex": 2,
@@ -1380,9 +1380,9 @@
 		{
 			"index": 71,
 			"id": "face_left",
-			"inputIndex": 17,
+			"inputIndex": 13,
 			"inputSpriteIndex": 3,
-			"sourceIndex": 17,
+			"sourceIndex": 13,
 			"sourceRect": {"x":48,"y":0,"w":16,"h":16},
 			"sliceIndex": 4,
 			"sliceSpriteIndex": 3,
@@ -1399,9 +1399,9 @@
 		{
 			"index": 72,
 			"id": "face",
-			"inputIndex": 17,
+			"inputIndex": 13,
 			"inputSpriteIndex": 4,
-			"sourceIndex": 17,
+			"sourceIndex": 13,
 			"sourceRect": {"x":64,"y":0,"w":16,"h":16},
 			"sliceIndex": 4,
 			"sliceSpriteIndex": 4,
@@ -1418,9 +1418,9 @@
 		{
 			"index": 73,
 			"id": "straight_up",
-			"inputIndex": 17,
+			"inputIndex": 13,
 			"inputSpriteIndex": 5,
-			"sourceIndex": 17,
+			"sourceIndex": 13,
 			"sourceRect": {"x":0,"y":16,"w":16,"h":16},
 			"sliceIndex": 4,
 			"sliceSpriteIndex": 5,
@@ -1437,9 +1437,9 @@
 		{
 			"index": 74,
 			"id": "straight_down",
-			"inputIndex": 17,
+			"inputIndex": 13,
 			"inputSpriteIndex": 6,
-			"sourceIndex": 17,
+			"sourceIndex": 13,
 			"sourceRect": {"x":16,"y":16,"w":16,"h":16},
 			"sliceIndex": 4,
 			"sliceSpriteIndex": 6,
@@ -1456,9 +1456,9 @@
 		{
 			"index": 75,
 			"id": "straight_right",
-			"inputIndex": 17,
+			"inputIndex": 13,
 			"inputSpriteIndex": 7,
-			"sourceIndex": 17,
+			"sourceIndex": 13,
 			"sourceRect": {"x":32,"y":16,"w":16,"h":16},
 			"sliceIndex": 4,
 			"sliceSpriteIndex": 7,
@@ -1475,9 +1475,9 @@
 		{
 			"index": 76,
 			"id": "straight_left",
-			"inputIndex": 17,
+			"inputIndex": 13,
 			"inputSpriteIndex": 8,
-			"sourceIndex": 17,
+			"sourceIndex": 13,
 			"sourceRect": {"x":48,"y":16,"w":16,"h":16},
 			"sliceIndex": 4,
 			"sliceSpriteIndex": 8,
@@ -1494,9 +1494,9 @@
 		{
 			"index": 77,
 			"id": "alt",
-			"inputIndex": 17,
+			"inputIndex": 13,
 			"inputSpriteIndex": 9,
-			"sourceIndex": 17,
+			"sourceIndex": 13,
 			"sourceRect": {"x":64,"y":16,"w":16,"h":16},
 			"sliceIndex": 4,
 			"sliceSpriteIndex": 9,
@@ -1513,9 +1513,9 @@
 		{
 			"index": 78,
 			"id": "tail_up",
-			"inputIndex": 17,
+			"inputIndex": 13,
 			"inputSpriteIndex": 10,
-			"sourceIndex": 17,
+			"sourceIndex": 13,
 			"sourceRect": {"x":0,"y":32,"w":16,"h":16},
 			"sliceIndex": 4,
 			"sliceSpriteIndex": 10,
@@ -1532,9 +1532,9 @@
 		{
 			"index": 79,
 			"id": "tail_down",
-			"inputIndex": 17,
+			"inputIndex": 13,
 			"inputSpriteIndex": 11,
-			"sourceIndex": 17,
+			"sourceIndex": 13,
 			"sourceRect": {"x":16,"y":32,"w":16,"h":16},
 			"sliceIndex": 4,
 			"sliceSpriteIndex": 11,
@@ -1551,9 +1551,9 @@
 		{
 			"index": 80,
 			"id": "tail_left",
-			"inputIndex": 17,
+			"inputIndex": 13,
 			"inputSpriteIndex": 12,
-			"sourceIndex": 17,
+			"sourceIndex": 13,
 			"sourceRect": {"x":32,"y":32,"w":16,"h":16},
 			"sliceIndex": 4,
 			"sliceSpriteIndex": 12,
@@ -1570,9 +1570,9 @@
 		{
 			"index": 81,
 			"id": "tail_right",
-			"inputIndex": 17,
+			"inputIndex": 13,
 			"inputSpriteIndex": 13,
-			"sourceIndex": 17,
+			"sourceIndex": 13,
 			"sourceRect": {"x":48,"y":32,"w":16,"h":16},
 			"sliceIndex": 4,
 			"sliceSpriteIndex": 13,
@@ -1589,9 +1589,9 @@
 		{
 			"index": 82,
 			"id": "curve_right_up",
-			"inputIndex": 17,
+			"inputIndex": 13,
 			"inputSpriteIndex": 14,
-			"sourceIndex": 17,
+			"sourceIndex": 13,
 			"sourceRect": {"x":0,"y":48,"w":16,"h":16},
 			"sliceIndex": 4,
 			"sliceSpriteIndex": 14,
@@ -1608,9 +1608,9 @@
 		{
 			"index": 83,
 			"id": "curve_left_up",
-			"inputIndex": 17,
+			"inputIndex": 13,
 			"inputSpriteIndex": 15,
-			"sourceIndex": 17,
+			"sourceIndex": 13,
 			"sourceRect": {"x":16,"y":48,"w":16,"h":16},
 			"sliceIndex": 4,
 			"sliceSpriteIndex": 15,
@@ -1627,9 +1627,9 @@
 		{
 			"index": 84,
 			"id": "curve_right_down",
-			"inputIndex": 17,
+			"inputIndex": 13,
 			"inputSpriteIndex": 16,
-			"sourceIndex": 17,
+			"sourceIndex": 13,
 			"sourceRect": {"x":32,"y":48,"w":16,"h":16},
 			"sliceIndex": 4,
 			"sliceSpriteIndex": 16,
@@ -1646,9 +1646,9 @@
 		{
 			"index": 85,
 			"id": "curve_left_down",
-			"inputIndex": 17,
+			"inputIndex": 13,
 			"inputSpriteIndex": 17,
-			"sourceIndex": 17,
+			"sourceIndex": 13,
 			"sourceRect": {"x":48,"y":48,"w":16,"h":16},
 			"sliceIndex": 4,
 			"sliceSpriteIndex": 17,
@@ -1665,9 +1665,9 @@
 		{
 			"index": 86,
 			"id": "curve_up_left",
-			"inputIndex": 17,
+			"inputIndex": 13,
 			"inputSpriteIndex": 18,
-			"sourceIndex": 17,
+			"sourceIndex": 13,
 			"sourceRect": {"x":0,"y":64,"w":16,"h":16},
 			"sliceIndex": 4,
 			"sliceSpriteIndex": 18,
@@ -1684,9 +1684,9 @@
 		{
 			"index": 87,
 			"id": "curve_up_right",
-			"inputIndex": 17,
+			"inputIndex": 13,
 			"inputSpriteIndex": 19,
-			"sourceIndex": 17,
+			"sourceIndex": 13,
 			"sourceRect": {"x":16,"y":64,"w":16,"h":16},
 			"sliceIndex": 4,
 			"sliceSpriteIndex": 19,
@@ -1703,9 +1703,9 @@
 		{
 			"index": 88,
 			"id": "curve_down_left",
-			"inputIndex": 17,
+			"inputIndex": 13,
 			"inputSpriteIndex": 20,
-			"sourceIndex": 17,
+			"sourceIndex": 13,
 			"sourceRect": {"x":32,"y":64,"w":16,"h":16},
 			"sliceIndex": 4,
 			"sliceSpriteIndex": 20,
@@ -1722,9 +1722,9 @@
 		{
 			"index": 89,
 			"id": "curve_down_right",
-			"inputIndex": 17,
+			"inputIndex": 13,
 			"inputSpriteIndex": 21,
-			"sourceIndex": 17,
+			"sourceIndex": 13,
 			"sourceRect": {"x":48,"y":64,"w":16,"h":16},
 			"sliceIndex": 4,
 			"sliceSpriteIndex": 21,
@@ -1783,47 +1783,11 @@
 			]
 		},
 		{
-			"filename": "wall_all.png",
+			"filename": "wall_full.png",
 			"sourceSprites": [
 				{
 					"sourceIndex": 2,
-					"spriteIndices": [2]
-				}
-			]
-		},
-		{
-			"filename": "wall_right.png",
-			"sourceSprites": [
-				{
-					"sourceIndex": 3,
-					"spriteIndices": [3]
-				}
-			]
-		},
-		{
-			"filename": "wall_left.png",
-			"sourceSprites": [
-				{
-					"sourceIndex": 4,
-					"spriteIndices": [4]
-				}
-			]
-		},
-		{
-			"filename": "wall_top.png",
-			"sourceSprites": [
-				{
-					"sourceIndex": 5,
-					"spriteIndices": [5]
-				}
-			]
-		},
-		{
-			"filename": "wall_bottom.png",
-			"sourceSprites": [
-				{
-					"sourceIndex": 6,
-					"spriteIndices": [6]
+					"spriteIndices": [2,3,4,5,6]
 				}
 			]
 		},
@@ -1831,7 +1795,7 @@
 			"filename": "portal_all.png",
 			"sourceSprites": [
 				{
-					"sourceIndex": 7,
+					"sourceIndex": 3,
 					"spriteIndices": [7]
 				}
 			]
@@ -1840,7 +1804,7 @@
 			"filename": "portal_right.png",
 			"sourceSprites": [
 				{
-					"sourceIndex": 8,
+					"sourceIndex": 4,
 					"spriteIndices": [8]
 				}
 			]
@@ -1849,7 +1813,7 @@
 			"filename": "portal_left.png",
 			"sourceSprites": [
 				{
-					"sourceIndex": 9,
+					"sourceIndex": 5,
 					"spriteIndices": [9]
 				}
 			]
@@ -1858,7 +1822,7 @@
 			"filename": "portal_up.png",
 			"sourceSprites": [
 				{
-					"sourceIndex": 10,
+					"sourceIndex": 6,
 					"spriteIndices": [10]
 				}
 			]
@@ -1867,7 +1831,7 @@
 			"filename": "portal_down.png",
 			"sourceSprites": [
 				{
-					"sourceIndex": 11,
+					"sourceIndex": 7,
 					"spriteIndices": [11]
 				}
 			]
@@ -1876,7 +1840,7 @@
 			"filename": "log_full.png",
 			"sourceSprites": [
 				{
-					"sourceIndex": 12,
+					"sourceIndex": 8,
 					"spriteIndices": [12,13,14,15,16,17,18]
 				}
 			]
@@ -1885,7 +1849,7 @@
 			"filename": "castle_full.png",
 			"sourceSprites": [
 				{
-					"sourceIndex": 13,
+					"sourceIndex": 9,
 					"spriteIndices": [19,20,21,22,23,24,25,26,27,28,29,30]
 				}
 			]
@@ -1894,7 +1858,7 @@
 			"filename": "coin.png",
 			"sourceSprites": [
 				{
-					"sourceIndex": 14,
+					"sourceIndex": 10,
 					"spriteIndices": [31,32,33,34,35,36,37,38,39,40,41,42]
 				}
 			]
@@ -1903,7 +1867,7 @@
 			"filename": "water_full.png",
 			"sourceSprites": [
 				{
-					"sourceIndex": 15,
+					"sourceIndex": 11,
 					"spriteIndices": [43,44,45,46,47,48,49,50,51,52,53,54,55]
 				}
 			]
@@ -1912,7 +1876,7 @@
 			"filename": "island1_full.png",
 			"sourceSprites": [
 				{
-					"sourceIndex": 16,
+					"sourceIndex": 12,
 					"spriteIndices": [56,57,58,59,60,61,62,63,64,65,66,67]
 				}
 			]
@@ -1921,7 +1885,7 @@
 			"filename": "player_full.png",
 			"sourceSprites": [
 				{
-					"sourceIndex": 17,
+					"sourceIndex": 13,
 					"spriteIndices": [68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89]
 				}
 			]
@@ -1942,33 +1906,9 @@
 		},
 		{
 			"path": "src/main",
-			"filename": "wall_all.png",
+			"filename": "wall_full.png",
 			"width": 16,
-			"height": 16
-		},
-		{
-			"path": "src/main",
-			"filename": "wall_right.png",
-			"width": 16,
-			"height": 16
-		},
-		{
-			"path": "src/main",
-			"filename": "wall_left.png",
-			"width": 16,
-			"height": 16
-		},
-		{
-			"path": "src/main",
-			"filename": "wall_top.png",
-			"width": 16,
-			"height": 16
-		},
-		{
-			"path": "src/main",
-			"filename": "wall_bottom.png",
-			"width": 16,
-			"height": 16
+			"height": 80
 		},
 		{
 			"path": "src/main",
