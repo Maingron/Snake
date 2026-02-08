@@ -30,6 +30,24 @@
 						"pos": [0, 0],
 						"face": "stone1"
 					}
+				],
+				"Wall": [
+					{"pos": [5, 5], "face": "all"},
+					{"pos": [7, 7], "face": "up"},
+					{"pos": [8, 7], "face": "up"},
+					{"pos": [7, 10], "face": "down"},
+					{"pos": [8, 10], "face": "down"},
+					{"pos": [4, 9], "face": "left"},
+					{"pos": [4, 8], "face": "left"},
+					{"pos": [11, 9], "face": "right"},
+					{"pos": [11, 8], "face": "right"}
+
+				],
+				"Portal": [
+					{
+						"pos": [10, 10],
+						"posDest": [15, 15]
+					}
 				]
 			}
 		}

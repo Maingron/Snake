@@ -188,6 +188,8 @@ function startGame() {
     snake.meta.author = "maingron";
     snake.meta.website = "https://maingron.com/snake";
 
+    new Fruit.Apple({pos: [4,5]});
+
 
 
 
