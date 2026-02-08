@@ -17,6 +17,7 @@ snake.data = {
         pause: true
     }
 };
+snake.level = {};
 snake.meta = {};
 
 snake.elements = {
@@ -150,13 +151,32 @@ async function initOnce() {
         return langfun.getLang;
     });
 
-    ctx.fillText(getLocaleString("loading"),100,140);
+    ctx.fillText(getLocaleString("loading"), 100, 140);
 }
 
 function startGame() {
+    let levelFile = "js/levels/test.json";
+    let levelSub = 0;
+    let levelLoader = new LevelLoader();
+    levelLoader.importLevelFile(levelFile).then(level => {
+        snake.level.meta = Object.assign(level.meta, level.data[levelSub].meta);
+        snake.elements.canvas.style.backgroundColor = snake.level.meta.background.color;
+        for(let type of [
+            'Water',
+            'Wall',
+            'Portal',
+            'Fruit'
+        ]) {
+            for(let entity of level.data[levelSub].data[type] ?? []) {
+                new window[type](entity);
+            }
+        }
+    });
+
 	if(snake?.data?.tick?.tickAnimationFrameId !== null) {
 		cancelAnimationFrame(snake?.data?.tick?.tickAnimationFrameId);
 	}
+
 
     snake.data.fruits = [];
     snake.data.players = [];
@@ -169,40 +189,6 @@ function startGame() {
     snake.meta.website = "https://maingron.com/snake";
 
 
-    snake.data.walls.push(new Water({pos:[3,3], face: "middle"}));
-    snake.data.walls.push(new Water({pos:[3,2], face: "up"}));
-    snake.data.walls.push(new Water({pos:[3,4], face: "down"}));
-    snake.data.walls.push(new Water({pos:[4,3], face: "right"}));
-    snake.data.walls.push(new Water({pos:[2,3], face: "left"}));
-
-    snake.data.walls.push(new Water({pos:[4,2], face: "up_right"}));
-    snake.data.walls.push(new Water({pos:[2,2], face: "up_left"}));
-
-    snake.data.walls.push(new Water({pos:[4,4], face: "down_right"}));
-    snake.data.walls.push(new Water({pos:[2,4], face: "down_left"}));
-
-
-    for(var i = 0; i < (snake.config.fieldHeight * snake.config.fieldWidth) / 100; i++) {
-        snake.data.fruits.push(new Fruit.Orange());
-    }
-        
-    snake.data.walls.push(new Wall({pos:[6,6], face: "left"}));
-    snake.data.walls.push(new Wall({pos:[7,6], face: "right"}));
-
-    snake.data.walls.push(new Wall({pos:[12,15], face: "right"}));
-
-    for(let x = 7; x <= 12; x++) {
-        snake.data.walls.push(new Wall({pos:[x,5], face: "up"}))
-        snake.data.walls.push(new Wall({pos:[x,6], face: "down"}))
-    }
-
-    snake.data.portals.push(new Portal({pos: [5,5], posDest: [12,12], face: "all"}));
-    snake.data.portals.push(new Portal({pos: [12,12], posDest: [5,5], face: "all"}));
-
-    snake.data.portals.push(new Portal({pos: [10,10], posDest: [0,10], face: "right"}));
-    snake.data.portals.push(new Portal({pos: [15,17], posDest: [5,5], face: "left"}));
-    snake.data.portals.push(new Portal({pos: [17,15], posDest: [5,5], face: "up"}));
-    snake.data.portals.push(new Portal({pos: [17,17], posDest: [5,5], face: "down"}));
 
 
 	tick();
@@ -253,7 +239,7 @@ function renderFPS() {
     ctx.fill();
 
     let relativeCoords = calculateRelativeToCamera(0,0);
-    let relativeCoords2 = calculateRelativeToCamera(snake.config.fieldWidth, snake.config.fieldHeight);
+    let relativeCoords2 = calculateRelativeToCamera(...snake?.level?.meta?.fieldSize ?? [0,0]);
     ctx.clearRect(relativeCoords[0], relativeCoords[1], relativeCoords2[0] - relativeCoords[0], relativeCoords2[1] - relativeCoords[1]);
 
 

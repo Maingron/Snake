@@ -1,0 +1,37 @@
+{
+	"meta": {
+		"name": "Test",
+		"author": "Robin",
+		"description": "A level used for testing purposes. Not meant to be played by users.",
+		"version": "0.1",
+		"fieldSize": [20, 20],
+		"fieldWrap": true,
+		"player": {
+			"pos": [0, 0]
+		},
+		"background": {
+			"color": "#007FFF",
+			"image": null
+		}
+	},
+	"data": {
+		"0": {
+			"meta": {
+				"fieldSize": [100, 100],
+				"name": "Ground Level"
+			},
+			"data": {
+				"Water": [
+					{
+						"pos": [0, 0],
+						"face": "middle"
+					},
+					{
+						"pos": [0, 0],
+						"face": "stone1"
+					}
+				]
+			}
+		}
+	}
+}

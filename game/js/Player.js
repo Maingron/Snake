@@ -118,29 +118,30 @@ export class Player extends GenericEntity {
 				return;
 			}
 			moveThisTick = true;
+			
 			if(this.direction == "up") {
-				if(snake.config.wrapField && this.pos[1] == 0) {
-					nextPosition[1] = snake.config.fieldHeight - 1;
+				if(snake.level.meta.fieldWrap && this.pos[1] == 0) {
+					nextPosition[1] = snake.level.meta.fieldSize[1] - 1;
 				} else {
 					nextPosition[1]--;
 				}
 		
 			} else if(this.direction == "down") {
-				if(snake.config.wrapField && this.pos[1] == snake.config.fieldHeight - 1) {
+				if(snake.level.meta.fieldWrap && this.pos[1] == snake.level.meta.fieldSize[1] - 1) {
 					nextPosition[1] = 0;
 				} else {
 					nextPosition[1]++;
 				}
 		
 			} else if(this.direction == "left") {
-				if(snake.config.wrapField && this.pos[0] == 0) {
-					nextPosition[0] = snake.config.fieldWidth - 1;
+				if(snake.level.meta.fieldWrap && this.pos[0] == 0) {
+					nextPosition[0] = snake.level.meta.fieldSize[0] - 1;
 				} else {
 					nextPosition[0]--;
 				}
 		
 			} else if(this.direction == "right") {
-				if(snake.config.wrapField && this.pos[0] == snake.config.fieldWidth - 1) {
+				if(snake.level.meta.fieldWrap && this.pos[0] == snake.level.meta.fieldSize[0] - 1) {
 					nextPosition[0] = 0;
 				} else {
 					nextPosition[0]++;
