@@ -89,7 +89,11 @@ export class Player extends GenericEntity {
 	}
 
 	gainPoints(amount) {
+		for(let i = 0; i < amount; i++) {
+			this.positions.unshift([this.positions[0][0], this.positions[0][1], this.positions[0][2]]);
+		}
 		this.points += amount;
+
 	}
 
 	crawlTo(nextPosition) {
@@ -150,30 +154,18 @@ export class Player extends GenericEntity {
 	
 			if(nextPosition[0] != this.positions[this.positions.length - 2][0] || nextPosition[1] != this.positions[this.positions.length - 2][1]) {
 				this.crawlTo(nextPosition);
-
-				for(let fruit of snake.data.fruits) {
-					if(fruit.checkCollision(this)) {
-						fruit.collide(this);
-						for(let i = 0; i < fruit.points; i++) {
-							this.positions.unshift([this.positions[0][0], this.positions[0][1], this.positions[0][2]]);
-						}
-					}
-				}
-
-				for(let portal of snake.data.portals) {
-					if(this.ignoresInstance(portal) || portal.ignoresInstance(this)) {
+				for(let entity of GenericEntity.allInstances.filter(e => e.pos[0] == this.pos[0] && e.pos[1] == this.pos[1])) {
+					if(this.ignoresInstance(entity) || entity.ignoresInstance(this)) {
 						continue;
 					}
-					if(portal.checkCollision(this)) {
-						portal.collide(this);
+					if(entity == this) {
+						continue;
+					}
+					if(entity.checkCollision(this)) {
+						entity.collide(this);
 					}
 				}
 
-				for(let wall of snake.data.walls) {
-					if(wall.checkCollision(this)) {
-						wall.collide(this);
-					}
-				}
 			} else {
 				if(this.directionNext == "right") {
 					this.direction = "left";
