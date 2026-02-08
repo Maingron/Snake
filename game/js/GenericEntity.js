@@ -5,9 +5,13 @@ export default class GenericEntity {
 
 		Object.assign(this, {
 			pos: [0, 0, 1, 1],
+			zIndex: 9,
 			variant: null,
 			face: null,
 			collisionDirectional: false, // or "same", "opposite"
+			collision: {
+				active: true
+			},
 			ignoreInstances: [],
 			sprite: {
 				sheetObject: null,
@@ -28,6 +32,9 @@ export default class GenericEntity {
 		GenericEntity.allInstances.push(this);
 	}
 	checkCollision(otherObject) {
+		if(this.collision.active == false) {
+			return false;
+		}
 		let otherObjectPos;
 		if(otherObject instanceof GenericEntity) {
 			otherObjectPos = otherObject.pos;

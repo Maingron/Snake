@@ -169,8 +169,21 @@ function startGame() {
     snake.meta.website = "https://maingron.com/snake";
 
 
+    snake.data.walls.push(new Water({pos:[3,3], face: "middle"}));
+    snake.data.walls.push(new Water({pos:[3,2], face: "up"}));
+    snake.data.walls.push(new Water({pos:[3,4], face: "down"}));
+    snake.data.walls.push(new Water({pos:[4,3], face: "right"}));
+    snake.data.walls.push(new Water({pos:[2,3], face: "left"}));
+
+    snake.data.walls.push(new Water({pos:[4,2], face: "up_right"}));
+    snake.data.walls.push(new Water({pos:[2,2], face: "up_left"}));
+
+    snake.data.walls.push(new Water({pos:[4,4], face: "down_right"}));
+    snake.data.walls.push(new Water({pos:[2,4], face: "down_left"}));
+
+
     for(var i = 0; i < (snake.config.fieldHeight * snake.config.fieldWidth) / 100; i++) {
-        snake.data.fruits.push(new Fruit.Apple());
+        snake.data.fruits.push(new Fruit.Orange());
     }
         
     snake.data.walls.push(new Wall({pos:[6,6], face: "left"}));
@@ -190,6 +203,7 @@ function startGame() {
     snake.data.portals.push(new Portal({pos: [15,17], posDest: [5,5], face: "left"}));
     snake.data.portals.push(new Portal({pos: [17,15], posDest: [5,5], face: "up"}));
     snake.data.portals.push(new Portal({pos: [17,17], posDest: [5,5], face: "down"}));
+
 
 	tick();
 }

@@ -3,6 +3,7 @@ export class Player extends GenericEntity {
 		const thisPlayer = super(props);
 		Object.assign(thisPlayer, {
 			pos: [0, 0],
+			zIndex: 10,
 			previousMove: [0,0,"right"], // [x,y,direction]
 			direction: "right",
 			directionNext: "right",
