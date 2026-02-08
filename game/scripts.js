@@ -32,7 +32,10 @@ async function initOnce() {
     snake.elements.canvas.height = snake.config.canvasHeight;
     snake.elements.canvas.width = snake.config.canvasWidth;
 
-    ctx = snake.data.ctx = snake.elements.canvas.getContext("2d");
+    ctx = snake.data.ctx = snake.elements.canvas.getContext("2d", {
+        desynchronized: true,
+        antialias: false
+    });
     canvasFunctions.applyDefaults();
 
     // snake.elements.canvas.style.backgroundSize = (snake.config.canvasHeight / snake.config.fieldHeight + "px");
@@ -258,10 +261,11 @@ function renderFPS() {
 
     ctx.fillStyle = "#f00";
 
-    for(let entity of GenericEntity.allInstances) {
-        if(entity.inViewport()) {
-            entity.draw(ctx);
-        }
+    let entitiesToDraw = GenericEntity.allInstances.filter(x=>x.inViewport());
+    
+    entitiesToDraw.sort((a,b) => (a.zIndex || 0) - (b.zIndex || 0));
+    for(let entity of entitiesToDraw) {
+        entity.draw(ctx);
     }
 
     ctx.font = snake.config.fontSize * 4 + "px " + snake.config.fontFamily // Font for scoreboard is bigger than default
