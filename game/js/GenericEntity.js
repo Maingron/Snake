@@ -18,8 +18,8 @@ export default class GenericEntity {
 		});
 
 		this.sprite = {
-			sheetObject: snake.sprites.main,
-			id: thisEntity.spriteId,
+			sheetObject: snake?.sprites?.main,
+			id: thisEntity?.spriteId,
 			opacity: 1,
 			rotate: 0,
 			animate: null,

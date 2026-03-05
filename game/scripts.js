@@ -296,9 +296,9 @@ function renderFPS() {
 
 
 
-    if(snake.data.players[0].status == "dead") {
-        Scenes.playerDied();
-    }
+	if(snake?.data?.players[0]?.status == "dead") {
+		Scenes.playerDied();
+	}
 
 
     snake.framecounter.pushRenderCall();
@@ -308,21 +308,21 @@ function calculateRelativeToCamera(x, y, width, height) {
     const playerSnake = snake?.data?.players[0] || { props: { pos: [0, 0] } };
 
     const { oneWidth, oneHeight, scale, canvasWidth, canvasHeight } = snake.config;
-    let playerX = playerSnake.pos[0];
-    let playerY = playerSnake.pos[1];
-	const somethingMath1 = (snake.data.tick.count % snake.config.movespeed) / (snake.config.movespeed);
-	const somethingMath2 = ( 1 / snake.config.movespeed * ( snake.config.movespeed - 1 ) );
-	if(!playerSnake.stunFrames && !playerSnake.smoothMovement.disableFrames) {
-		if(playerSnake.direction == "left") {
-			x = x + somethingMath1 - somethingMath2;
-		} else if(playerSnake.direction == "right") {
-			x = x - somethingMath1 + somethingMath2;
-		} else if(playerSnake.direction == "up") {
-			y = y + somethingMath1 - somethingMath2;
-		} else if(playerSnake.direction == "down") {
-			y = y - somethingMath1 + somethingMath2;
-		}
-	}
+    let playerX = playerSnake?.pos?.[0] ?? 0;
+    let playerY = playerSnake?.pos?.[1] ?? 0;
+    const somethingMath1 = (snake.data.tick.count % snake.config.movespeed) / (snake.config.movespeed);
+    const somethingMath2 = (1 / snake.config.movespeed * (snake.config.movespeed - 1));
+    if(!playerSnake?.stunFrames && !playerSnake?.smoothMovement?.disableFrames) {
+        if(playerSnake?.direction == "left") {
+            x = x + somethingMath1 - somethingMath2;
+        } else if(playerSnake?.direction == "right") {
+            x = x - somethingMath1 + somethingMath2;
+        } else if(playerSnake?.direction == "up") {
+            y = y + somethingMath1 - somethingMath2;
+        } else if(playerSnake?.direction == "down") {
+            y = y - somethingMath1 + somethingMath2;
+        }
+    }
 
 
     const scaledWidth = oneWidth * scale;
